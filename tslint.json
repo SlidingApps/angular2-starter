@@ -105,8 +105,8 @@
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
     "directive-class-suffix": true,
-    "directive-selector-prefix": [true, "app"],
-    "component-selector-prefix": [true, "app"],
-    "pipe-naming": [true, "camelCase", "app"]
+    "directive-selector-prefix": [true, "sa"],
+    "component-selector-prefix": [true, "sa"],
+    "pipe-naming": [true, "camelCase", "sa"]
   }
 }
