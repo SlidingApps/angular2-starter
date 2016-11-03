@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-account-view',
+  selector: 'sa-account-view',
   template: `
     <!-- ACCOUNT: BEGIN -->
     <div>ACCOUNT VIEW</div>

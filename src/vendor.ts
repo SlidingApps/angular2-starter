@@ -1,3 +1,4 @@
+
 // Angular 2
 import '@angular/platform-browser';
 import '@angular/platform-browser-dynamic';
@@ -12,6 +13,8 @@ import '@angularclass/hmr';
 import 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
+
+import './vendor/application/less/application.less';
 
 // Other vendors for example jQuery, Lodash or Bootstrap
 // You can import js, ts, css, sass, ...

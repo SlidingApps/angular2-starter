@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-account-sign-in',
+  selector: 'sa-account-sign-in',
   template: `
     <!-- ACCOUNT SIGN IN: BEGIN -->
     <div>ACCOUNT SIGN IN</div>

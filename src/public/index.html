@@ -1,13 +1,26 @@
 <!doctype html>
 <html>
   <head>
+    <base href="/">
+
     <meta charset="utf-8">
     <title>Angular 2 App | ng2-webpack</title>
+
+    <!-- FAVICON -->
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
 
-    <base href="/">
+    <!-- MATERIAL DESIGN ICONS-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <!-- LOADER CSS -->
+    <link rel="stylesheet" href="style/loader.css">
   </head>
   <body>
-    <sa-application>Loading...</sa-application>
+    <sa-application class="application">
+      <div class="loader-bootstrap loader">loading</div>
+    </sa-application>
   </body>
 </html>

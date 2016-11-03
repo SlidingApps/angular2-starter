@@ -10,5 +10,4 @@ import { Component } from '@angular/core';
     <!-- PUBLIC: END -->
     `
 })
-export class PublicComponent {
-}
+export class PublicComponent { }

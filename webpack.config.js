@@ -125,9 +125,19 @@ module.exports = function makeWebpackConfig() {
       // all css required in src/app files will be merged in js files
       {test: /\.(scss|sass)$/, exclude: root('src', 'style'), loader: 'raw!postcss!sass'},
 
+      {test: /\.less$/, loader: "style!css!less"},
+
       // support for .html as raw text
       // todo: change the loader to something that adds a hash to images
-      {test: /\.html$/, loader: 'raw',  exclude: root('src', 'public')}
+      {test: /\.html$/, loader: 'raw',  exclude: root('src', 'public')},
+
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: [
+          'file?hash=sha512&digest=hex&name=[hash].[ext]',
+          'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+        ]
+      }
     ]
   };
 
