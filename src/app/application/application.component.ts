@@ -1,7 +1,7 @@
 
 import { Component } from '@angular/core';
 
-import '../../style/app.scss';
+import '../../style/application.scss';
 
 @Component({
   selector: 'sa-application',
