@@ -25,8 +25,6 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
   declarations: [
     ApplicationComponent
   ],
-  providers: [
-  ],
   bootstrap: [ApplicationComponent]
 })
 export class ApplicationModule {
