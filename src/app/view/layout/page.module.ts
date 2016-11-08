@@ -6,15 +6,15 @@ import { NavigationModule } from './navigation/navigation.module';
 import { ContentModule } from './content/content.module';
 
 @NgModule({
-  imports: [
-    NavigationModule,
-    ContentModule
-  ],
-  declarations: [
-    PageComponent
-  ],
-  exports: [
-    PageComponent
-  ]
+    imports: [
+        NavigationModule,
+        ContentModule
+    ],
+    declarations: [
+        PageComponent
+    ],
+    exports: [
+        PageComponent
+    ]
 })
 export class PageModule { }

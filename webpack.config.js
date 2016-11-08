@@ -94,10 +94,16 @@ module.exports = function makeWebpackConfig() {
         exclude: [isTest ? /\.(e2e)\.ts$/ : /\.(spec|e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/]
       },
 
+        // use url loader for images
+        {
+            test: /\.(png|jpe?g|gif|svg|ico)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+            loader: 'url-loader?name=img/[name].[ext]'
+        },
+
       // copy those assets to output
       {
-        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file?name=fonts/[name].[hash].[ext]?'
+        test: /\.(woff|woff2|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file?name=assets/[name].[hash].[ext]?'
       },
 
       // Support for *.json files.
@@ -129,7 +135,7 @@ module.exports = function makeWebpackConfig() {
 
       // support for .html as raw text
       // todo: change the loader to something that adds a hash to images
-      {test: /\.html$/, loader: 'raw',  exclude: root('src', 'public')},
+      {test: /\.html$/, loader: 'raw', exclude: root('src', 'public')},
 
       {
         test: /\.(jpe?g|png|gif|svg)$/i,

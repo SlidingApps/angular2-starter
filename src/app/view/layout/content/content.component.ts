@@ -2,11 +2,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'sa-layout-content',
-  template: `
-    <!-- CONTENT: BEGIN -->
+    selector: 'sa-layout-content',
+    template: `
+    <!-- LAYOUT.CONTENT: BEGIN -->
     <router-outlet></router-outlet>
-    <!-- CONTENT: END -->
+    <!-- LAYOUT.CONTENT: END -->
     `
 })
 export class ContentComponent { }

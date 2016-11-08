@@ -2,11 +2,16 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'sa-account-view',
-  template: `
+    selector: 'sa-account-view',
+    template: `
     <!-- ACCOUNT: BEGIN -->
-    <div>ACCOUNT VIEW</div>
-    <router-outlet></router-outlet>
+    <div class="page-login">
+        <div class="loginContentWrap" style="padding: 0;">
+            <div class="container-fluid">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
     <!-- ACCOUNT: END -->
     `
 })

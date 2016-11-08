@@ -8,16 +8,16 @@ import { PublicRouterModule } from './public.routing';
 import { PublicComponent } from './public.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    Ng2BootstrapModule,
-    PublicRouterModule
-  ],
-  declarations: [
-    PublicComponent
-  ],
-  exports: [
-    PublicComponent
-  ]
+    imports: [
+        CommonModule,
+        Ng2BootstrapModule,
+        PublicRouterModule
+    ],
+    declarations: [
+        PublicComponent
+    ],
+    exports: [
+        PublicComponent
+    ]
 })
 export class PublicModule { }

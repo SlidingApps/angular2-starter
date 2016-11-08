@@ -2,12 +2,12 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'sa-layout-page',
-  template: `
-    <!-- PAGE: BEGIN -->
+    selector: 'sa-layout-page',
+    template: `
+    <!-- LAYOUT.PAGE: BEGIN -->
     <sa-layout-navigation></sa-layout-navigation>
     <sa-layout-content></sa-layout-content>
-    <!-- PAGE: END -->
+    <!-- LAYOUT.PAGE: END -->
     `
 })
 export class PageComponent { }

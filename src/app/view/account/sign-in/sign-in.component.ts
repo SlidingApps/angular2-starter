@@ -1,33 +1,44 @@
 
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Logger } from '../../../foundation/logger';
+
+import { Model } from './model';
 
 @Component({
-  selector: 'sa-account-sign-in',
-  template: `
-    <!-- ACCOUNT SIGN IN: BEGIN -->
-    <div>ACCOUNT SIGN IN</div>
-    <p>
-        <alert *ngFor="let alert of alerts; let i = index" [type]="alert.type" dismissible="true" (close)="closeAlert(i)">{{ alert.msg }}</alert>
-    </p>
-    <!-- ACCOUNT SIGN IN: END -->
+    selector: 'sa-account-sign-in',
+    template: `
+    <!-- ACCOUNT.SIGN-IN: BEGIN -->
+    <div class="page-login">
+        <div class="loginContentWrap" style="padding: 0;">
+            <div class="container-fluid">
+                <form name="form" data-ng-submit="ctrl.submit(form)">
+                  <sa-account-sign-in-form></sa-account-sign-in-form>
+                </form>
+                <ul class="more">
+                    <li><a data-ui-sref="account.getStarted">Get started</a></li>
+                    <li><a data-ui-sref="account.forgotPassword">Forgotten password</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>    
+    <!-- ACCOUNT.SIGN-IN: END -->
     `
 })
-export class SignInComponent {
+export class SignInComponent implements OnDestroy {
 
-  public alerts: Array<Object> = [
-    {
-      type: 'danger',
-      msg: 'Oh snap! Change a few things up and try submitting again.'
-    },
-    {
-      type: 'success',
-      msg: 'Well done! You successfully read this important alert message.',
-      closable: true
+    constructor() {
+        Logger.LOG.info('constructor', this);
+        this.model.username = 'username@taskrunner.io';
     }
-  ];
 
-  public closeAlert(i: number): void {
-    this.alerts.splice(i, 1);
-  }
+    public model: Model = new Model();
 
+    private modelChanged: Subscription =
+        this.model.$propertyChanged$.filter(x => !!x).subscribe(x => console.log('changes', x));
+
+    public ngOnDestroy() {
+        this.modelChanged.unsubscribe();
+        this.model.$destroy();
+    }
 }
