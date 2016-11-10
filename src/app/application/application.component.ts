@@ -1,7 +1,8 @@
 
 import { Component } from '@angular/core';
 import { Logger } from '../foundation/logger';
-import { Logger as AngularLogger } from 'angular2-logger/core';
+
+import { Log, Level } from 'ng2-logger/ng2-logger';
 
 import '../../style/application.scss';
 
@@ -18,7 +19,8 @@ export class ApplicationComponent {
     public url: string = 'https://github.com/slidingapps/angular2-starter';
     public title: string = 'Hello from this side !';
 
-    constructor(private logger: AngularLogger) {
-        Logger.Init(logger);
+    constructor() {
+        let log: Log = Log.create('application', Level.ERROR, Level.INFO, Level.WARN, Level.DATA);
+        Logger.Init(log);
     }
 }

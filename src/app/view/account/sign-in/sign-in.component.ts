@@ -1,7 +1,6 @@
 
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Logger } from '../../../foundation/logger';
 
 import { Model } from './model';
 
@@ -28,17 +27,12 @@ import { Model } from './model';
 export class SignInComponent implements OnDestroy {
 
     constructor() {
-        Logger.LOG.info('constructor', this);
         this.model.username = 'username@taskrunner.io';
     }
 
     public model: Model = new Model();
 
-    private modelChanged: Subscription =
-        this.model.$propertyChanged$.filter(x => !!x).subscribe(x => console.log('changes', x));
-
     public ngOnDestroy() {
-        this.modelChanged.unsubscribe();
         this.model.$destroy();
     }
 }

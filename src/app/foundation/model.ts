@@ -17,8 +17,8 @@ export class Model implements IModel {
     private _$propertyChanged$: BehaviorSubject<IPropertyChangedEvent>;
     public get $propertyChanged$() {
         if (!this._$propertyChanged$) {
-            Logger.LOG.debug(this.$name, '$propertyChanged$ instantiated', this);
             this._$propertyChanged$ = new BehaviorSubject<IPropertyChangedEvent>(undefined);
+            Logger.Debug(this.$name + '.$propertyChanged$', this, 'new');
         }
         return this._$propertyChanged$;
     }
@@ -30,21 +30,23 @@ export class Model implements IModel {
     }
 
     protected $toPayload<TPayload extends IPayload>(converter: (model: Model) => TPayload): TPayload {
-        Logger.LOG.info(this.$name, '$toPayload invoked', this);
+        Logger.Info(this.$name + '.$toPayload()', this);
         let payload: TPayload = converter(this);
-        Logger.LOG.debug(this.$name, '$toPayload done', payload);
+        Logger.Debug(this.$name + '.$toPayload()', this, payload);
 
         return payload;
     }
 
+    /* tslint:disable:no-any */
     protected $onPropertyChanged(property: string, value: any) {
-        Logger.LOG.debug(this.$name, property, value);
+        Logger.Debug(this.$name + '.$onPropertyChanged()', this, property, value);
         this.$propertyChanged$.next({ sender: this, args: { property, value }});
     }
+    /* tslint:enable:no-any */
 
     public $destroy() {
-        Logger.LOG.info(this.$name, '$destroy invoked', this);
+        Logger.Info(this.$name + '.$destroy()', this);
         if (this._$propertyChanged$) { this._$propertyChanged$.complete(); }
-        Logger.LOG.debug(this.$name, '$destroy done', this);
+        Logger.Debug(this.$name + '.$destroy()', this, 'done');
     }
 }

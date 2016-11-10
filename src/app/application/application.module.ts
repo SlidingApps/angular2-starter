@@ -11,8 +11,6 @@ import { PageModule } from '../view/layout/page.module';
 import { PublicModule } from '../view/public/public.module';
 import { AccountModule } from '../view/account/account.module';
 
-import { Logger } from 'angular2-logger/core';
-
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 
 @NgModule({
@@ -29,7 +27,6 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
         ApplicationComponent
     ],
     providers: [
-        Logger
     ],
     bootstrap: [ApplicationComponent]
 })

@@ -70,7 +70,7 @@ module.exports = function makeWebpackConfig() {
    */
   config.resolve = {
     // only discover files that have those extensions
-    extensions: ['.ts', '.js', '.json', '.css', '.scss', '.html'],
+    extensions: ['.ts', '.js', '.json', '.css', '.scss', '.less', '.html'],
   };
 
   var atlOptions = '';
@@ -163,7 +163,8 @@ module.exports = function makeWebpackConfig() {
     config.module.rules.push({
       test: /\.ts$/,
       enforce: 'pre',
-      loader: 'tslint'
+      loader: 'tslint',
+      exclude: /(node_modules)/
     });
   }
 
