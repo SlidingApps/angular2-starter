@@ -1,5 +1,6 @@
 
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
     selector: 'sa-account-sign-in-password',
@@ -7,16 +8,13 @@ import { Component } from '@angular/core';
     <!-- ACCOUNT.SIGN-IN.PASSWORD: BEGIN -->
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4">
-            <div class="form-group">
+            <div [formGroup]="formGroup" class="form-group">
                 <input  id="password" 
-                        name="password"
+                        formControlName="password"
                         type="password" 
                         class="form-control simple-form-control" 
                         placeholder="password" 
-                        required
-                        data-ng-model="ctrl.model.password" 
-                        data-ng-model-options="{ updateOn: 'default blur', debounce: { default: 1000, blur: 0 } }"
-                        data-ng-minlength="4"/>
+                        required/>
                 <i class="fa fa-lock"></i>
             </div>
         </div>
@@ -24,4 +22,12 @@ import { Component } from '@angular/core';
     <!-- ACCOUNT.SIGN-IN.PASSWORD: END -->
     `
 })
-export class PasswordComponent { }
+export class PasswordComponent implements OnInit {
+
+    @Input()
+    public formGroup: FormGroup;
+
+    public ngOnInit(): void {
+        this.formGroup.addControl('password', new FormControl(undefined, Validators.required));
+    }
+}

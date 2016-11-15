@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
+import { Logger } from '../../foundation/logger';
 import { PublicRouterModule } from './public.routing';
 import { PublicComponent } from './public.component';
 
@@ -20,4 +21,8 @@ import { PublicComponent } from './public.component';
         PublicComponent
     ]
 })
-export class PublicModule { }
+export class PublicModule {
+    constructor() {
+        Logger.Info('PublicModule', 'done');
+    }
+}

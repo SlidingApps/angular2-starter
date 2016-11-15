@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { Logger } from '../../../foundation/logger';
 import { ContentComponent } from './content.component';
 
 @NgModule({
@@ -15,4 +16,8 @@ import { ContentComponent } from './content.component';
         ContentComponent
     ]
 })
-export class ContentModule { }
+export class ContentModule {
+    constructor() {
+        Logger.Info('ContentModule', 'done');
+    }
+}

@@ -13,7 +13,8 @@ import { SignInComponent } from './sign-in/sign-in.component';
                 component: AccountComponent,
                 children: [
                     {path: '', redirectTo: 'signin', pathMatch: 'full'},
-                    {path: 'signin', component: SignInComponent}
+                    {path: 'signin', component: SignInComponent},
+                    {path: 'getstarted', component: SignInComponent}
                 ]
             }
         ])
