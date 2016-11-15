@@ -85,6 +85,12 @@ module.exports = function makeWebpackConfig() {
    * List: http://webpack.github.io/docs/list-of-loaders.html
    * This handles most of the magic responsible for converting modules
    */
+
+  // -loader no longer automatically added when resolving loaders, enable old behaviour.
+  config.resolveLoader = {
+      moduleExtensions: ['-loader']
+  };
+
   config.module = {
     rules: [
       // Support for .ts files.
