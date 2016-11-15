@@ -13,7 +13,7 @@ import { SignInModel } from './sign-in.model';
             <div class="container-fluid">
                 <sa-account-sign-in-form [model]="model" (submit)="onSubmitModel(model)"></sa-account-sign-in-form>
                 <ul class="more">
-                    <li><a routerLink="/account/signin">Get started</a></li>
+                    <li><a routerLink="/account/getstarted">Get started</a></li>
                     <li><a routerLink="/account/signin">Forgotten password</a></li>
                 </ul>
             </div>

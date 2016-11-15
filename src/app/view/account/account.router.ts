@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { AccountComponent } from './account.component';
+import { GetStartedComponent } from './get-started/get-started.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 
 @NgModule({
@@ -14,7 +15,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
                 children: [
                     {path: '', redirectTo: 'signin', pathMatch: 'full'},
                     {path: 'signin', component: SignInComponent},
-                    {path: 'getstarted', component: SignInComponent}
+                    {path: 'getstarted', component: GetStartedComponent}
                 ]
             }
         ])

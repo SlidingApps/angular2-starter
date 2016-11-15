@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
 import { Logger } from '../../foundation/logger';
+import { GetStartedModule } from './get-started/get-started.module';
 import { SignInModule } from './sign-in/sign-in.module';
 import { AccountRouterModule } from './account.router';
 import { AccountComponent } from './account.component';
@@ -16,6 +17,7 @@ import { AccountComponent } from './account.component';
         RouterModule,
         Ng2BootstrapModule,
         AccountRouterModule,
+        GetStartedModule,
         SignInModule
     ],
     declarations: [
