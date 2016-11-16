@@ -86,7 +86,9 @@ module.exports = function makeWebpackConfig() {
    * This handles most of the magic responsible for converting modules
    */
 
-  // -loader no longer automatically added when resolving loaders, enable old behaviour.
+  /**
+   *  -loader no longer automatically added when resolving loaders, enable old behaviour in config.
+   *  */
   config.resolveLoader = {
       moduleExtensions: ['-loader']
   };
@@ -137,6 +139,7 @@ module.exports = function makeWebpackConfig() {
       // all css required in src/app files will be merged in js files
       {test: /\.(scss|sass)$/, exclude: root('src', 'style'), loader: 'raw!postcss!sass'},
 
+      // support for .less files
       {test: /\.less$/, loader: "style!css!less"},
 
       // support for .html as raw text
@@ -295,7 +298,7 @@ module.exports = function makeWebpackConfig() {
     contentBase: './src/public',
     historyApiFallback: true,
     quiet: true,
-    stats: 'minimal' // none (or false), errors-only, minimal, normal (or true) and verbose
+    stats: 'normal' // none (or false), errors-only, minimal, normal (or true) and verbose
   };
 
   return config;

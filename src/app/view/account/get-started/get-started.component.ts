@@ -12,8 +12,7 @@ import { GetStartedModel } from './get-started.model';
         <div class="loginContentWrap" style="padding: 0;">
             <div class="container-fluid">
                 <ul class="more">
-                    <li><a routerLink="/account/getstarted">Get started</a></li>
-                    <li><a routerLink="/account/signin">Forgotten password</a></li>
+                    <li>Allready have an account? Sign in <a routerLink="/account/signin">here</a>.</li>
                 </ul>
             </div>
         </div>

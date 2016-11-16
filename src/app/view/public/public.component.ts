@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
         <div class="col-md-6 col-md-offset-3">
             <h1 style="text-align: center;">Welcome to TASKRUNNER.IO</h1>
             <div style="text-align:center;">
-                <a routerLink="/account/signin" class="btn btn-primary">Get started</a>
+                <a routerLink="/account/getstarted" class="btn btn-primary">Get started</a>
             </div>
         </div>        
           
