@@ -1,8 +1,10 @@
 
-import { Component, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Logger } from '../../../../foundation/logger';
 import { Subscription } from 'rxjs';
+
+import * as $ from 'jquery';
 
 import { IGetGetStartedFormModel } from './form.model';
 
@@ -19,9 +21,9 @@ import { IGetGetStartedFormModel } from './form.model';
     <!-- ACCOUNT.SIGN-IN.FORM: END -->
     `
 })
-export class FormComponent implements OnDestroy {
+export class FormComponent implements OnInit, OnDestroy {
 
-    constructor(builder: FormBuilder) {
+    constructor(private element: ElementRef, builder: FormBuilder) {
         this.formGroup = builder.group({});
 
         this.formValueChanged =
@@ -38,6 +40,11 @@ export class FormComponent implements OnDestroy {
 
     public formGroup: FormGroup;
     public formValueChanged: Subscription;
+
+    public ngOnInit(): void {
+        console.log('element', $(this.element.nativeElement).find("input[autofocus='autofocus']"));
+        $('input[autofocus]').trigger('focus');
+    }
 
     public ngOnDestroy() {
         this.formValueChanged.unsubscribe();
