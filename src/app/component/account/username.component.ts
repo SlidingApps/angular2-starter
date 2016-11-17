@@ -19,7 +19,6 @@ export interface IUsernameModel {
                         class="form-control simple-form-control"
                         placeholder="email or username"
                         autocomplete="off"
-                        autofocus
                         required />
                 <i class="fa fa-envelope"></i>
             </div>
