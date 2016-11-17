@@ -5,9 +5,11 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
+import { AccountComponentModule } from '../../../component/account/account.module';
 
 import { Logger } from '../../../foundation/logger';
 import { GetStartedComponent } from './get-started.component';
+import { FormComponent } from './form/form.component';
 
 @NgModule({
     imports: [
@@ -15,9 +17,11 @@ import { GetStartedComponent } from './get-started.component';
         ReactiveFormsModule,
         RouterModule,
         Ng2BootstrapModule,
+        AccountComponentModule
     ],
     declarations: [
-        GetStartedComponent
+        GetStartedComponent,
+        FormComponent
     ]
 })
 export class GetStartedModule {

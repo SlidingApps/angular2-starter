@@ -11,6 +11,7 @@ import { GetStartedModel } from './get-started.model';
     <div class="page-login">
         <div class="loginContentWrap" style="padding: 0;">
             <div class="container-fluid">
+                <sa-account-get-started-form [model]="model" (submit)="onSubmitModel($event)"></sa-account-get-started-form>
                 <ul class="more">
                     <li>Allready have an account? Sign in <a routerLink="/account/signin">here</a>.</li>
                 </ul>
