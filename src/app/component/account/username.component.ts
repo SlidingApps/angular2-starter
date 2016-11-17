@@ -16,7 +16,7 @@ export interface IUsernameModel {
                 <input  id="username"
                         formControlName="username"
                         type="text"
-                        class="form-control simple-form-control"
+                        class="form-control simple-form-control sa-comp-account-username"
                         placeholder="email or username"
                         autocomplete="off"
                         required />

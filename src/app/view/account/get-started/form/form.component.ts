@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Logger } from '../../../../foundation/logger';
 import { Subscription } from 'rxjs';
 
-import * as $ from 'jquery';
+import 'jquery';
 
 import { IGetGetStartedFormModel } from './form.model';
 
@@ -16,6 +16,7 @@ import { IGetGetStartedFormModel } from './form.model';
         <sa-comp-account-organization [formGroup]="formGroup"></sa-comp-account-organization>
         <sa-comp-account-username [formGroup]="formGroup"></sa-comp-account-username>
         <sa-comp-account-password [formGroup]="formGroup"></sa-comp-account-password>
+        <sa-comp-account-password [formGroup]="formGroup" [name]="'password_confirmation'" [placeholder]="'confirm your password'"></sa-comp-account-password>
         <sa-comp-account-button [formGroup]="formGroup" [text]="'Sign up'"></sa-comp-account-button>
     </form>
     <!-- ACCOUNT.SIGN-IN.FORM: END -->
@@ -28,7 +29,7 @@ export class FormComponent implements OnInit, OnDestroy {
 
         this.formValueChanged =
             this.formGroup.valueChanges
-                .debounceTime(200)
+                .debounceTime(100)
                 .subscribe(x => this.onValuesChanged(x as IGetGetStartedFormModel));
     }
 
@@ -42,18 +43,18 @@ export class FormComponent implements OnInit, OnDestroy {
     public formValueChanged: Subscription;
 
     public ngOnInit(): void {
-        console.log('element', $(this.element.nativeElement).find("input[autofocus='autofocus']"));
-        $('input[autofocus]').trigger('focus');
+        jQuery('input[class*=\'sa-comp-account-organization\']').trigger('focus');
     }
 
     public ngOnDestroy() {
         this.formValueChanged.unsubscribe();
     }
 
-    private onSubmit(value: any): void {
-        console.log('submit', value);
+    /* tslint:disable:no-unused-variable */
+    private onSubmit(value: IGetGetStartedFormModel): void {
         this.submit.emit(value);
     }
+    /* tslint:enable:no-unused-variable */
 
     private onValuesChanged(model: IGetGetStartedFormModel): void {
         Logger.Debug('FormComponent.formValueChanged()', model);

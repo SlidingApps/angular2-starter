@@ -16,7 +16,7 @@ export interface IOrganizationModel {
                 <input  id="organization"
                         formControlName="organization"
                         type="text"
-                        class="form-control simple-form-control"
+                        class="form-control simple-form-control sa-comp-account-organization"
                         placeholder="organization"
                         autocomplete="off"
                         autofocus

@@ -13,11 +13,11 @@ export interface IPasswordModel {
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4">
             <div [formGroup]="formGroup" class="form-group">
-                <input  id="password" 
-                        formControlName="password"
+                <input  id="{{ name }}" 
+                        formControlName="{{ name }}"
                         type="password" 
-                        class="form-control simple-form-control" 
-                        placeholder="password" 
+                        class="form-control simple-form-control sa-comp-account-password" 
+                        placeholder="{{ placeholder }}" 
                         required/>
                 <i class="fa fa-lock"></i>
             </div>
@@ -33,7 +33,13 @@ export class PasswordComponent implements OnInit {
     @Input()
     public formGroup: FormGroup;
 
+    @Input()
+    public name: string = PasswordComponent.FORM_CONTROL_NAME;
+
+    @Input()
+    public placeholder: string = 'password';
+
     public ngOnInit(): void {
-        this.formGroup.addControl(PasswordComponent.FORM_CONTROL_NAME, new FormControl(undefined, Validators.required));
+        this.formGroup.addControl(this.name, new FormControl(undefined, Validators.required));
     }
 }

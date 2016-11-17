@@ -1,5 +1,5 @@
 
-import { Component, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Logger } from '../../../../foundation/logger';
 import { Subscription } from 'rxjs';
@@ -11,14 +11,14 @@ import { ISignInFormModel } from './form.model';
     template: `
     <!-- ACCOUNT.SIGN-IN.FORM: BEGIN -->
     <form [formGroup]="formGroup">
-        <sa-account-sign-in-username [formGroup]="formGroup"></sa-account-sign-in-username>
-        <sa-account-sign-in-password [formGroup]="formGroup"></sa-account-sign-in-password>
-        <sa-account-sign-in-button [formGroup]="formGroup"></sa-account-sign-in-button>
+        <sa-comp-account-username [formGroup]="formGroup"></sa-comp-account-username>
+        <sa-comp-account-password [formGroup]="formGroup"></sa-comp-account-password>
+        <sa-comp-account-button [formGroup]="formGroup" [text]="'Sign up'"></sa-comp-account-button>
     </form>
     <!-- ACCOUNT.SIGN-IN.FORM: END -->
     `
 })
-export class FormComponent implements OnDestroy {
+export class FormComponent implements OnInit, OnDestroy {
 
     constructor(builder: FormBuilder) {
         this.formGroup = builder.group({});
@@ -38,7 +38,11 @@ export class FormComponent implements OnDestroy {
     public formGroup: FormGroup;
     public formValueChanged: Subscription;
 
-    public ngOnDestroy() {
+    public ngOnInit(): void {
+        jQuery('input[class*=\'sa-comp-account-username\']').trigger('focus');
+    }
+
+    public ngOnDestroy(): void {
         this.formValueChanged.unsubscribe();
     }
 

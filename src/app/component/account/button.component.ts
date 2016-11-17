@@ -1,5 +1,5 @@
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -16,16 +16,10 @@ import { FormGroup } from '@angular/forms';
     <!-- COMPONENT.ACCOUNT.BUTTON: END -->
     `
 })
-export class ButtonComponent implements OnInit {
+export class ButtonComponent {
     @Input()
     public formGroup: FormGroup;
 
     @Input()
     public text: string;
-
-    public isInitialized: boolean = false;
-
-    public ngOnInit(): void {
-        this.isInitialized = true;
-    }
 }

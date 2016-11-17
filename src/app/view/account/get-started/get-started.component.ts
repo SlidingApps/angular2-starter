@@ -13,7 +13,7 @@ import { GetStartedModel } from './get-started.model';
             <div class="container-fluid">
                 <sa-account-get-started-form [model]="model" (submit)="onSubmitModel($event)"></sa-account-get-started-form>
                 <ul class="more">
-                    <li>Allready have an account? Sign in <a routerLink="/account/signin">here</a>.</li>
+                    <li>Allready have an account? <a routerLink="/account/signin">Sign in here</a>.</li>
                 </ul>
             </div>
         </div>
