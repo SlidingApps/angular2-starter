@@ -1,2 +1,2 @@
-let  english: string = 'test';
+let  english: string;
 export default english;

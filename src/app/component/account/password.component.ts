@@ -1,6 +1,7 @@
 
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { TranslateService } from '../../application/shared.module';
 
 export interface IPasswordModel {
     password: string;
@@ -28,6 +29,10 @@ export interface IPasswordModel {
 })
 export class PasswordComponent implements OnInit {
 
+    constructor(private translate: TranslateService) {
+        this.placeholder = this.placeholder ? this.placeholder : this.translate.instant('ACCOUNT.PASSWORD_PLACEHOLDER');
+    }
+
     public static get FORM_CONTROL_NAME(): string { return 'password'; }
 
     @Input()
@@ -37,7 +42,7 @@ export class PasswordComponent implements OnInit {
     public name: string = PasswordComponent.FORM_CONTROL_NAME;
 
     @Input()
-    public placeholder: string = 'password';
+    public placeholder: string;
 
     public ngOnInit(): void {
         this.formGroup.addControl(this.name, new FormControl(undefined, Validators.required));

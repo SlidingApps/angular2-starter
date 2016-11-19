@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { Logger } from '../../foundation/logger';
+import { SharedModule, Logger } from '../../application/shared.module';
 
 import { OrganizationComponent, IOrganizationModel } from './organization.component';
 import { UsernameComponent, IUsernameModel } from './username.component';
@@ -13,7 +13,8 @@ import { ButtonComponent } from './button.component';
 @NgModule({
     imports: [
         CommonModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SharedModule
     ],
     declarations: [
         OrganizationComponent,

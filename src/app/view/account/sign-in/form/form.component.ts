@@ -12,7 +12,7 @@ import { IFormModel } from './form.model';
     <form [formGroup]="formGroup" (submit)="onSubmit()">        
         <sa-comp-account-username [formGroup]="formGroup"></sa-comp-account-username>
         <sa-comp-account-password [formGroup]="formGroup"></sa-comp-account-password>
-        <sa-comp-account-button [formGroup]="formGroup" [text]="'Sign in'"></sa-comp-account-button>
+        <sa-comp-account-button [formGroup]="formGroup" [text]="'ACCOUNT.SIGN_IN_ACTION' | translate"></sa-comp-account-button>
     </form>
     <!-- ACCOUNT.SIGN-IN.FORM: END -->
     `

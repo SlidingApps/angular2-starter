@@ -16,10 +16,10 @@ import { Component } from '@angular/core';
         <div class="pageContent" data-ng-if="!ctrl.isSignedIn">
             <div class="container-fluid">
                 <div class="col-sm-1 col-sm-offset-10">
-                    <a class="btn btn-primary" style="margin-top: 10px;" routerLink="/account/getstarted">Get started</a>
+                    <a class="btn btn-primary" style="margin-top: 10px;" routerLink="/account/getstarted">{{ 'NAVIGATION.GET_STARTED_ACTION' | translate }}</a>
                 </div>
                 <div class="col-sm-1">
-                    <a class="btn btn-normal" style="margin-top: 10px;" routerLink="/account/signin">Sign In</a>
+                    <a class="btn btn-normal" style="margin-top: 10px;" routerLink="/account/signin">{{ 'NAVIGATION.SIGN_IN_ACTION' | translate }}</a>
                 </div>
             </div>
         </div>

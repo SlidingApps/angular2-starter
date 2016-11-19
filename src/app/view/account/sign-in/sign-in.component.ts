@@ -14,8 +14,8 @@ import { SignInModel } from './sign-in.model';
             <div class="container-fluid">
                 <sa-account-sign-in-form (sign-in-clicked)="onSignInClicked($event)"></sa-account-sign-in-form>
                 <ul class="more">
-                    <li><a routerLink="/account/getstarted">Get started</a></li>
-                    <li><a routerLink="/account/forgotpassword">Forgotten password</a></li>
+                    <li><a routerLink="/account/getstarted">{{ 'ACCOUNT.GET_STARTED_LINK' | translate }}</a></li>
+                    <li><a routerLink="/account/forgotpassword">{{ 'ACCOUNT.FORGOT_PASSWORD_LINK' | translate }}</a></li>
                 </ul>
             </div>
         </div>

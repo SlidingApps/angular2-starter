@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
         <div class="col-md-6 col-md-offset-3">
             <h1 style="text-align: center;">{{ 'PUBLIC.WELCOME' | translate }}</h1>
             <div style="text-align:center;">
-                <a routerLink="/account/getstarted" class="btn btn-primary">Get started</a>
+                <a routerLink="/account/getstarted" class="btn btn-primary">{{ 'PUBLIC.GET_STARTED_ACTION' | translate }}</a>
             </div>
         </div>        
           

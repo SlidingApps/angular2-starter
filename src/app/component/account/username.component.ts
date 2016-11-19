@@ -1,6 +1,7 @@
 
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { TranslateService } from '../../application/shared.module';
 
 export interface IUsernameModel {
     username: string;
@@ -24,7 +25,7 @@ export interface IUsernameModel {
             </div>
         </div>
         <div class="col-lg-4" *ngIf="formControl.errors">
-            <span *ngIf="formControl.errors.minlength && formControl.touched" style="color: orangered; font-weight: bold;">Username is too short</span>
+            <span *ngIf="formControl.errors.minlength && formControl.touched" style="color: orangered; font-weight: bold;">{{ 'ACCOUNT.VALIDATION_ERROR_USERNAME_NAME_TOO_SHORT' | translate}}</span>
         </div>
     </div>
     <!-- COMPONENT.ACCOUNT.USERNAME: END -->
@@ -32,13 +33,17 @@ export interface IUsernameModel {
 })
 export class UsernameComponent implements OnInit {
 
+    constructor(private translate: TranslateService) {
+        this.placeholder = this.placeholder ? this.placeholder : this.translate.instant('ACCOUNT.EMAIL_OR_USERNAME_PLACEHOLDER');
+    }
+
     public static get FORM_CONTROL_NAME(): string { return 'username'; }
 
     @Input()
     public formGroup: FormGroup;
 
     @Input()
-    public placeholder: string = 'email or username';
+    public placeholder: string;
 
     public formControl: FormControl;
 

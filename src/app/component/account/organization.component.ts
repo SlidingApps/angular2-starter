@@ -17,7 +17,7 @@ export interface IOrganizationModel {
                         formControlName="organization"
                         type="text"
                         class="form-control simple-form-control sa-comp-account-organization"
-                        placeholder="organization"
+                        placeholder="{{ 'ACCOUNT.ORGANIZATION_PLACEHOLDER' | translate }}"
                         autocomplete="off"
                         autofocus
                         required />
@@ -25,7 +25,7 @@ export interface IOrganizationModel {
             </div>
         </div>
         <div class="col-lg-4" *ngIf="formControl.errors">
-            <span *ngIf="formControl.errors.minlength && formControl.touched" style="color: orangered; font-weight: bold;">Organization name is too short</span>
+            <span *ngIf="formControl.errors.minlength && formControl.touched" style="color: orangered; font-weight: bold;">{{ 'ACCOUNT.VALIDATION_ERROR_ORGANIZATION_NAME_TOO_SHORT' | translate }}</span>
         </div>
     </div>
     <!-- COMPONENT.ACCOUNT.ORGANIZATION: END -->

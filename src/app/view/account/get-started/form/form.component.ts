@@ -1,7 +1,7 @@
 
 import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Logger } from '../../../../foundation/logger';
+import { Logger, TranslateService } from '../../../../application/shared.module';
 
 import { IFormModel } from './form.model';
 
@@ -13,17 +13,17 @@ import 'jquery';
     <!-- ACCOUNT.SIGN-IN.FORM: BEGIN -->
     <form #f="ngForm" [formGroup]="formGroup" (ngSubmit)="onSubmit(f.value)">
         <sa-comp-account-organization [formGroup]="formGroup"></sa-comp-account-organization>
-        <sa-comp-account-username [formGroup]="formGroup" [placeholder]="'email'"></sa-comp-account-username>
+        <sa-comp-account-username [formGroup]="formGroup" [placeholder]="'ACCOUNT.EMAIL_PLACEHOLDER' | translate"></sa-comp-account-username>
         <sa-comp-account-password [formGroup]="formGroup"></sa-comp-account-password>
-        <sa-comp-account-password [formGroup]="formGroup" [name]="'password_confirmation'" [placeholder]="'confirm your password'"></sa-comp-account-password>
-        <sa-comp-account-button [formGroup]="formGroup" [text]="'Sign up'"></sa-comp-account-button>
+        <sa-comp-account-password [formGroup]="formGroup" [name]="'passwordConfirmation'" [placeholder]="'ACCOUNT.CONFIRM_PASSWORD_PLACEHOLDER' | translate"></sa-comp-account-password>
+        <sa-comp-account-button [formGroup]="formGroup" [text]="'ACCOUNT.SIGN_UP_ACTION' | translate"></sa-comp-account-button>
     </form>
     <!-- ACCOUNT.SIGN-IN.FORM: END -->
     `
 })
 export class FormComponent implements OnInit {
 
-    constructor(private element: ElementRef, builder: FormBuilder) {
+    constructor(private element: ElementRef, public translate: TranslateService, builder: FormBuilder) {
         this.formGroup = builder.group({});
     }
 

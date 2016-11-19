@@ -5,6 +5,7 @@ import { TranslateService } from './shared.module';
 
 import '../../style/application.scss';
 import * as english from '../asset/i18n/en.json';
+import * as nederlands from '../asset/i18n/nl.json';
 
 @Component({
     selector: 'sa-application',
@@ -18,6 +19,7 @@ import * as english from '../asset/i18n/en.json';
 export class ApplicationComponent {
     constructor(translate: TranslateService) {
         translate.setTranslation('en', english);
+        translate.setTranslation('nl', nederlands);
 
         translate.setDefaultLang('en');
         translate.use('en');

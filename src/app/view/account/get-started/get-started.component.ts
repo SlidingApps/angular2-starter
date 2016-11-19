@@ -14,7 +14,7 @@ import { IFormModel } from './form/form.model';
             <div class="container-fluid">
                 <sa-account-get-started-form (sign-up-clicked)="onSignUpClicked($event)"></sa-account-get-started-form>
                 <ul class="more">
-                    <li>Allready have an account? <a routerLink="/account/signin">Sign in here</a>.</li>
+                    <li>{{ 'ACCOUNT.HAVE_ACCOUNT_QSTN' | translate }} <a routerLink="/account/signin">{{ 'ACCOUNT.SIGN_IN_LINK' | translate }}</a>.</li>
                 </ul>
             </div>
         </div>

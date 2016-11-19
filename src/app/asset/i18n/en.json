@@ -1,5 +1,26 @@
 {
     "PUBLIC": {
-        "WELCOME": "Welcome to TASKRUNNER.IO"
+        "WELCOME": "Welcome to TASKRUNNER.IO",
+        "GET_STARTED_ACTION": "Get Started"
+    },
+    "ACCOUNT": {
+        "HAVE_ACCOUNT_QSTN": "Allready have an account?",
+        "SIGN_IN_LINK": "Sign in here",
+        "GET_STARTED_LINK": "Get started",
+        "FORGOT_PASSWORD_LINK": "Forgot password",
+        "ORGANIZATION_PLACEHOLDER": "organization",
+        "EMAIL_PLACEHOLDER": "email",
+        "EMAIL_OR_USERNAME_PLACEHOLDER": "email or username",
+        "PASSWORD_PLACEHOLDER": "password",
+        "CONFIRM_PASSWORD_PLACEHOLDER": "confirm your password",
+        "SIGN_UP_ACTION": "Sign Up",
+        "SIGN_IN_ACTION": "Sign In",
+        "SEND_INSTRUCTIONS_ACTION": "Send Instructions",
+        "VALIDATION_ERROR_ORGANIZATION_NAME_TOO_SHORT": "Organization name is too short",
+        "VALIDATION_ERROR_USERNAME_NAME_TOO_SHORT": "Username name is too short"
+    },
+    "NAVIGATION": {
+        "GET_STARTED_ACTION": "Get Started",
+        "SIGN_IN_ACTION": "Sign In"
     }
 }

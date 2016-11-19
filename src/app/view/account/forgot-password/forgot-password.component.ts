@@ -13,8 +13,8 @@ import { IFormModel} from './form/form.model';
             <div class="container-fluid">
                 <sa-account-forgot-password-form (send-link-clicked)="onSendLinkClicked($event)"></sa-account-forgot-password-form>
                 <ul class="more">
-                    <li><a routerLink="/account/getstarted">Get started</a></li>
-                    <li><a routerLink="/account/signin">Forgotten password</a></li>
+                    <li><a routerLink="/account/getstarted">{{ 'ACCOUNT.GET_STARTED_LINK' | translate }}</a></li>
+                    <li>{{ 'ACCOUNT.HAVE_ACCOUNT_QSTN' | translate }} <a routerLink="/account/signin">{{ 'ACCOUNT.SIGN_IN_LINK' | translate }}</a>.</li>
                 </ul>
             </div>
         </div>
