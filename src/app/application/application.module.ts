@@ -1,5 +1,5 @@
 
-import { SharedModule, Logger } from './shared.module';
+import { SharedModule, TranslateService, Logger } from './shared.module';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +17,9 @@ import { PublicModule } from '../view/public/public.module';
 import { AccountModule } from '../view/account/account.module';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
+
+import * as english from '../asset/i18n/en.json';
+import * as nederlands from '../asset/i18n/nl.json';
 
 @NgModule({
     imports: [
@@ -37,7 +40,13 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     bootstrap: [ApplicationComponent]
 })
 export class ApplicationModule {
-    constructor(public appRef: ApplicationRef, private router: Router) {
+    constructor(public appRef: ApplicationRef, private router: Router, private translate: TranslateService) {
+        translate.setTranslation('en', english);
+        translate.setTranslation('nl', nederlands);
+
+        translate.setDefaultLang('en');
+        translate.use('en');
+
         const appLog: Log = Log.create(ApplicationConfig.APPLICATION_SINK_NAME, ...ApplicationConfig.APPLICATION_SINK_LEVELS);
         const routerLog: Log = Log.create(ApplicationConfig.ROUTER_SINK_NAME, ...ApplicationConfig.ROUTER_SINK_LEVELS);
         const modelLog: Log = Log.create(ApplicationConfig.MODEL_SINK_NAME, ...ApplicationConfig.MODEL_SINK_LEVELS);
