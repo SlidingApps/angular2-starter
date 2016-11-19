@@ -1,9 +1,8 @@
 
 // FOUNDATION
 import { Model as FoundationModel } from '../../../foundation/model';
-import { IGetGetStartedFormModel } from './form/form.model';
 
-export class GetStartedModel extends FoundationModel implements IGetGetStartedFormModel {
+export class GetStartedModel extends FoundationModel {
     private _organization: string;
     public get organization(): string { return this._organization; }
     public set organization(value: string) {

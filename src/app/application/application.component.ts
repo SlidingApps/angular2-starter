@@ -1,9 +1,10 @@
 /// <reference path="../index.d.ts" />
 
 import { Component } from '@angular/core';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from './shared.module';
 
 import '../../style/application.scss';
+import * as english from '../asset/i18n/en.json';
 
 @Component({
     selector: 'sa-application',
@@ -16,6 +17,8 @@ import '../../style/application.scss';
 })
 export class ApplicationComponent {
     constructor(translate: TranslateService) {
+        translate.setTranslation('en', english);
+
         translate.setDefaultLang('en');
         translate.use('en');
     }

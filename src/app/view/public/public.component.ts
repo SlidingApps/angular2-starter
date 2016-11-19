@@ -1,6 +1,5 @@
 
 import { Component } from '@angular/core';
-import { TranslateService } from 'ng2-translate';
 
 @Component({
     selector: 'sa-public-view',
@@ -21,8 +20,4 @@ import { TranslateService } from 'ng2-translate';
     <!-- PUBLIC: END -->
     `
 })
-export class PublicComponent {
-    constructor(translate: TranslateService) {
-
-    }
-}
+export class PublicComponent { }

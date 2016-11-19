@@ -1,20 +1,14 @@
 
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TranslateModule } from 'ng2-translate';
 
-import { Ng2BootstrapModule } from 'ng2-bootstrap';
-
-import { Logger } from '../../foundation/logger';
+import { SharedModule, Logger } from '../../application/shared.module';
 import { PublicRouterModule } from './public.routing';
 import { PublicComponent } from './public.component';
 
 @NgModule({
     imports: [
-        CommonModule,
-        Ng2BootstrapModule,
-        PublicRouterModule,
-        TranslateModule
+        SharedModule,
+        PublicRouterModule
     ],
     declarations: [
         PublicComponent

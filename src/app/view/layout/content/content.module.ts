@@ -1,13 +1,12 @@
 
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 
-import { Logger } from '../../../foundation/logger';
+import { SharedModule, Logger } from '../../../application/shared.module';
 import { ContentComponent } from './content.component';
 
 @NgModule({
     imports: [
-        RouterModule
+        SharedModule
     ],
     declarations: [
         ContentComponent

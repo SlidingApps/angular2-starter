@@ -1,22 +1,15 @@
 
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Logger } from '../../application/shared.module';
 
-import { Ng2BootstrapModule } from 'ng2-bootstrap';
-
-import { Logger } from '../../foundation/logger';
+import { AccountRouterModule } from './account.router';
+import { AccountComponent } from './account.component';
 import { GetStartedModule } from './get-started/get-started.module';
 import { ForgotPasswordModule } from './forgot-password/forgot-password.module';
 import { SignInModule } from './sign-in/sign-in.module';
-import { AccountRouterModule } from './account.router';
-import { AccountComponent } from './account.component';
 
 @NgModule({
     imports: [
-        CommonModule,
-        RouterModule,
-        Ng2BootstrapModule,
         AccountRouterModule,
         GetStartedModule,
         ForgotPasswordModule,

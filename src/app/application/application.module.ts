@@ -1,12 +1,10 @@
 
+import { SharedModule, Logger } from './shared.module';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule, Http } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { Log } from 'ng2-logger/ng2-logger';
-import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
-
-import { Logger } from '../foundation/logger';
+import { TranslateModule } from 'ng2-translate';
 
 import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, RoutesRecognized } from '@angular/router';
 
@@ -22,19 +20,14 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 
 @NgModule({
     imports: [
+        SharedModule,
         BrowserModule,
-        HttpModule,
         ApplicationRoutingModule,
         FormsModule,
         PageModule,
         PublicModule,
         AccountModule,
-        TranslateModule.forRoot({
-                provide: TranslateLoader,
-                useFactory: (http: Http) => new TranslateStaticLoader(http, './assets/i18n', '.json'),
-                deps: [Http]
-            }
-        )
+        TranslateModule.forRoot()
     ],
     declarations: [
         ApplicationComponent

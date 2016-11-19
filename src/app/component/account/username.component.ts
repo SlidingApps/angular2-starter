@@ -17,7 +17,7 @@ export interface IUsernameModel {
                         formControlName="username"
                         type="text"
                         class="form-control simple-form-control sa-comp-account-username"
-                        placeholder="email or username"
+                        placeholder="{{ placeholder }}"
                         autocomplete="off"
                         required />
                 <i class="fa fa-envelope"></i>
@@ -36,6 +36,10 @@ export class UsernameComponent implements OnInit {
 
     @Input()
     public formGroup: FormGroup;
+
+    @Input()
+    public placeholder: string = 'email or username';
+
     public formControl: FormControl;
 
     public ngOnInit(): void {

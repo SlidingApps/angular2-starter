@@ -3,7 +3,6 @@ import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/co
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Logger } from '../../../../foundation/logger';
 
-
 import { IFormModel } from './form.model';
 
 import 'jquery';
@@ -14,7 +13,7 @@ import 'jquery';
     <!-- ACCOUNT.SIGN-IN.FORM: BEGIN -->
     <form #f="ngForm" [formGroup]="formGroup" (ngSubmit)="onSubmit(f.value)">
         <sa-comp-account-organization [formGroup]="formGroup"></sa-comp-account-organization>
-        <sa-comp-account-username [formGroup]="formGroup"></sa-comp-account-username>
+        <sa-comp-account-username [formGroup]="formGroup" [placeholder]="'email'"></sa-comp-account-username>
         <sa-comp-account-password [formGroup]="formGroup"></sa-comp-account-password>
         <sa-comp-account-password [formGroup]="formGroup" [name]="'password_confirmation'" [placeholder]="'confirm your password'"></sa-comp-account-password>
         <sa-comp-account-button [formGroup]="formGroup" [text]="'Sign up'"></sa-comp-account-button>
