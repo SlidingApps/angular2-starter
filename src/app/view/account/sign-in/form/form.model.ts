@@ -1,8 +1,7 @@
 
-import { IUsernameModel } from './username.model';
-import { IPasswordModel } from './password.model';
+import { IUsernameModel, IPasswordModel } from '../../../../component/account/account.module';
 
-export interface ISignInFormModel extends
+export interface IFormModel extends
     IUsernameModel,
     IPasswordModel {
 }

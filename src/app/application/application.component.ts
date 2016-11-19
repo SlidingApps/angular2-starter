@@ -1,6 +1,7 @@
 /// <reference path="../index.d.ts" />
 
 import { Component } from '@angular/core';
+import { TranslateService } from 'ng2-translate';
 
 import '../../style/application.scss';
 
@@ -13,4 +14,9 @@ import '../../style/application.scss';
      `,
     styleUrls: ['./application.component.scss'],
 })
-export class ApplicationComponent { }
+export class ApplicationComponent {
+    constructor(translate: TranslateService) {
+        translate.setDefaultLang('en');
+        translate.use('en');
+    }
+}

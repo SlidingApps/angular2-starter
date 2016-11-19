@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { AccountComponent } from './account.component';
 import { GetStartedComponent } from './get-started/get-started.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 
 @NgModule({
@@ -15,6 +16,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
                 children: [
                     {path: '', redirectTo: 'signin', pathMatch: 'full'},
                     {path: 'signin', component: SignInComponent},
+                    {path: 'forgotpassword', component: ForgotPasswordComponent},
                     {path: 'getstarted', component: GetStartedComponent}
                 ]
             }

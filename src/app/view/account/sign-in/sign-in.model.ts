@@ -1,9 +1,8 @@
 
 // FOUNDATION
 import { Model as FoundationModel } from '../../../foundation/model';
-import { ISignInFormModel } from './form/form.model';
 
-export class SignInModel extends FoundationModel implements ISignInFormModel {
+export class SignInModel extends FoundationModel {
     private _username: string;
     public get username(): string { return this._username; }
     public set username(value: string) {

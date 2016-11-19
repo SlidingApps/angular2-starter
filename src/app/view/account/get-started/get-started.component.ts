@@ -1,8 +1,9 @@
 
 import { Component, OnDestroy } from '@angular/core';
-
 import { Logger } from '../../../foundation/logger';
+
 import { GetStartedModel } from './get-started.model';
+import { IFormModel } from './form/form.model';
 
 @Component({
     selector: 'sa-account-sign-in',
@@ -11,7 +12,7 @@ import { GetStartedModel } from './get-started.model';
     <div class="page-login">
         <div class="loginContentWrap" style="padding: 0;">
             <div class="container-fluid">
-                <sa-account-get-started-form [model]="model" (submit)="onSubmitModel($event)"></sa-account-get-started-form>
+                <sa-account-get-started-form (sign-up-clicked)="onSignUpClicked($event)"></sa-account-get-started-form>
                 <ul class="more">
                     <li>Allready have an account? <a routerLink="/account/signin">Sign in here</a>.</li>
                 </ul>
@@ -25,8 +26,8 @@ export class GetStartedComponent implements OnDestroy {
 
     public model: GetStartedModel = new GetStartedModel();
 
-    public onSubmitModel(model: GetStartedModel) {
-        Logger.Info('GetStartedComponent.onSubmit()', model);
+    public onSignUpClicked(model: IFormModel) {
+        Logger.Info('GetStartedComponent.onSignUpClicked()', model);
     }
 
     public ngOnDestroy() {

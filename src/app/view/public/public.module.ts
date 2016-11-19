@@ -1,6 +1,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from 'ng2-translate';
 
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
@@ -12,7 +13,8 @@ import { PublicComponent } from './public.component';
     imports: [
         CommonModule,
         Ng2BootstrapModule,
-        PublicRouterModule
+        PublicRouterModule,
+        TranslateModule
     ],
     declarations: [
         PublicComponent

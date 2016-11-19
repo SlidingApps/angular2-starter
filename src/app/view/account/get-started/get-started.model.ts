@@ -21,4 +21,10 @@ export class GetStartedModel extends FoundationModel implements IGetGetStartedFo
     public set password(value: string) {
         this.$setPropety('password', value);
     }
+
+    private _passwordConfirmation: string;
+    public get passwordConfirmation(): string { return this._passwordConfirmation; }
+    public set passwordConfirmation(value: string) {
+        this.$setPropety('passwordConfirmation', value);
+    }
 }

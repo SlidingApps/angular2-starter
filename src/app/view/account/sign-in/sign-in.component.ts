@@ -1,7 +1,8 @@
 
 import { Component, OnDestroy } from '@angular/core';
-
 import { Logger } from '../../../foundation/logger';
+
+import { IFormModel } from './form/form.model';
 import { SignInModel } from './sign-in.model';
 
 @Component({
@@ -11,10 +12,10 @@ import { SignInModel } from './sign-in.model';
     <div class="page-login">
         <div class="loginContentWrap" style="padding: 0;">
             <div class="container-fluid">
-                <sa-account-sign-in-form [model]="model" (submit)="onSubmitModel(model)"></sa-account-sign-in-form>
+                <sa-account-sign-in-form (sign-in-clicked)="onSignInClicked($event)"></sa-account-sign-in-form>
                 <ul class="more">
                     <li><a routerLink="/account/getstarted">Get started</a></li>
-                    <li><a routerLink="/account/signin">Forgotten password</a></li>
+                    <li><a routerLink="/account/forgotpassword">Forgotten password</a></li>
                 </ul>
             </div>
         </div>
@@ -26,8 +27,8 @@ export class SignInComponent implements OnDestroy {
 
     public model: SignInModel = new SignInModel();
 
-    public onSubmitModel(model: SignInModel) {
-        Logger.Info('SignInComponent.onSubmit()', model);
+    public onSignInClicked(model: IFormModel) {
+        Logger.Info('SignInComponent.onSignInClicked()', model);
     }
 
     public ngOnDestroy() {

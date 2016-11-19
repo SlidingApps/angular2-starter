@@ -1,9 +1,10 @@
 
 import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { Log } from 'ng2-logger/ng2-logger';
+import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
 
 import { Logger } from '../foundation/logger';
 
@@ -27,7 +28,13 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
         FormsModule,
         PageModule,
         PublicModule,
-        AccountModule
+        AccountModule,
+        TranslateModule.forRoot({
+                provide: TranslateLoader,
+                useFactory: (http: Http) => new TranslateStaticLoader(http, './assets/i18n', '.json'),
+                deps: [Http]
+            }
+        )
     ],
     declarations: [
         ApplicationComponent

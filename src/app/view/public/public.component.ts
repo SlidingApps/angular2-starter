@@ -1,5 +1,6 @@
 
 import { Component } from '@angular/core';
+import { TranslateService } from 'ng2-translate';
 
 @Component({
     selector: 'sa-public-view',
@@ -9,7 +10,7 @@ import { Component } from '@angular/core';
       <div class="row">
   
         <div class="col-md-6 col-md-offset-3">
-            <h1 style="text-align: center;">Welcome to TASKRUNNER.IO</h1>
+            <h1 style="text-align: center;">{{ 'PUBLIC.WELCOME' | translate }}</h1>
             <div style="text-align:center;">
                 <a routerLink="/account/getstarted" class="btn btn-primary">Get started</a>
             </div>
@@ -20,4 +21,8 @@ import { Component } from '@angular/core';
     <!-- PUBLIC: END -->
     `
 })
-export class PublicComponent { }
+export class PublicComponent {
+    constructor(translate: TranslateService) {
+
+    }
+}

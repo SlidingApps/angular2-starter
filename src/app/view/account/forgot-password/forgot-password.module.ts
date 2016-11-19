@@ -8,7 +8,7 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { AccountComponentModule } from '../../../component/account/account.module';
 
 import { Logger } from '../../../foundation/logger';
-import { SignInComponent } from './sign-in.component';
+import { ForgotPasswordComponent } from './forgot-password.component';
 import { FormComponent } from './form/form.component';
 
 @NgModule({
@@ -20,12 +20,12 @@ import { FormComponent } from './form/form.component';
         AccountComponentModule
     ],
     declarations: [
-        SignInComponent,
+        ForgotPasswordComponent,
         FormComponent
     ]
 })
-export class SignInModule {
+export class ForgotPasswordModule {
     constructor() {
-        Logger.Info('SignInModule', 'done');
+        Logger.Info('ForgotPasswordModule', 'done');
     }
 }

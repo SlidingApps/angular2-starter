@@ -6,13 +6,12 @@ import { Logger } from '../../../../foundation/logger';
 import { IFormModel } from './form.model';
 
 @Component({
-    selector: 'sa-account-sign-in-form',
+    selector: 'sa-account-forgot-password-form',
     template: `
     <!-- ACCOUNT.SIGN-IN.FORM: BEGIN -->
     <form [formGroup]="formGroup" (submit)="onSubmit()">        
         <sa-comp-account-username [formGroup]="formGroup"></sa-comp-account-username>
-        <sa-comp-account-password [formGroup]="formGroup"></sa-comp-account-password>
-        <sa-comp-account-button [formGroup]="formGroup" [text]="'Sign in'"></sa-comp-account-button>
+        <sa-comp-account-button [formGroup]="formGroup" [text]="'Send instructions'"></sa-comp-account-button>
     </form>
     <!-- ACCOUNT.SIGN-IN.FORM: END -->
     `
@@ -23,8 +22,8 @@ export class FormComponent implements OnInit {
         this.formGroup = builder.group({});
     }
 
-    @Output('sign-in-clicked')
-    public signInClicked = new EventEmitter();
+    @Output('send-link-clicked')
+    public sendLinkClicked = new EventEmitter();
 
     public formGroup: FormGroup;
 
@@ -35,7 +34,7 @@ export class FormComponent implements OnInit {
     /* tslint:disable:no-unused-variable */
     private onSubmit(): void {
         const model: IFormModel = this.formGroup.value;
-        this.signInClicked.emit(model);
+        this.sendLinkClicked.emit(model);
 
         Logger.Debug('FormComponent.onSubmit()', model);
     }
