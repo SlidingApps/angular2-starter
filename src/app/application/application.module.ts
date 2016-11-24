@@ -3,6 +3,7 @@ import { SharedModule, TranslateService, Logger } from './shared.module';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
 import { Log } from 'ng2-logger/ng2-logger';
 import { TranslateModule } from 'ng2-translate';
 
@@ -15,6 +16,8 @@ import { ApplicationRoutingModule } from './application.routing';
 import { PageModule } from '../view/layout/page.module';
 import { PublicModule } from '../view/public/public.module';
 import { AccountModule } from '../view/account/account.module';
+
+import { account } from '../store/account/reducer';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 
@@ -30,7 +33,8 @@ import * as nederlands from '../asset/i18n/nl.json';
         PageModule,
         PublicModule,
         AccountModule,
-        TranslateModule.forRoot()
+        TranslateModule.forRoot(),
+        StoreModule.provideStore(account)
     ],
     declarations: [
         ApplicationComponent
