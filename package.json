@@ -22,7 +22,8 @@
     "docs": "typedoc --options typedoc.json src/app/app.component.ts",
     "start": "npm run server",
     "start:hmr": "npm run server -- --hot",
-    "postinstall": "npm run webdriver-update"
+    "typings": "typings install",
+    "postinstall": "npm run typings && npm run webdriver-update"
   },
   "dependencies": {
     "@angular/common": "2.1.2",
