@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AccountComponentModule } from '../../../component/account/account.module';
 
 import { SharedModule, Logger } from '../../../application/shared.module';
+import { ServiceModule } from '../../../service/service.module';
 import { GetStartedComponent } from './get-started.component';
 import { FormComponent } from './form/form.component';
 
@@ -12,7 +13,8 @@ import { FormComponent } from './form/form.component';
     imports: [
         SharedModule,
         ReactiveFormsModule,
-        AccountComponentModule
+        AccountComponentModule,
+        ServiceModule
     ],
     declarations: [
         GetStartedComponent,

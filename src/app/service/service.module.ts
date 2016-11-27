@@ -1,0 +1,20 @@
+
+import { NgModule } from '@angular/core';
+
+import { Logger } from '../../app/application/shared.module';
+import { RestService } from './rest/rest-service';
+import { ReadModelService } from './read-model/read-model-service';
+
+@NgModule({
+    providers: [
+        RestService,
+        ReadModelService
+    ]
+})
+export class ServiceModule {
+    constructor() {
+        Logger.Info('ServiceModule', 'done');
+    }
+}
+
+export { RestService, ReadModelService }

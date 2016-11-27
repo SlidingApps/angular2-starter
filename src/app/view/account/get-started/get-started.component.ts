@@ -4,7 +4,9 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Logger } from '../../../foundation/logger';
 
+import { ReadModelService } from '../../../service/service.module';
 // import { GetStartedModel } from './get-started.model';
+
 import { IFormModel } from './form/form.model';
 
 import * as action from '../../../store/account/action';
@@ -30,7 +32,9 @@ import * as account from '../../../store/account/reducer';
 })
 export class GetStartedComponent implements OnDestroy {
 
-    constructor(private store: Store<account.Model>) {
+    constructor(private readService: ReadModelService, private store: Store<account.Model>) {
+        console.log('get-started', this);
+
         this.store.subscribe(model => Logger.Info('Account.Store', model));
         this.model = this.store.let(x => x);
     }

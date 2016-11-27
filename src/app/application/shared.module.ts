@@ -6,6 +6,7 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TranslateModule, TranslateService } from 'ng2-translate';
 
 import { Logger } from '../foundation/logger';
+import { ApplicationConfig } from './application.config';
 
 @NgModule({
     imports: [
@@ -30,4 +31,4 @@ class SharedModule {
     }
 }
 
-export { SharedModule, TranslateService, Logger }
+export { SharedModule, TranslateService, Logger, ApplicationConfig }
