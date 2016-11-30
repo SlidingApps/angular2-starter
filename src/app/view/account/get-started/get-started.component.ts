@@ -8,7 +8,7 @@ import { ReadModelService } from '../../../service/service.module';
 // import { GetStartedModel } from './get-started.model';
 
 import { IFormModel } from './form/form.model';
-import { State, GetStarted, GetStartedAction, SignIn } from '../../../state/state.module';
+import { State, GetStarted, GetStartedAction } from '../../../state/state.module';
 
 @Component({
     selector: 'sa-account-sign-in',
@@ -42,11 +42,10 @@ export class GetStartedComponent implements OnInit, OnDestroy {
 
     public ngOnInit() {
         let getStarted: Observable<GetStarted.IState> = this.store.select(x => x.GetStarted);
-        let signIn: Observable<SignIn.IState> = this.store.select(x => x.SignIn);
 
         this.model = getStarted.let(x => x);
         this.model.subscribe(x => {
-            Logger.Info('account.get-started.model', getStarted, signIn, x);
+            Logger.Info('account.get-started.model', getStarted, x);
         });
     }
 
