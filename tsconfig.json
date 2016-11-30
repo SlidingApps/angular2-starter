@@ -5,7 +5,17 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "sourceMap": true,
-        "noEmitHelpers": true
+        "noEmitHelpers": true,
+        "rootDir": [
+            "/src/app/application"
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "sa-application/*": [
+                "*",
+                "src/app/application/*"
+            ]
+        }
     },
     "compileOnSave": false,
     "buildOnSave": false,

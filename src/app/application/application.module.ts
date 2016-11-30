@@ -3,7 +3,6 @@ import { SharedModule, TranslateService, Logger } from './shared.module';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { StoreModule as NgRxStoreModule } from '@ngrx/store';
 import { Log } from 'ng2-logger/ng2-logger';
 import { TranslateModule } from 'ng2-translate';
 
@@ -13,13 +12,11 @@ import { ApplicationConfig } from './application.config';
 import { ApplicationComponent } from './application.component';
 import { ApplicationRoutingModule } from './application.routing';
 
-import { StoreModule } from '../store/store.module';
+import { StateModule } from '../state/state.module';
 
 import { PageModule } from '../view/layout/page.module';
 import { PublicModule } from '../view/public/public.module';
 import { AccountModule } from '../view/account/account.module';
-
-import { account as getStartedReducer } from '../store/account/get-started/get-started.reducer';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 
@@ -32,10 +29,9 @@ import * as nederlands from '../asset/i18n/nl.json';
         BrowserModule,
         FormsModule,
         TranslateModule.forRoot(),
-        NgRxStoreModule.provideStore(getStartedReducer),
 
         ApplicationRoutingModule,
-        StoreModule,
+        StateModule,
         PageModule,
         PublicModule,
         AccountModule
@@ -87,7 +83,7 @@ export class ApplicationModule {
     }
 
     public hmrOnInit(store) {
-        console.log('HMR store', store);
+        console.log('HMR state', store);
     }
 
     public hmrOnDestroy(store) {

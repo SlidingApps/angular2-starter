@@ -1,5 +1,5 @@
 
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Logger } from '../../../foundation/logger';
@@ -8,9 +8,7 @@ import { ReadModelService } from '../../../service/service.module';
 // import { GetStartedModel } from './get-started.model';
 
 import { IFormModel } from './form/form.model';
-
-import * as action from '../../../store/account/get-started/get-started.action';
-import * as reducer from '../../../store/account/get-started/get-started.reducer';
+import { State, GetStarted, GetStartedAction, SignIn } from '../../../state/state.module';
 
 @Component({
     selector: 'sa-account-sign-in',
@@ -30,18 +28,26 @@ import * as reducer from '../../../store/account/get-started/get-started.reducer
     <!-- ACCOUNT.GET-STARTED: END -->
     `
 })
-export class GetStartedComponent implements OnDestroy {
+export class GetStartedComponent implements OnInit, OnDestroy {
 
-    constructor(private readService: ReadModelService, private store: Store<reducer.IState>) {
-        this.store.subscribe(model => Logger.Info('account.get-started.state', model));
-        this.model = this.store.let(x => x);
+    constructor(private readService: ReadModelService, private store: Store<State>) {
     }
 
-    public model: Observable<reducer.IState>;
+    public model: Observable<GetStarted.IState>;
 
     public onSignUpClicked(model: IFormModel) {
         Logger.Info('GetStartedComponent.onSignUpClicked()', model);
-        this.store.dispatch(new action.Update(model));
+        this.store.dispatch(new GetStartedAction.Update(model));
+    }
+
+    public ngOnInit() {
+        let getStarted: Observable<GetStarted.IState> = this.store.select(x => x.GetStarted);
+        let signIn: Observable<SignIn.IState> = this.store.select(x => x.SignIn);
+
+        this.model = getStarted.let(x => x);
+        this.model.subscribe(x => {
+            Logger.Info('account.get-started.model', getStarted, signIn, x);
+        });
     }
 
     public ngOnDestroy() {

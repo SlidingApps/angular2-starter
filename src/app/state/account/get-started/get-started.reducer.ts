@@ -29,7 +29,7 @@ const INITIAL_STATE: IState = {
     state: ModelState.Initialized
 };
 
-export const account = (state: IState = INITIAL_STATE, action: Actions): IState => {
+export const reducer = (state: IState = INITIAL_STATE, action: Actions): IState => {
 
     switch (action.type) {
         case ActionType.UPDATE:
