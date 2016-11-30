@@ -7,6 +7,10 @@ export interface IPasswordModel {
     password: string;
 }
 
+export interface IPasswordConfirmationModel {
+    passwordConfirmation: string;
+}
+
 @Component({
     selector: 'sa-comp-account-password',
     template: `

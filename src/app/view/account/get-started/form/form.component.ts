@@ -1,3 +1,4 @@
+/// <reference path="../../../../index.d.ts" />
 
 import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';

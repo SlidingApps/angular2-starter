@@ -7,7 +7,7 @@ import { SharedModule, Logger } from '../../application/shared.module';
 
 import { OrganizationComponent, IOrganizationModel } from './organization.component';
 import { UsernameComponent, IUsernameModel } from './username.component';
-import { PasswordComponent, IPasswordModel } from './password.component';
+import { PasswordComponent, IPasswordModel, IPasswordConfirmationModel } from './password.component';
 import { ButtonComponent } from './button.component';
 
 @NgModule({
@@ -35,4 +35,4 @@ class AccountComponentModule {
     }
 }
 
-export { AccountComponentModule, IOrganizationModel, IUsernameModel, IPasswordModel }
+export { AccountComponentModule, IOrganizationModel, IUsernameModel, IPasswordModel, IPasswordConfirmationModel }

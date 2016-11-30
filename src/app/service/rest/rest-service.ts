@@ -115,12 +115,13 @@ export class RestServiceEndpoint {
     private resources: Array<ResourceConfiguration> = [];
     private queryString: string = '';
 
-
+    /* tslint:disable:no-any */
     public query(query: any): RestServiceEndpoint {
         this.queryString = RestServiceUtils.BuildQueryString(query);
 
         return this;
     }
+    /* tslint:enable:no-any */
 
     public all<TRepresentation>(options: string|IResourceOptions): RestServiceEndpoint {
         let _options: IResourceOptions = typeof options === 'string' ? { name: options.toString() } : options;
@@ -149,9 +150,11 @@ export class RestServiceEndpoint {
         url = url + this.queryString;
         Logger.Sinks['rest'].Debug('RestServiceEndpoint.get()', url);
 
+        /* tslint:disable:no-any */
         return this.$http.get(url, this.requestConfiguration)
             .map((response: Response) => response.json())
             .catch((error: any) => Observable.throw(error.json().error || 'server error'));
+        /* tslint:enable:no-any */
     }
 
     public post<TPayload>(instance: TPayload): Observable<TPayload> {
@@ -163,9 +166,11 @@ export class RestServiceEndpoint {
         url = url + this.queryString;
         Logger.Sinks['rest'].Debug('RestServiceEndpoint.post()', url, instance);
 
+        /* tslint:disable:no-any */
         return this.$http.post(url, instance, this.requestConfiguration)
             .map((response: Response) => instance)
             .catch((error: any) => Observable.throw(error.json().error || 'server error'));
+        /* tslint:enable:no-any */
     }
 
     public put<TPayload>(instance?: TPayload): Observable<TPayload> {
@@ -177,9 +182,11 @@ export class RestServiceEndpoint {
         url = url + this.queryString;
         Logger.Sinks['rest'].Debug('RestServiceEndpoint.put()', url, instance);
 
+        /* tslint:disable:no-any */
         return this.$http.put(url, instance, this.requestConfiguration)
             .map((response: Response) => instance)
             .catch((error: any) => Observable.throw(error.json().error || 'server error'));
+        /* tslint:enable:no-any */
     }
 
 
@@ -192,9 +199,11 @@ export class RestServiceEndpoint {
         url = url + this.queryString;
         Logger.Sinks['rest'].Debug('RestServiceEndpoint.delete()', url);
 
+        /* tslint:disable:no-any */
         return this.$http.delete(url, this.requestConfiguration)
             .map((response: Response) => response.json())
             .catch((error: any) => Observable.throw(error.json().error || 'server error'));
+        /* tslint:any:no-any */
     }
 }
 
@@ -222,6 +231,7 @@ class RestServiceUtils {
         return endpoint;
     }
 
+    /* tslint:disable:no-any */
     public static BuildQueryString(query: any): string {
         let queryString: string = '';
 
@@ -261,6 +271,7 @@ class RestServiceUtils {
 
         return queryString !== '' ? '?' + queryString : queryString;
     }
+    /* tslint:enable:no-any */
 }
 
 interface IKeyValuePair<TValue> {
@@ -319,14 +330,16 @@ export interface IHostConfiguration extends IHostOptions {
 export interface IApiOptions {
     path: string;
 
-    /* tslint:disable:no-null-keyword */
+    /* tslint:disable:no-any */
     values?: any;
-    /* tslint:enable:no-null-keyword */
+    /* tslint:enable:no-any */
 }
 
 export interface IApiConfiguration extends IApiOptions {
     path: string;
+    /* tslint:disable:no-any */
     values: any;
+    /* tslint:enable:no-any */
 }
 
 export interface IRestServiceConfiguration {

@@ -9,8 +9,8 @@ import { ReadModelService } from '../../../service/service.module';
 
 import { IFormModel } from './form/form.model';
 
-import * as action from '../../../store/account/action';
-import * as account from '../../../store/account/reducer';
+import * as action from '../../../store/account/get-started/get-started.action';
+import * as reducer from '../../../store/account/get-started/get-started.reducer';
 
 @Component({
     selector: 'sa-account-sign-in',
@@ -32,18 +32,16 @@ import * as account from '../../../store/account/reducer';
 })
 export class GetStartedComponent implements OnDestroy {
 
-    constructor(private readService: ReadModelService, private store: Store<account.Model>) {
-        console.log('get-started', this);
-
-        this.store.subscribe(model => Logger.Info('Account.Store', model));
+    constructor(private readService: ReadModelService, private store: Store<reducer.IState>) {
+        this.store.subscribe(model => Logger.Info('account.get-started.state', model));
         this.model = this.store.let(x => x);
     }
 
-    public model: Observable<account.Model>;
+    public model: Observable<reducer.IState>;
 
     public onSignUpClicked(model: IFormModel) {
         Logger.Info('GetStartedComponent.onSignUpClicked()', model);
-        this.store.dispatch(new action.UpdateAction(model));
+        this.store.dispatch(new action.Update(model));
     }
 
     public ngOnDestroy() {

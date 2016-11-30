@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "clean": "rimraf node_modules doc dist coverage && npm cache clean",
+    "clean": "rimraf node_modules doc dist coverage typings && npm cache clean",
     "clean-install": "npm run clean && npm install",
     "clean-start": "npm run clean-install && npm start",
     "watch": "webpack --watch --progress --profile",
@@ -35,6 +35,7 @@
     "@angular/platform-browser-dynamic": "2.1.2",
     "@angular/router": "3.1.2",
     "@ngrx/core": "^1.2.0",
+    "@ngrx/effects": "^2.0.0",
     "@ngrx/store": "^2.2.1",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
