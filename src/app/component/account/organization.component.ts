@@ -19,7 +19,6 @@ export interface IOrganizationModel {
                         class="form-control simple-form-control sa-comp-account-organization"
                         placeholder="{{ 'ACCOUNT.ORGANIZATION_PLACEHOLDER' | translate }}"
                         autocomplete="off"
-                        autofocus
                         required />
                 <i class="fa fa-users"></i>
             </div>

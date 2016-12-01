@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AccountComponentModule } from '../../../component/account/account.module';
+import { DirectiveModule } from '../../../component/directive/directive.module';
 
 import { SharedModule, Logger } from '../../../application/shared.module';
 import { ServiceModule } from '../../../service/service.module';
@@ -14,6 +15,7 @@ import { FormComponent } from './form/form.component';
         SharedModule,
         ReactiveFormsModule,
         AccountComponentModule,
+        DirectiveModule,
         ServiceModule
     ],
     declarations: [
