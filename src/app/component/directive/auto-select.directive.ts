@@ -1,20 +1,21 @@
 
 import { Directive, ElementRef } from '@angular/core';
 
+import { Observable } from 'rxjs';
+
 @Directive({
     selector: '[saAutoSelect]'
 })
-export class AutofocusDirective {
+export class AutoSelectDirective {
     constructor(private elementRef: ElementRef) {
-        console.log('saAutoSelect', this.elementRef.nativeElement);
         jQuery(this.elementRef.nativeElement).focus(() => {
-            console.log('focus', jQuery(this));
             jQuery(elementRef.nativeElement).select();
         });
 
-        jQuery(this.elementRef.nativeElement).click(() =>{
-            console.log('click', jQuery(this));
+        jQuery(this.elementRef.nativeElement).click(() => {
             jQuery(elementRef.nativeElement).select();
         });
+
+        Observable.timer(0, 300).first().subscribe(x => jQuery(elementRef.nativeElement).select());
     }
 }

@@ -52,10 +52,12 @@ export class ApplicationModule {
         translate.use('en');
 
         const appLog: Log = Log.create(ApplicationConfig.APPLICATION_SINK_NAME, ...ApplicationConfig.APPLICATION_SINK_LEVELS);
+        const restLog: Log = Log.create(ApplicationConfig.REST_SINK_NAME, ...ApplicationConfig.REST_SINK_LEVELS);
         const routerLog: Log = Log.create(ApplicationConfig.ROUTER_SINK_NAME, ...ApplicationConfig.ROUTER_SINK_LEVELS);
         const modelLog: Log = Log.create(ApplicationConfig.MODEL_SINK_NAME, ...ApplicationConfig.MODEL_SINK_LEVELS);
 
         Logger.AddLog(ApplicationConfig.APPLICATION_SINK_NAME, appLog, true);
+        Logger.AddLog(ApplicationConfig.REST_SINK_NAME, restLog, false);
         Logger.AddLog(ApplicationConfig.ROUTER_SINK_NAME, routerLog, false);
         Logger.AddLog(ApplicationConfig.MODEL_SINK_NAME, modelLog, false);
 

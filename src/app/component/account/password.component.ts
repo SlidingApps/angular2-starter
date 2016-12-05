@@ -23,6 +23,7 @@ export interface IPasswordConfirmationModel {
                         type="password" 
                         class="form-control simple-form-control sa-comp-account-password" 
                         placeholder="{{ placeholder }}" 
+                        saAutoSelect
                         required/>
                 <i class="fa fa-lock"></i>
             </div>

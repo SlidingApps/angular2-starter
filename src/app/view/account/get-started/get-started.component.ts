@@ -1,11 +1,10 @@
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Logger } from '../../../foundation/logger';
 
 import { ReadModelService } from '../../../service/service.module';
-// import { GetStartedModel } from './get-started.model';
 
 import { IFormModel } from './form/form.model';
 import { State, GetStarted, GetStartedAction } from '../../../state/state.module';
@@ -16,9 +15,8 @@ import { State, GetStarted, GetStartedAction } from '../../../state/state.module
     <!-- ACCOUNT.GET_STARTED: BEGIN -->
     <div class="page-login">
         <div class="loginContentWrap" style="padding: 0;">
-            <div>{{ (model | async).organization }}</div>
             <div class="container-fluid">
-                <sa-account-get-started-form (sign-up-clicked)="onSignUpClicked($event)"></sa-account-get-started-form>
+                <sa-account-get-started-form [model]="state$" (values-changed)="onValuesChanged($event)" (sign-up-clicked)="onSignUpClicked($event)"></sa-account-get-started-form>
                 <ul class="more">
                     <li>{{ 'ACCOUNT.HAVE_ACCOUNT_QSTN' | translate }} <a routerLink="/account/signin">{{ 'ACCOUNT.SIGN_IN_LINK' | translate }}</a>.</li>
                 </ul>
@@ -28,28 +26,30 @@ import { State, GetStarted, GetStartedAction } from '../../../state/state.module
     <!-- ACCOUNT.GET-STARTED: END -->
     `
 })
-export class GetStartedComponent implements OnInit, OnDestroy {
+export class GetStartedComponent implements OnInit {
 
     constructor(private readService: ReadModelService, private store: Store<State>) {
     }
 
-    public model: Observable<GetStarted.IState>;
-
-    public onSignUpClicked(model: IFormModel) {
-        Logger.Info('GetStartedComponent.onSignUpClicked()', model);
-        this.store.dispatch(new GetStartedAction.Update(model));
-    }
+    public state$: Observable<GetStarted.IState>;
 
     public ngOnInit() {
-        let getStarted: Observable<GetStarted.IState> = this.store.select(x => x.GetStarted);
-
-        this.model = getStarted.let(x => x);
-        this.model.subscribe(x => {
-            Logger.Info('account.get-started.model', getStarted, x);
+        this.state$ = this.store.select(x => x.GetStarted).let(x => x);
+        this.state$.subscribe(state => {
+            state.password = null;
+            state.passwordConfirmation = null;
         });
     }
 
-    public ngOnDestroy() {
-        // this.model.$destroy();
+    public onValuesChanged(model: IFormModel) {
+        Logger.Debug('GetStartedComponent.onValuesChanged()', model);
+        if (model) {
+            this.store.dispatch(new GetStartedAction.Update(model));
+        }
+    }
+
+    public onSignUpClicked(model: IFormModel) {
+        Logger.Debug('GetStartedComponent.onSignUpClicked()', model);
+        this.store.dispatch(new GetStartedAction.Update(model));
     }
 }

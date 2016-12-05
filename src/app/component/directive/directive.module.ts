@@ -2,14 +2,14 @@
 import { NgModule } from '@angular/core';
 import { Logger } from '../../application/shared.module';
 
-import { AutofocusDirective } from './autofocus.directive';
+import { AutoSelectDirective } from './auto-select.directive';
 
 @NgModule({
     declarations: [
-        AutofocusDirective
+        AutoSelectDirective
     ],
     exports: [
-        AutofocusDirective
+        AutoSelectDirective
     ]
 })
 export class DirectiveModule {

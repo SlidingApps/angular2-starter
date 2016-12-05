@@ -20,6 +20,7 @@ export interface IUsernameModel {
                         class="form-control simple-form-control sa-comp-account-username"
                         placeholder="{{ placeholder }}"
                         autocomplete="off"
+                        saAutoSelect
                         required />
                 <i class="fa fa-envelope"></i>
             </div>
@@ -45,10 +46,13 @@ export class UsernameComponent implements OnInit {
     @Input()
     public placeholder: string;
 
+    @Input()
+    public username: string;
+
     public formControl: FormControl;
 
     public ngOnInit(): void {
-        this.formControl = new FormControl(undefined, [Validators.required, Validators.minLength(6)]);
+        this.formControl = new FormControl(this.username, [Validators.required, Validators.minLength(6)]);
         this.formGroup.addControl(UsernameComponent.FORM_CONTROL_NAME, this.formControl);
     }
 }

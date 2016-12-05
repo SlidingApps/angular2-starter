@@ -52,6 +52,6 @@ export class Logger {
 
     public static Debug(message: string, ...params: any[]): void { (<any>Logger.DefaultSink.log).d(message, params); }
 
-    private static DefaultSink: LogInfo = new LogInfo(Log.create(Logger.DEFAULT_LOG_NAME, Level.ERROR, Level.INFO, Level.WARN, Level.DATA));
+    private static DefaultSink: LogInfo = new LogInfo(Log.create(Logger.DEFAULT_LOG_NAME, Level.ERROR /*, Level.INFO, Level.WARN, Level.DATA */));
 }
 /* tslint:enable:no-any */

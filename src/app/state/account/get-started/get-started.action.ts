@@ -2,24 +2,23 @@
 import { Action } from '@ngrx/store';
 
 import { type } from '../../utils';
-import { ModelState } from './get-started.reducer';
 
 export const ActionType = {
-    CREATE: type('ACCOUNT.GET-STARTED.CREATE'),
-    UPDATE: type('ACCOUNT.GET-STARTED.UPDATE'),
-    UPDATE_SUCCESS: type('ACCOUNT.GET-STARTED.UPDATE_SUCCESS'),
-    UPDATE_FAIL: type('ACCOUNT.GET-STARTED.UPDATE_FAIL')
+    CREATE: type('ACCOUNT.GET_STARTED.CREATE'),
+    UPDATE: type('ACCOUNT.GET_STARTED.UPDATE'),
+    ORGANIZATION_AVAILABLE: type('ACCOUNT.GET_STARTED.ORGANIZATION_AVAILABLE'),
+    ORGANIZATION_NOT_AVAILABLE: type('ACCOUNT.GET_STARTED.ORGANIZATION_NOT_AVAILABLE')
 };
 
-export interface IUpdateOrganizationPayload {
+export interface IUpdatePayload {
     organization: string;
     username: string;
     password: string;
     passwordConfirmation: string;
 }
 
-export interface IUpdateStatePayload {
-    state: ModelState;
+export interface IUpdateOrganizationPayload {
+    organization: string;
 }
 
 export class Create implements Action {
@@ -29,25 +28,25 @@ export class Create implements Action {
 }
 
 export class Update implements Action {
-    constructor(public payload: IUpdateOrganizationPayload) { }
+    constructor(public payload: IUpdatePayload) { }
 
     public type = ActionType.UPDATE;
 }
 
-export class UpdateSucess implements Action {
-    constructor(public payload: IUpdateStatePayload) { }
+export class OrganizationAvailable implements Action {
+    constructor() { }
 
-    public type = ActionType.UPDATE_SUCCESS;
+    public type = ActionType.ORGANIZATION_AVAILABLE;
 }
 
-export class UpdateFail implements Action {
-    constructor(public payload: IUpdateStatePayload) { }
+export class OrganizationNotAvailable implements Action {
+    constructor() { }
 
-    public type = ActionType.UPDATE_FAIL;
+    public type = ActionType.ORGANIZATION_NOT_AVAILABLE;
 }
 
 export type Actions
     = Create
     | Update
-    | UpdateSucess
-    | UpdateFail;
+    | OrganizationAvailable
+    | OrganizationNotAvailable;
