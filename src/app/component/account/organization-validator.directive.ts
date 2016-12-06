@@ -1,31 +1,37 @@
 
-import { AbstractControl, Validator } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { AbstractControl } from '@angular/forms';
+import { Observable, Observer} from 'rxjs';
 
-export class AsyncValidator implements Validator {
+export class AsyncValidator {
+    public _validate;
 
-    public validate(control: AbstractControl ): Promise<{[key: string]: any}> {
-        // return this.validateUniqueEmailObservable(control.value).first();
-        // return (new Observable(observer => observer.next({asyncInvalid: true}))).first();
-
-        return new Promise(resolve => {
-            if (control.value === 'peter') {
-                resolve({asyncInvalid: true});
-            } else {
-                resolve(null);
-            }
+    constructor(validator: (control: AbstractControl) => any, debounceTime = 1000) {
+        let source: any = new Observable((observer: Observer<AbstractControl>) => {
+            this._validate = (control) => observer.next(control);
         });
+
+        source.debounceTime(debounceTime)
+            .distinctUntilChanged(null, (x) => x.control.value)
+            .map(x => { return { promise: validator(x.control), resolver: x.promiseResolver }; })
+            .subscribe(
+                (x) => x.promise.then(resultValue => x.resolver(resultValue),
+                    (e) => { console.log('async validator error: %s', e); }));
     }
 
-    private validateUniqueEmailObservable(value: string ): Observable<{[key: string]: any}> {
-        return new Observable(observer => {
-            console.log('validate');
-            if (value === 'peter' ) {
-                console.log('invalid');
-                observer.next({asyncInvalid: true});
-            } else {
-                observer.next(null);
-            }
-        });
+    private _getValidator() {
+        return (control) => {
+            let promiseResolver;
+            let p = new Promise((resolve) => {
+                promiseResolver = resolve;
+            });
+            this._validate({ control: control, promiseResolver: promiseResolver });
+            return p;
+        };
+    }
+
+    public static debounce(validator: (control: AbstractControl) => any, debounceTime = 400) {
+        let asyncValidator = new this(validator, debounceTime);
+
+        return asyncValidator._getValidator();
     }
 }
