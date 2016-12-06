@@ -42,14 +42,17 @@ export class GetStartedComponent implements OnInit {
     }
 
     public onValuesChanged(model: IFormModel) {
-        Logger.Debug('GetStartedComponent.onValuesChanged()', model);
-        if (model) {
-            this.store.dispatch(new GetStartedAction.Update(model));
-        }
+        this.updateState(model);
     }
 
     public onSignUpClicked(model: IFormModel) {
-        Logger.Debug('GetStartedComponent.onSignUpClicked()', model);
-        this.store.dispatch(new GetStartedAction.Update(model));
+        this.updateState(model);
+    }
+
+    private updateState(model: IFormModel) {
+        Logger.Debug('GetStartedComponent.updateState()', model);
+        if (model) {
+            this.store.dispatch(new GetStartedAction.Update(model));
+        }
     }
 }

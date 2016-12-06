@@ -1,9 +1,9 @@
 
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { AsyncValidator } from './organization-validator.directive';
 import { Observable } from 'rxjs';
-import {IStateError} from "sa-application/src/app/state/account/state-error";
+
+import {AsyncValidator, IValidationFailure } from '../async-validator';
 
 export interface IOrganizationModel {
     organization: string;
@@ -45,26 +45,27 @@ export class OrganizationComponent implements OnInit {
     @Input()
     public organization: string;
 
-    @Input('validation-errors')
-    public validationErrors: Observable<Array<{[key: string]: boolean}>>;
+    @Input('validation-failures')
+    public validationFailures: Observable<Array<IValidationFailure>>;
 
     public formControl: FormControl;
 
     public ngOnInit(): void {
-        let validator = AsyncValidator.debounce((control) => this.validateExists(control), 1000);
+        let validator = AsyncValidator.debounce((control) => this.validateExists(control));
 
         this.formControl = new FormControl(this.organization, [Validators.required, Validators.minLength(4)], [validator]);
         this.formGroup.addControl(OrganizationComponent.FORM_CONTROL_NAME, this.formControl);
 
-        this.validationErrors.subscribe(x => console.log('validationErrors', x));
+        this.validationFailures.subscribe(x => console.log('validationErrors', x));
     }
 
-    private validateExists(control: AbstractControl): Promise<{[key: string]: boolean}> {
+    private validateExists(control: AbstractControl): Promise<Array<IValidationFailure>> {
         let q = new Promise((resolve, reject) => {
-            this.validationErrors
+            this.validationFailures
+                .debounceTime(500)
                 .distinctUntilChanged()
                 .first()
-                .map(x => x === null ? null : x[0])
+                .map(x => x === null ? null : x)
                 .subscribe(x => {
                     console.log('validator', x);
                     resolve(x);
@@ -72,18 +73,5 @@ export class OrganizationComponent implements OnInit {
         });
 
         return q;
-
-        // return Observable.create((observer) => {
-        //     setTimeout(() => {
-        //         observer.next({isValid: false});
-        //         observer.complete();
-        //     }, 1000);
-        // }).subscribe();
-
-        // let q = new Promise((resolve, reject) => {
-        //     resolve({isValid: false});
-        // });
-        //
-        // return q;
     }
 }

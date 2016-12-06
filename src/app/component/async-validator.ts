@@ -2,10 +2,14 @@
 import { AbstractControl } from '@angular/forms';
 import { Observable, Observer} from 'rxjs';
 
+export interface IValidationFailure {
+    [key: string]: boolean;
+}
+
 export class AsyncValidator {
     public _validate;
 
-    constructor(validator: (control: AbstractControl) => any, debounceTime = 1000) {
+    constructor(validator: (control: AbstractControl) => Promise<IValidationFailure|Array<IValidationFailure>>, debounceTime = 1000) {
         let source: any = new Observable((observer: Observer<AbstractControl>) => {
             this._validate = (control) => observer.next(control);
         });
@@ -29,7 +33,7 @@ export class AsyncValidator {
         };
     }
 
-    public static debounce(validator: (control: AbstractControl) => any, debounceTime = 400) {
+    public static debounce(validator: (control: AbstractControl) => Promise<IValidationFailure|Array<IValidationFailure>>, debounceTime = 400) {
         let asyncValidator = new this(validator, debounceTime);
 
         return asyncValidator._getValidator();
