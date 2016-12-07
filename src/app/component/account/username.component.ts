@@ -26,7 +26,7 @@ export interface IUsernameModel {
             </div>
         </div>
         <div class="col-lg-4" *ngIf="formControl.errors">
-            <span *ngIf="formControl.errors.minlength && formControl.touched" style="color: orangered; font-weight: bold;">{{ 'ACCOUNT.VALIDATION_ERROR_USERNAME_NAME_TOO_SHORT' | translate}}</span>
+            <span *ngIf="formControl.errors.minlength && formControl.touched" style="color: orangered; font-weight: bold;">{{ 'VALIDATION.FAILURE.USERNAME.NAME_TOO_SHORT' | translate }}</span>
         </div>
     </div>
     <!-- COMPONENT.ACCOUNT.USERNAME: END -->

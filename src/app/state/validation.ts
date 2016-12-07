@@ -1,4 +1,6 @@
 
+import { Observable } from 'rxjs';
+
 /* tslint:disable:no-any */
 export enum ValidationState {
     UNKNOWN = <any>'UNKNOWN',
@@ -22,4 +24,18 @@ export interface IValidationInfo {
 
 export interface IValidationFailure {
     [key: string]: boolean;
+}
+
+export function createValidationFailures(state: Observable<IValidated>, attribute: string): Observable<Array<IValidationFailure>> {
+    return state
+        .map(model => model.$validations)
+        .filter(validations => !!validations.length)
+        .map(validations => validations.filter(v => v.attribute === attribute))
+        .map(validations => {
+            if (!!validations.length) {
+                return validations.map(validation => { return { [validation.message]: validation.state === ValidationState.FAILED }; });
+            } else {
+                return null;
+            }
+        });
 }

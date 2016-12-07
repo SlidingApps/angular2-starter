@@ -61,7 +61,8 @@ export class Validator {
             state.$validations = [...state.$validations, {
                 attribute: ErrorAttribute.ORGANIZATION,
                 token: ErrorToken.ORGANIZATION_IS_AVAILABLE,
-                state: available ? ValidationState.PASSED : ValidationState.FAILED
+                state: available ? ValidationState.PASSED : ValidationState.FAILED,
+                message: 'VALIDATION.FAILURE.TENANT.IS_NOT_AVAILABLE'
             }];
         }
 

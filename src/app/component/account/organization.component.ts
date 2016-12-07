@@ -1,6 +1,6 @@
 
 import { Component, Input, OnInit } from '@angular/core';
-import {FormGroup, FormControl, Validators, ValidatorFn} from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { AsyncValidator } from '../async-validator';
@@ -29,8 +29,8 @@ export interface IOrganizationModel {
             </div>
         </div>
         <div class="col-lg-4" *ngIf="formControl.errors">
-            <span *ngIf="formControl.errors.minlength && formControl.touched" style="color: orangered; font-weight: bold;">{{ 'ACCOUNT.VALIDATION_ERROR_ORGANIZATION_NAME_TOO_SHORT' | translate }}</span>
-            <span *ngIf="formControl.errors['ACCOUNT.GET_STARTED.ERROR.ORGANIZATION_IS_AVAILABLE']" style="color: orangered; font-weight: bold;">{{ 'ACCOUNT.GET_STARTED.ERROR.ORGANIZATION_IS_AVAILABLE' | translate }}</span>
+            <span *ngIf="formControl.errors['VALIDATION.FAILURE.TENANT.IS_NOT_AVAILABLE']" style="color: orangered; font-weight: bold;">{{ 'VALIDATION.FAILURE.TENANT.IS_NOT_AVAILABLE' | translate }}</span>
+            <span *ngIf="formControl.errors.minlength && formControl.touched" style="color: orangered; font-weight: bold;">{{ 'VALIDATION.FAILURE.TENANT.NAME_TOO_SHORT' | translate }}</span>
         </div>
     </div>
     <!-- COMPONENT.ACCOUNT.ORGANIZATION: END -->
@@ -39,6 +39,7 @@ export interface IOrganizationModel {
 export class OrganizationComponent implements OnInit {
 
     public static get FORM_CONTROL_NAME(): string { return 'organization'; }
+    public static get IS_NOT_AVAILABLE(): string { return 'VALIDATION.FAILURE.TENANT.IS_NOT_AVAILABLE'; }
 
     @Input()
     public formGroup: FormGroup;
@@ -62,13 +63,10 @@ class OrganizationValidator {
         let validator = AsyncValidator.debounce((control) => {
             let promise = new Promise((resolve, reject) => {
                 validationFailures
-                    .debounceTime(200)
+                    .debounceTime(100)
                     .first()
                     .concatMap(x => !!x ? x : Observable.empty())
-                    .subscribe(x => {
-                        const result: IValidationFailure = (!x['ACCOUNT.GET_STARTED.ERROR.ORGANIZATION_IS_AVAILABLE'] ? null : x) as IValidationFailure;
-                        resolve(result);
-                    });
+                    .subscribe(x => resolve((x && !!x[OrganizationComponent.IS_NOT_AVAILABLE] ? x : null)));
             });
 
             return promise;

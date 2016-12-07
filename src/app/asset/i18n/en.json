@@ -3,6 +3,17 @@
         "WELCOME": "Welcome to TASKRUNNER.IO",
         "GET_STARTED_ACTION": "Get Started"
     },
+    "VALIDATION": {
+        "FAILURE": {
+            "TENANT": {
+                "IS_NOT_AVAILABLE": "This name is not available",
+                "NAME_TOO_SHORT": "This name is too short"
+            },
+            "USERNAME": {
+                "NAME_TOO_SHORT": "This name is too short"
+            }
+        }
+    },
     "ACCOUNT": {
         "HAVE_ACCOUNT_QSTN": "Allready have an account?",
         "SIGN_IN_LINK": "Sign in here",
@@ -15,14 +26,7 @@
         "CONFIRM_PASSWORD_PLACEHOLDER": "confirm your password",
         "SIGN_UP_ACTION": "Sign Up",
         "SIGN_IN_ACTION": "Sign In",
-        "SEND_INSTRUCTIONS_ACTION": "Send Instructions",
-        "VALIDATION_ERROR_ORGANIZATION_NAME_TOO_SHORT": "Organization name is too short",
-        "VALIDATION_ERROR_USERNAME_NAME_TOO_SHORT": "Username name is too short",
-        "GET_STARTED": {
-            "ERROR": {
-                "ORGANIZATION_IS_AVAILABLE": "This name is not available"
-            }
-        }
+        "SEND_INSTRUCTIONS_ACTION": "Send Instructions"
     },
     "NAVIGATION": {
         "GET_STARTED_ACTION": "Get Started",

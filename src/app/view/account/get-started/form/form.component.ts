@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Logger, TranslateService } from '../../../../application/shared.module';
 import { Observable } from 'rxjs';
 
-import { GetStarted, IValidationFailure, ValidationState } from '../../../../state/state.module';
+import { GetStarted, Validation } from '../../../../state/state.module';
 import { IFormModel } from './form.model';
 
 import 'jquery';
@@ -54,7 +54,7 @@ export class FormComponent implements OnInit {
             .subscribe(model => this.valuesChanged.emit(model));
 
         // Create an observable ORGANIZATION validation failures.
-        this.organizationValidationFailures = this.createValidationFailures(GetStarted.ErrorAttribute.ORGANIZATION);
+        this.organizationValidationFailures = Validation.createValidationFailures(this.model, GetStarted.ErrorAttribute.ORGANIZATION);
     }
 
     /* tslint:disable:no-unused-variable */
@@ -65,18 +65,4 @@ export class FormComponent implements OnInit {
         Logger.Debug('FormComponent.onSubmit()', this.model);
     }
     /* tslint:enable:no-unused-variable */
-
-    private createValidationFailures(attribute: string): Observable<Array<IValidationFailure>> {
-        return this.model
-            .map(model => model.$validations)
-            .filter(validations => !!validations.length)
-            .map(validations => validations.filter(v => v.attribute === attribute))
-            .map(validations => {
-                if (!!validations.length) {
-                    return validations.map(v => { return { [v.token]: v.state === ValidationState.FAILED }; });
-                } else {
-                    return null;
-                }
-            });
-    }
 }
