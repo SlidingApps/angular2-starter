@@ -1,9 +1,10 @@
 
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import {FormGroup, FormControl, Validators, ValidatorFn} from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { AsyncValidator, IValidationFailure } from '../async-validator';
+import { AsyncValidator } from '../async-validator';
+import { IValidationFailure } from '../../state/validation';
 
 export interface IOrganizationModel {
     organization: string;
@@ -28,8 +29,8 @@ export interface IOrganizationModel {
             </div>
         </div>
         <div class="col-lg-4" *ngIf="formControl.errors">
-            {{formControl.errors | json}}
             <span *ngIf="formControl.errors.minlength && formControl.touched" style="color: orangered; font-weight: bold;">{{ 'ACCOUNT.VALIDATION_ERROR_ORGANIZATION_NAME_TOO_SHORT' | translate }}</span>
+            <span *ngIf="formControl.errors['ACCOUNT.GET_STARTED.ERROR.ORGANIZATION_IS_AVAILABLE']" style="color: orangered; font-weight: bold;">{{ 'ACCOUNT.GET_STARTED.ERROR.ORGANIZATION_IS_AVAILABLE' | translate }}</span>
         </div>
     </div>
     <!-- COMPONENT.ACCOUNT.ORGANIZATION: END -->
@@ -51,22 +52,28 @@ export class OrganizationComponent implements OnInit {
     public formControl: FormControl;
 
     public ngOnInit(): void {
-        let validator = AsyncValidator.debounce((control) => this.validateExists(control));
-
-        this.formControl = new FormControl(this.organization, [Validators.required, Validators.minLength(4)], [validator]);
+        this.formControl = new FormControl(this.organization, [Validators.required, Validators.minLength(4)], [OrganizationValidator.isAvailable(this.validationFailures)]);
         this.formGroup.addControl(OrganizationComponent.FORM_CONTROL_NAME, this.formControl);
     }
+}
 
-    private validateExists(control: AbstractControl): Promise<Array<IValidationFailure>> {
-        let q = new Promise((resolve, reject) => {
-            this.validationFailures
-                .debounceTime(200)
-                .distinctUntilChanged()
-                .first()
-                .map(x => x === null ? null : x)
-                .subscribe(x => resolve(x));
+class OrganizationValidator {
+    public static isAvailable(validationFailures: Observable<Array<IValidationFailure>>): ValidatorFn {
+        let validator = AsyncValidator.debounce((control) => {
+            let promise = new Promise((resolve, reject) => {
+                validationFailures
+                    .debounceTime(200)
+                    .first()
+                    .concatMap(x => !!x ? x : Observable.empty())
+                    .subscribe(x => {
+                        const result: IValidationFailure = (!x['ACCOUNT.GET_STARTED.ERROR.ORGANIZATION_IS_AVAILABLE'] ? null : x) as IValidationFailure;
+                        resolve(result);
+                    });
+            });
+
+            return promise;
         });
 
-        return q;
+        return validator;
     }
 }

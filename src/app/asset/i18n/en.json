@@ -17,7 +17,12 @@
         "SIGN_IN_ACTION": "Sign In",
         "SEND_INSTRUCTIONS_ACTION": "Send Instructions",
         "VALIDATION_ERROR_ORGANIZATION_NAME_TOO_SHORT": "Organization name is too short",
-        "VALIDATION_ERROR_USERNAME_NAME_TOO_SHORT": "Username name is too short"
+        "VALIDATION_ERROR_USERNAME_NAME_TOO_SHORT": "Username name is too short",
+        "GET_STARTED": {
+            "ERROR": {
+                "ORGANIZATION_IS_AVAILABLE": "This name is not available"
+            }
+        }
     },
     "NAVIGATION": {
         "GET_STARTED_ACTION": "Get Started",

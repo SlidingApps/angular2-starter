@@ -5,8 +5,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Logger, TranslateService } from '../../../../application/shared.module';
 import { Observable } from 'rxjs';
 
-import { IValidationFailure } from '../../../../../app/component/async-validator';
-import { GetStarted } from '../../../../state/state.module';
+import { GetStarted, IValidationFailure, ValidationState } from '../../../../state/state.module';
 import { IFormModel } from './form.model';
 
 import 'jquery';
@@ -67,13 +66,14 @@ export class FormComponent implements OnInit {
     }
     /* tslint:enable:no-unused-variable */
 
-    private createValidationFailures(errorAttribute: string): Observable<Array<IValidationFailure>> {
+    private createValidationFailures(attribute: string): Observable<Array<IValidationFailure>> {
         return this.model
-            .map(model => model.$errors)
-            .map(errors => errors.filter(error => error.attribute === errorAttribute))
-            .map(errors => {
-                if (!!errors.length) {
-                    return errors.map(error => { return { [error.token]: true }; } );
+            .map(model => model.$validations)
+            .filter(validations => !!validations.length)
+            .map(validations => validations.filter(v => v.attribute === attribute))
+            .map(validations => {
+                if (!!validations.length) {
+                    return validations.map(v => { return { [v.token]: v.state === ValidationState.FAILED }; });
                 } else {
                     return null;
                 }

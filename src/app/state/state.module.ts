@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { Logger } from '../../app/application/shared.module';
 
-import { IStateError } from './account/state-error';
+import { IValidationInfo, IValidationFailure, ValidationState } from './validation';
 import { AccountModule } from './account/account.module';
 
 import * as GetStartedAction from './account/get-started/get-started.action';
@@ -34,4 +34,6 @@ class StateModule {
     }
 }
 
-export { StateModule, State, IStateError, GetStarted, GetStartedAction, SignIn }
+export { StateModule, State}
+export { IValidationInfo, IValidationFailure, ValidationState }
+export { GetStarted, GetStartedAction, SignIn }

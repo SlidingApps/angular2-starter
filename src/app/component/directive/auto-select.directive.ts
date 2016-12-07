@@ -1,8 +1,6 @@
 
 import { Directive, ElementRef } from '@angular/core';
 
-import { Observable } from 'rxjs';
-
 @Directive({
     selector: '[saAutoSelect]'
 })

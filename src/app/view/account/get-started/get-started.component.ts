@@ -4,8 +4,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Logger } from '../../../foundation/logger';
 
-import { ReadModelService } from '../../../service/service.module';
-
 import { IFormModel } from './form/form.model';
 import { State, GetStarted, GetStartedAction } from '../../../state/state.module';
 
@@ -28,7 +26,7 @@ import { State, GetStarted, GetStartedAction } from '../../../state/state.module
 })
 export class GetStartedComponent implements OnInit {
 
-    constructor(private readService: ReadModelService, private store: Store<State>) {
+    constructor(private store: Store<State>) {
     }
 
     public state$: Observable<GetStarted.IState>;

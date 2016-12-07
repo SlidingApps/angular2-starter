@@ -1,6 +1,7 @@
 
 import { Actions, ActionType } from './get-started.action';
-import { IStateError } from '../state-error';
+
+import { IValidated, ValidationState } from '../../validation';
 import { type } from '../../utils';
 
 export const ErrorAttribute = {
@@ -9,17 +10,15 @@ export const ErrorAttribute = {
 };
 
 export const ErrorToken = {
-    ORGANIZATION_EXISTS: type('ACCOUNT.GET_STARTED.ERROR.ORGANIZATION_EXISTS'),
+    ORGANIZATION_IS_AVAILABLE: type('ACCOUNT.GET_STARTED.ERROR.ORGANIZATION_IS_AVAILABLE'),
     PASSWORDS_NOT_EQUAL: type('ACCOUNT.GET_STARTED.ERROR.PASSWORDS_NOT_EQUAL')
 };
 
-export interface IState {
+export interface IState extends IValidated {
     organization: string;
     username: string;
     password: string;
     passwordConfirmation: string;
-
-    $errors: Array<IStateError>;
 }
 
 const INITIAL_STATE: IState = {
@@ -28,7 +27,7 @@ const INITIAL_STATE: IState = {
     password: null,
     passwordConfirmation: null,
 
-    $errors: []
+    $validations: []
 };
 
 export const reducer = (state: IState = INITIAL_STATE, action: Actions): IState => {
@@ -41,12 +40,12 @@ export const reducer = (state: IState = INITIAL_STATE, action: Actions): IState 
 
         case ActionType.ORGANIZATION_AVAILABLE:
             state = Object.assign({}, state);
-            state = Validator.OrganizationExists(state, true);
+            state = Validator.OrganizationIsAvailable(state, true);
             return state;
 
         case ActionType.ORGANIZATION_NOT_AVAILABLE:
             state = Object.assign({}, state);
-            state = Validator.OrganizationExists(state, false);
+            state = Validator.OrganizationIsAvailable(state, false);
             return state;
 
         default:
@@ -56,12 +55,13 @@ export const reducer = (state: IState = INITIAL_STATE, action: Actions): IState 
 
 export class Validator {
 
-    public static OrganizationExists(state: IState, success: boolean): IState {
-        state.$errors = state.$errors.filter(x => x.attribute !== ErrorAttribute.ORGANIZATION);
-        if (state && !success) {
-            state.$errors = [...state.$errors, {
+    public static OrganizationIsAvailable(state: IState, available: boolean): IState {
+        state.$validations = state.$validations.filter(x => x.attribute !== ErrorAttribute.ORGANIZATION);
+        if (state) {
+            state.$validations = [...state.$validations, {
                 attribute: ErrorAttribute.ORGANIZATION,
-                token: ErrorToken.ORGANIZATION_EXISTS
+                token: ErrorToken.ORGANIZATION_IS_AVAILABLE,
+                state: available ? ValidationState.PASSED : ValidationState.FAILED
             }];
         }
 
@@ -69,11 +69,13 @@ export class Validator {
     }
 
     public static ValidatePasswordEquality(state: IState): IState {
-        state.$errors = state.$errors.filter(x => x.attribute !== ErrorAttribute.PASSWORD);
-        if (state && !!state.password && !!state.passwordConfirmation && state.password !== state.passwordConfirmation) {
-            state.$errors = [...state.$errors, {
+        state.$validations = state.$validations.filter(x => x.attribute !== ErrorAttribute.PASSWORD);
+        const success: boolean = !!state.password && !!state.passwordConfirmation && state.password !== state.passwordConfirmation;
+        if (state) {
+            state.$validations = [...state.$validations, {
                 attribute: ErrorAttribute.PASSWORD,
-                token: ErrorToken.PASSWORDS_NOT_EQUAL
+                token: ErrorToken.PASSWORDS_NOT_EQUAL,
+                state: success ? ValidationState.PASSED : ValidationState.FAILED
             }];
         }
 
