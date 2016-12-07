@@ -35,7 +35,7 @@ export class FormComponent implements OnInit {
     public model: Observable<GetStarted.IState>;
 
     @Output('values-changed')
-    public valuesChanged = new EventEmitter()
+    public valuesChanged = new EventEmitter();
 
     @Output('sign-up-clicked')
     public signUpClicked = new EventEmitter();

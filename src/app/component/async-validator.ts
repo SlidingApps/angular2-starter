@@ -2,6 +2,8 @@
 import { AbstractControl } from '@angular/forms';
 import { Observable, Observer} from 'rxjs';
 
+import { Logger } from '../../app/application/shared.module';
+
 export interface IValidationFailure {
     [key: string]: boolean;
 }
@@ -10,25 +12,27 @@ export class AsyncValidator {
     public _validate;
 
     constructor(validator: (control: AbstractControl) => Promise<IValidationFailure|Array<IValidationFailure>>, debounceTime = 1000) {
+        /* tslint:disable:no-any */
         let source: any = new Observable((observer: Observer<AbstractControl>) => {
             this._validate = (control) => observer.next(control);
         });
+        /* tslint:enable:no-any */
 
         source.debounceTime(debounceTime)
             .distinctUntilChanged(null, (x) => x.control.value)
             .map(x => { return { promise: validator(x.control), resolver: x.promiseResolver }; })
             .subscribe(
-                (x) => x.promise.then(resultValue => x.resolver(resultValue),
-                    (e) => { console.log('async validator error: %s', e); }));
+                x => x.promise.then(resultValue => x.resolver(resultValue),
+                error => Logger.Error('AsyncValidator', error)));
     }
 
     private _getValidator() {
         return (control) => {
-            let promiseResolver;
-            let p = new Promise((resolve) => {
-                promiseResolver = resolve;
-            });
+            let promiseResolver = null;
+
+            let p = new Promise(resolve => promiseResolver = resolve);
             this._validate({ control: control, promiseResolver: promiseResolver });
+
             return p;
         };
     }

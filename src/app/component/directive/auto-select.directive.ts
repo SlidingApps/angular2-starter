@@ -16,6 +16,6 @@ export class AutoSelectDirective {
             jQuery(elementRef.nativeElement).select();
         });
 
-        Observable.timer(0, 300).first().subscribe(x => jQuery(elementRef.nativeElement).select());
+        // Observable.timer(0, 300).first().subscribe(x => jQuery(elementRef.nativeElement).select());
     }
 }

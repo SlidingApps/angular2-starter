@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import {AsyncValidator, IValidationFailure } from '../async-validator';
+import { AsyncValidator, IValidationFailure } from '../async-validator';
 
 export interface IOrganizationModel {
     organization: string;
@@ -28,7 +28,7 @@ export interface IOrganizationModel {
             </div>
         </div>
         <div class="col-lg-4" *ngIf="formControl.errors">
-            {{ formControl.errors | json }}
+            {{formControl.errors | json}}
             <span *ngIf="formControl.errors.minlength && formControl.touched" style="color: orangered; font-weight: bold;">{{ 'ACCOUNT.VALIDATION_ERROR_ORGANIZATION_NAME_TOO_SHORT' | translate }}</span>
         </div>
     </div>
@@ -55,21 +55,16 @@ export class OrganizationComponent implements OnInit {
 
         this.formControl = new FormControl(this.organization, [Validators.required, Validators.minLength(4)], [validator]);
         this.formGroup.addControl(OrganizationComponent.FORM_CONTROL_NAME, this.formControl);
-
-        this.validationFailures.subscribe(x => console.log('validationErrors', x));
     }
 
     private validateExists(control: AbstractControl): Promise<Array<IValidationFailure>> {
         let q = new Promise((resolve, reject) => {
             this.validationFailures
-                .debounceTime(500)
+                .debounceTime(200)
                 .distinctUntilChanged()
                 .first()
                 .map(x => x === null ? null : x)
-                .subscribe(x => {
-                    console.log('validator', x);
-                    resolve(x);
-                });
+                .subscribe(x => resolve(x));
         });
 
         return q;
