@@ -11,7 +11,7 @@ import { State, GetStarted, GetStartedAction } from '../../../state/state.module
     selector: 'sa-account-sign-in',
     template: `
     <!-- ACCOUNT.GET_STARTED: BEGIN -->
-    <div class="page-login">
+    <div class="page-login sa-animated">
         <div class="loginContentWrap" style="padding: 0;">
             <div class="container-fluid">
                 <sa-account-get-started-form [model]="state$" (values-changed)="onValuesChanged($event)" (sign-up-clicked)="onSignUpClicked($event)"></sa-account-get-started-form>

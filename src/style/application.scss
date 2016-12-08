@@ -1,10 +1,13 @@
 
-div.no-animation {
-  opacity: 1;
-  animation: fade 0.100s linear;
+.sa-animated {
+    div {
+        opacity: 1;
+        animation: fade 0.250s linear;
+    }
 }
 
 @keyframes fade {
   0% { opacity: 0 }
+  25% { opacity: 0.75 }
   100% { opacity: 1 }
 }
