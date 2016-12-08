@@ -5,24 +5,24 @@ import { IValidated, ValidationState } from '../../validation';
 import { type } from '../../utils';
 
 export const ErrorAttribute = {
-    ORGANIZATION: type('ACCOUNT.GET_STARTED.ATTRIBUTE.ORGANIZATION'),
+    TENANT: type('ACCOUNT.GET_STARTED.ATTRIBUTE.TENANT'),
     PASSWORD: type('ACCOUNT.GET_STARTED.ATTRIBUTE.PASSWORD')
 };
 
 export const ErrorToken = {
-    ORGANIZATION_IS_AVAILABLE: type('ACCOUNT.GET_STARTED.ERROR.ORGANIZATION_IS_AVAILABLE'),
+    TENANT_NAME_IS_AVAILABLE: type('ACCOUNT.GET_STARTED.ERROR.TENANT_NAME_IS_AVAILABLE'),
     PASSWORDS_NOT_EQUAL: type('ACCOUNT.GET_STARTED.ERROR.PASSWORDS_NOT_EQUAL')
 };
 
 export interface IState extends IValidated {
-    organization: string;
+    tenant: string;
     username: string;
     password: string;
     passwordConfirmation: string;
 }
 
 const INITIAL_STATE: IState = {
-    organization: null,
+    tenant: null,
     username: null,
     password: null,
     passwordConfirmation: null,
@@ -38,14 +38,14 @@ export const reducer = (state: IState = INITIAL_STATE, action: Actions): IState 
             state = Validator.ValidatePasswordEquality(state);
             return state;
 
-        case ActionType.ORGANIZATION_AVAILABLE:
+        case ActionType.TENANT_NAME_AVAILABLE:
             state = Object.assign({}, state);
-            state = Validator.OrganizationIsAvailable(state, true);
+            state = Validator.TenantNameIsAvailable(state, true);
             return state;
 
-        case ActionType.ORGANIZATION_NOT_AVAILABLE:
+        case ActionType.TENANT_NAME_NOT_AVAILABLE:
             state = Object.assign({}, state);
-            state = Validator.OrganizationIsAvailable(state, false);
+            state = Validator.TenantNameIsAvailable(state, false);
             return state;
 
         default:
@@ -55,12 +55,12 @@ export const reducer = (state: IState = INITIAL_STATE, action: Actions): IState 
 
 export class Validator {
 
-    public static OrganizationIsAvailable(state: IState, available: boolean): IState {
-        state.$validations = state.$validations.filter(x => x.attribute !== ErrorAttribute.ORGANIZATION);
+    public static TenantNameIsAvailable(state: IState, available: boolean): IState {
+        state.$validations = state.$validations.filter(x => x.attribute !== ErrorAttribute.TENANT);
         if (state) {
             state.$validations = [...state.$validations, {
-                attribute: ErrorAttribute.ORGANIZATION,
-                token: ErrorToken.ORGANIZATION_IS_AVAILABLE,
+                attribute: ErrorAttribute.TENANT,
+                token: ErrorToken.TENANT_NAME_IS_AVAILABLE,
                 state: available ? ValidationState.PASSED : ValidationState.FAILED,
                 message: 'VALIDATION.FAILURE.TENANT.IS_NOT_AVAILABLE'
             }];

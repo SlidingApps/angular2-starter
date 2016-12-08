@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule, Logger } from '../../application/shared.module';
 
 import { DirectiveModule } from '../directive/directive.module';
-import { OrganizationComponent, IOrganizationModel } from './organization.component';
+import { TenantComponent, ITenantModel } from './tenant.component';
 import { UsernameComponent, IUsernameModel } from './username.component';
 import { PasswordComponent, IPasswordModel, IPasswordConfirmationModel } from './password.component';
 import { ButtonComponent } from './button.component';
@@ -19,13 +19,13 @@ import { ButtonComponent } from './button.component';
         DirectiveModule
     ],
     declarations: [
-        OrganizationComponent,
+        TenantComponent,
         UsernameComponent,
         PasswordComponent,
         ButtonComponent
     ],
     exports: [
-        OrganizationComponent,
+        TenantComponent,
         UsernameComponent,
         PasswordComponent,
         ButtonComponent
@@ -37,4 +37,4 @@ class AccountComponentModule {
     }
 }
 
-export { AccountComponentModule, IOrganizationModel, IUsernameModel, IPasswordModel, IPasswordConfirmationModel }
+export { AccountComponentModule, ITenantModel, IUsernameModel, IPasswordModel, IPasswordConfirmationModel }

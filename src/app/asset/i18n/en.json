@@ -19,7 +19,7 @@
         "SIGN_IN_LINK": "Sign in here",
         "GET_STARTED_LINK": "Get started",
         "FORGOT_PASSWORD_LINK": "Forgot password",
-        "ORGANIZATION_PLACEHOLDER": "organization",
+        "TENANT_PLACEHOLDER": "organization",
         "EMAIL_PLACEHOLDER": "email",
         "EMAIL_OR_USERNAME_PLACEHOLDER": "email or username",
         "PASSWORD_PLACEHOLDER": "password",

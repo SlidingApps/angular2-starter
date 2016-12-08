@@ -153,7 +153,7 @@ export class RestServiceEndpoint {
         /* tslint:disable:no-any */
         return this.$http.get(url, this.requestConfiguration)
             .map((response: Response) => {
-                Logger.Sinks['rest'].Debug('RestServiceEndpoint.get()', url, response.json());
+                Logger.Sinks['rest'].Info('RestServiceEndpoint.get()', url, response.json());
                 return response.json();
             })
             .catch((error: any) => Observable.throw(error.json().error || 'server error'));

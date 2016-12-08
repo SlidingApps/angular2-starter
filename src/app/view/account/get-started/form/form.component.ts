@@ -15,7 +15,7 @@ import 'jquery';
     template: `
     <!-- ACCOUNT.SIGN-IN.FORM: BEGIN -->
     <form #f="ngForm" [formGroup]="formGroup" (ngSubmit)="onSubmit(f.value)">
-        <sa-comp-account-organization [formGroup]="formGroup" [organization]="(model | async).organization" [validation-failures]="organizationValidationFailures"></sa-comp-account-organization>
+        <sa-comp-account-tenant [formGroup]="formGroup" [tenant]="(model | async).tenant" [validation-failures]="tenantValidationFailures"></sa-comp-account-tenant>
         <sa-comp-account-username [formGroup]="formGroup" [username]="(model | async).username" [placeholder]="'ACCOUNT.EMAIL_PLACEHOLDER' | translate"></sa-comp-account-username>
         <sa-comp-account-password [formGroup]="formGroup"></sa-comp-account-password>
         <sa-comp-account-password [formGroup]="formGroup" [name]="'passwordConfirmation'" [placeholder]="'ACCOUNT.CONFIRM_PASSWORD_PLACEHOLDER' | translate"></sa-comp-account-password>
@@ -41,11 +41,11 @@ export class FormComponent implements OnInit {
 
     public formGroup: FormGroup;
 
-    public organizationValidationFailures: Observable<Array<{[key: string]: boolean}>>;
+    public tenantValidationFailures: Observable<Array<{[key: string]: boolean}>>;
 
     public ngOnInit(): void {
-        // Focus the ORGANIZATION input field.
-        Observable.timer(0, 300).first().subscribe(x => jQuery('input[class*=\'sa-comp-account-organization\']').trigger('focus'));
+        // Focus the TENANT input field.
+        Observable.timer(0, 300).first().subscribe(x => jQuery('input[class*=\'sa-comp-account-tenant\']').trigger('focus'));
 
         // Emit form values changes.
         this.formGroup
@@ -53,8 +53,8 @@ export class FormComponent implements OnInit {
             .debounceTime(300)
             .subscribe(model => this.valuesChanged.emit(model));
 
-        // Create an observable ORGANIZATION validation failures.
-        this.organizationValidationFailures = Validation.createValidationFailures(this.model, GetStarted.ErrorAttribute.ORGANIZATION);
+        // Create an observable TENANT validation failures.
+        this.tenantValidationFailures = Validation.createValidationFailures(this.model, GetStarted.ErrorAttribute.TENANT);
     }
 
     /* tslint:disable:no-unused-variable */

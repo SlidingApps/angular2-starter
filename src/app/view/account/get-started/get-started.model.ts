@@ -3,10 +3,10 @@
 import { Model as FoundationModel } from '../../../foundation/model';
 
 export class GetStartedModel extends FoundationModel {
-    private _organization: string;
-    public get organization(): string { return this._organization; }
-    public set organization(value: string) {
-        this.$setPropety('organization', value);
+    private _tenant: string;
+    public get tenant(): string { return this._tenant; }
+    public set tenant(value: string) {
+        this.$setPropety('tenant', value);
     }
 
     private _username: string;

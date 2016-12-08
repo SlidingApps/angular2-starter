@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Actions, Effect } from '@ngrx/effects';
 
 import { ReadModelService } from '../../../service/service.module';
-import { ActionType, IUpdateOrganizationPayload } from './get-started.action';
+import { ActionType, IUpdateTenanrPayload } from './get-started.action';
 
 @Injectable()
 export class GetStartedEffects {
@@ -18,25 +18,25 @@ export class GetStartedEffects {
         .ofType(ActionType.UPDATE)
 
         // Map the payload into JSON to use as the request body
-        .map(action => action.payload as IUpdateOrganizationPayload)
-        .map(payload => payload.organization)
-        .filter(organization => !!organization)
+        .map(action => action.payload as IUpdateTenanrPayload)
+        .map(payload => payload.tenant)
+        .filter(tenant => !!tenant)
         .distinctUntilChanged()
 
-        .switchMap(organization =>
-            // Observable.create(observer => setTimeout(() => observer.next({type: ActionType.ORGANIZATION_NOT_AVAILABLE}), 1000))
-            this.readService.tenant.getTenantCodeAvailability(organization)
+        .switchMap(tenant =>
+            // Observable.create(observer => setTimeout(() => observer.next({type: ActionType.TENANT_NAME_NOT_AVAILABLE}), 1000))
+            this.readService.tenant.getTenantCodeAvailability(tenant)
 
                 // If successful, dispatch success action with result
                 .map(response => {
                     if (response.isAvailable) {
-                        return {type: ActionType.ORGANIZATION_AVAILABLE};
+                        return {type: ActionType.TENANT_NAME_AVAILABLE};
                     } else {
-                        return {type: ActionType.ORGANIZATION_NOT_AVAILABLE};
+                        return {type: ActionType.TENANT_NAME_NOT_AVAILABLE};
                     }
                 })
 
                 // If request fails, dispatch failed action
-                .catch(() => Observable.of({type: ActionType.ORGANIZATION_NOT_AVAILABLE}))
+                .catch(() => Observable.of({type: ActionType.TENANT_NAME_NOT_AVAILABLE}))
         );
 }
