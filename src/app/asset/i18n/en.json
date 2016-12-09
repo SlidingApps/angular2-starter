@@ -6,7 +6,7 @@
     "VALIDATION": {
         "FAILURE": {
             "TENANT": {
-                "IS_NOT_AVAILABLE": "This name is not available",
+                "NAME_IS_NOT_AVAILABLE": "This name is not available",
                 "NAME_TOO_SHORT": "This name is too short"
             },
             "USERNAME": {

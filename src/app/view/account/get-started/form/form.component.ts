@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 
 import { GetStarted, Validation } from '../../../../state/state.module';
 import { IFormModel } from './form.model';
+import * as AccountComponent from '../../../../component/account/account.module';
 
 import 'jquery';
 
@@ -17,8 +18,8 @@ import 'jquery';
     <form #f="ngForm" [formGroup]="formGroup" (ngSubmit)="onSubmit(f.value)">
         <sa-comp-account-tenant [formGroup]="formGroup" [tenant]="(model | async).tenant" [validation-failures]="tenantValidationFailures"></sa-comp-account-tenant>
         <sa-comp-account-username [formGroup]="formGroup" [username]="(model | async).username" [placeholder]="'ACCOUNT.EMAIL_PLACEHOLDER' | translate"></sa-comp-account-username>
-        <sa-comp-account-password [formGroup]="formGroup" [validation-failures]="passwordValidationFailures"></sa-comp-account-password>
-        <sa-comp-account-password [formGroup]="formGroup" [name]="'passwordConfirmation'" [placeholder]="'ACCOUNT.CONFIRM_PASSWORD_PLACEHOLDER' | translate"></sa-comp-account-password>
+        <sa-comp-account-password [formGroup]="formGroup"></sa-comp-account-password>
+        <sa-comp-account-password [formGroup]="formGroup" [name]="'passwordConfirmation'" [is-confirmation]="true" [placeholder]="'ACCOUNT.CONFIRM_PASSWORD_PLACEHOLDER' | translate"></sa-comp-account-password>
         <sa-comp-account-button [formGroup]="formGroup" [text]="'ACCOUNT.SIGN_UP_ACTION' | translate"></sa-comp-account-button>
     </form>
     <!-- ACCOUNT.SIGN-IN.FORM: END -->
@@ -26,9 +27,7 @@ import 'jquery';
 })
 export class FormComponent implements OnInit {
 
-    constructor(private element: ElementRef, public translate: TranslateService, builder: FormBuilder) {
-        this.formGroup = builder.group({});
-    }
+    constructor(private element: ElementRef, public translate: TranslateService, private builder: FormBuilder) { }
 
     @Input('model')
     public model: Observable<GetStarted.IState>;
@@ -49,15 +48,21 @@ export class FormComponent implements OnInit {
         // Focus the TENANT input field.
         Observable.timer(0, 300).first().subscribe(x => jQuery('input[class*=\'sa-comp-account-tenant\']').trigger('focus'));
 
-        // Emit form values changes.
-        this.formGroup
-            .valueChanges
-            .debounceTime(300)
-            .subscribe(model => this.valuesChanged.emit(model));
-
         // Create observable validation failures.
         this.tenantValidationFailures = Validation.createValidationFailures(this.model, GetStarted.ErrorAttribute.TENANT);
         this.passwordValidationFailures = Validation.createValidationFailures(this.model, GetStarted.ErrorAttribute.PASSWORD);
+
+        this.formGroup = this.builder.group({});
+        this.formGroup.setAsyncValidators([AccountComponent.PasswordValidator.isPasswordAndConfirmationEqual(this.passwordValidationFailures)]);
+
+        // Emit form values changes.
+        this.formGroup
+            .valueChanges
+            .debounceTime(100)
+            .subscribe(model => {
+                this.formGroup.updateValueAndValidity({onlySelf: true, emitEvent: true});
+                this.valuesChanged.emit(model);
+            });
     }
 
     /* tslint:disable:no-unused-variable */

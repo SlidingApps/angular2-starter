@@ -9,7 +9,7 @@ import { SignInModel } from './sign-in.model';
     selector: 'sa-account-sign-in',
     template: `
     <!-- ACCOUNT.SIGN-IN: BEGIN -->
-    <div class="page-login">
+    <div class="page-login sa-animated">
         <div class="loginContentWrap" style="padding: 0;">
             <div class="container-fluid">
                 <sa-account-sign-in-form (sign-in-clicked)="onSignInClicked($event)"></sa-account-sign-in-form>

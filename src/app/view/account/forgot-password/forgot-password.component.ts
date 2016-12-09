@@ -8,7 +8,7 @@ import { IFormModel} from './form/form.model';
     selector: 'sa-account-sign-in',
     template: `
     <!-- ACCOUNT.SIGN-IN: BEGIN -->
-    <div class="page-login">
+    <div class="page-login sa-animated">
         <div class="loginContentWrap" style="padding: 0;">
             <div class="container-fluid">
                 <sa-account-forgot-password-form (send-link-clicked)="onSendLinkClicked($event)"></sa-account-forgot-password-form>

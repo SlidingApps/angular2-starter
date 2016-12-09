@@ -24,19 +24,19 @@ export class GetStartedEffects {
         .distinctUntilChanged()
 
         .switchMap(tenant =>
-            Observable.create(observer => setTimeout(() => observer.next({type: ActionType.TENANT_NAME_NOT_AVAILABLE}), 1000))
-            // this.readService.tenant.getTenantCodeAvailability(tenant)
-            //
-            //     // If successful, dispatch success action with result
-            //     .map(response => {
-            //         if (response.isAvailable) {
-            //             return {type: ActionType.TENANT_NAME_AVAILABLE};
-            //         } else {
-            //             return {type: ActionType.TENANT_NAME_NOT_AVAILABLE};
-            //         }
-            //     })
-            //
-            //     // If request fails, dispatch failed action
-            //     .catch(() => Observable.of({type: ActionType.TENANT_NAME_NOT_AVAILABLE}))
+            // Observable.create(observer => setTimeout(() => observer.next({type: ActionType.TENANT_NAME_NOT_AVAILABLE}), 1000))
+            this.readService.tenant.getTenantCodeAvailability(tenant)
+
+                // If successful, dispatch success action with result
+                .map(response => {
+                    if (response.isAvailable) {
+                        return {type: ActionType.TENANT_NAME_AVAILABLE};
+                    } else {
+                        return {type: ActionType.TENANT_NAME_NOT_AVAILABLE};
+                    }
+                })
+
+                // If request fails, dispatch failed action
+                .catch(() => Observable.of({type: ActionType.TENANT_NAME_NOT_AVAILABLE}))
         );
 }

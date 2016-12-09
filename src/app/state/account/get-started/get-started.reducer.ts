@@ -62,7 +62,7 @@ export class Validator {
                 attribute: ErrorAttribute.TENANT,
                 token: ErrorToken.TENANT_NAME_IS_AVAILABLE,
                 state: available ? ValidationState.PASSED : ValidationState.FAILED,
-                message: 'VALIDATION.FAILURE.TENANT.IS_NOT_AVAILABLE'
+                message: 'VALIDATION.FAILURE.TENANT.NAME_IS_NOT_AVAILABLE'
             }];
         }
 
@@ -72,7 +72,6 @@ export class Validator {
     public static ValidatePasswordEquality(state: IState): IState {
         state.$validations = state.$validations.filter(x => x.attribute !== ErrorAttribute.PASSWORD);
         const success: boolean = (!state.password && !state.passwordConfirmation) || ((!!state.password || !!state.passwordConfirmation) && state.password === state.passwordConfirmation);
-        console.log('success', success);
         if (state) {
             state.$validations = [...state.$validations, {
                 attribute: ErrorAttribute.PASSWORD,

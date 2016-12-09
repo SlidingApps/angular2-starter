@@ -1,12 +1,11 @@
 
-.sa-animated {
-    div {
-        opacity: 1;
-        animation: fade 0.250s ease-in;
-    }
+div.sa-animated {
+    opacity: 1;
+    animation: fade 0.300s ease-in;
 }
 
 @keyframes fade {
   0% { opacity: 0 }
+  40% { opacity: 0.8 }
   100% { opacity: 1 }
 }

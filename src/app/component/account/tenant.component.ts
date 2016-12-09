@@ -29,7 +29,7 @@ export interface ITenantModel {
             </div>
         </div>
         <div class="col-lg-4" *ngIf="formControl.errors">
-            <span *ngIf="formControl.errors['VALIDATION.FAILURE.TENANT.IS_NOT_AVAILABLE']" style="color: orangered; font-weight: bold;">{{ 'VALIDATION.FAILURE.TENANT.IS_NOT_AVAILABLE' | translate }}</span>
+            <span *ngIf="formControl.errors['VALIDATION.FAILURE.TENANT.NAME_IS_NOT_AVAILABLE']" style="color: orangered; font-weight: bold;">{{ 'VALIDATION.FAILURE.TENANT.NAME_IS_NOT_AVAILABLE' | translate }}</span>
             <span *ngIf="formControl.errors.minlength && formControl.touched" style="color: orangered; font-weight: bold;">{{ 'VALIDATION.FAILURE.TENANT.NAME_TOO_SHORT' | translate }}</span>
         </div>
     </div>
@@ -39,7 +39,7 @@ export interface ITenantModel {
 export class TenantComponent implements OnInit {
 
     public static get FORM_CONTROL_NAME(): string { return 'tenant'; }
-    public static get IS_NOT_AVAILABLE(): string { return 'VALIDATION.FAILURE.TENANT.IS_NOT_AVAILABLE'; }
+    public static get IS_NOT_AVAILABLE(): string { return 'VALIDATION.FAILURE.TENANT.NAME_IS_NOT_AVAILABLE'; }
 
     @Input()
     public formGroup: FormGroup;
@@ -63,10 +63,10 @@ class TenantValidator {
         let validator = AsyncValidator.debounce((control) => {
             let promise = new Promise((resolve, reject) => {
                 validationFailures
-                    .debounceTime(100)
+                    .debounceTime(200)
                     .first()
                     .concatMap(x => !!x ? x : Observable.empty())
-                    .subscribe(x => resolve((x && !!x[TenantComponent.IS_NOT_AVAILABLE] ? x : null)));
+                    .subscribe(x => resolve(x && !!x[TenantComponent.IS_NOT_AVAILABLE] ? x : null));
             });
 
             return promise;
