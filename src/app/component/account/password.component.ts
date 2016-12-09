@@ -1,7 +1,11 @@
 
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms';
+import { Observable } from 'rxjs';
+
 import { TranslateService } from '../../application/shared.module';
+import { Validation } from '../../state/state.module';
+import { AsyncValidator } from '../async-validator';
 
 export interface IPasswordModel {
     password: string;
@@ -28,6 +32,10 @@ export interface IPasswordConfirmationModel {
                 <i class="fa fa-lock"></i>
             </div>
         </div>
+         <div class="col-lg-4" *ngIf="formControl.errors">
+            <span *ngIf="formControl.errors['VALIDATION.FAILURE.PASSWORD.PASSWORD_AND_CONFIRMATION_NOT_EQUAL']" style="color: orangered; font-weight: bold;">{{ 'VALIDATION.FAILURE.PASSWORD.PASSWORD_AND_CONFIRMATION_NOT_EQUAL' | translate }}</span>
+            <span *ngIf="formControl.errors.minlength && formControl.touched" style="color: orangered; font-weight: bold;">{{ 'VALIDATION.FAILURE.PASSWORD.PASSWORD_TOO_SHORT' | translate }}</span>
+        </div>
     </div>
     <!-- COMPONENT.ACCOUNT.PASSWORD: END -->
     `
@@ -37,6 +45,8 @@ export class PasswordComponent implements OnInit {
     constructor(private translate: TranslateService) {
         this.placeholder = this.placeholder ? this.placeholder : this.translate.instant('ACCOUNT.PASSWORD_PLACEHOLDER');
     }
+
+    public static get PASSWORD_AND_CONFIRMATION_NOT_EQUAL(): string { return 'VALIDATION.FAILURE.PASSWORD.PASSWORD_AND_CONFIRMATION_NOT_EQUAL'; }
 
     public static get FORM_CONTROL_NAME(): string { return 'password'; }
 
@@ -49,7 +59,35 @@ export class PasswordComponent implements OnInit {
     @Input()
     public placeholder: string;
 
+    @Input('validation-failures')
+    public validationFailures: Observable<Array<Validation.IValidationFailure>>;
+
+    public formControl: FormControl;
+
     public ngOnInit(): void {
-        this.formGroup.addControl(this.name, new FormControl(undefined, Validators.required));
+        this.formControl = new FormControl(undefined, [Validators.required, Validators.minLength(6)], [PasswordValidator.isPasswordAndConfirmationEqual(this.validationFailures)]);
+        this.formGroup.addControl(this.name, this.formControl);
+    }
+}
+
+class PasswordValidator {
+    public static isPasswordAndConfirmationEqual(validationFailures: Observable<Array<Validation.IValidationFailure>>): ValidatorFn {
+        let validator = AsyncValidator.debounce((control) => {
+            let promise = new Promise((resolve, reject) => {
+                if (!!validationFailures) {
+                    validationFailures
+                        .debounceTime(100)
+                        .first()
+                        .concatMap(x => !!x ? x : Observable.empty())
+                        .subscribe(x => resolve((x && !!x[PasswordComponent.PASSWORD_AND_CONFIRMATION_NOT_EQUAL] ? x : null)));
+                } else {
+                  resolve(null);
+                }
+            });
+
+            return promise;
+        });
+
+        return validator;
     }
 }

@@ -71,12 +71,14 @@ export class Validator {
 
     public static ValidatePasswordEquality(state: IState): IState {
         state.$validations = state.$validations.filter(x => x.attribute !== ErrorAttribute.PASSWORD);
-        const success: boolean = !!state.password && !!state.passwordConfirmation && state.password !== state.passwordConfirmation;
+        const success: boolean = (!state.password && !state.passwordConfirmation) || ((!!state.password || !!state.passwordConfirmation) && state.password === state.passwordConfirmation);
+        console.log('success', success);
         if (state) {
             state.$validations = [...state.$validations, {
                 attribute: ErrorAttribute.PASSWORD,
                 token: ErrorToken.PASSWORDS_NOT_EQUAL,
-                state: success ? ValidationState.PASSED : ValidationState.FAILED
+                state: success ? ValidationState.PASSED : ValidationState.FAILED,
+                message: 'VALIDATION.FAILURE.PASSWORD.PASSWORD_AND_CONFIRMATION_NOT_EQUAL'
             }];
         }
 

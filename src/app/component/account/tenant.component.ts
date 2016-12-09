@@ -4,7 +4,7 @@ import { FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms'
 import { Observable } from 'rxjs';
 
 import { AsyncValidator } from '../async-validator';
-import { IValidationFailure } from '../../state/validation';
+import { Validation } from '../../state/state.module';
 
 export interface ITenantModel {
     tenant: string;
@@ -48,7 +48,7 @@ export class TenantComponent implements OnInit {
     public tenant: string;
 
     @Input('validation-failures')
-    public validationFailures: Observable<Array<IValidationFailure>>;
+    public validationFailures: Observable<Array<Validation.IValidationFailure>>;
 
     public formControl: FormControl;
 
@@ -59,7 +59,7 @@ export class TenantComponent implements OnInit {
 }
 
 class TenantValidator {
-    public static isAvailable(validationFailures: Observable<Array<IValidationFailure>>): ValidatorFn {
+    public static isAvailable(validationFailures: Observable<Array<Validation.IValidationFailure>>): ValidatorFn {
         let validator = AsyncValidator.debounce((control) => {
             let promise = new Promise((resolve, reject) => {
                 validationFailures

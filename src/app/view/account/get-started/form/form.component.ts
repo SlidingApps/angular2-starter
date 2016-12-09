@@ -17,7 +17,7 @@ import 'jquery';
     <form #f="ngForm" [formGroup]="formGroup" (ngSubmit)="onSubmit(f.value)">
         <sa-comp-account-tenant [formGroup]="formGroup" [tenant]="(model | async).tenant" [validation-failures]="tenantValidationFailures"></sa-comp-account-tenant>
         <sa-comp-account-username [formGroup]="formGroup" [username]="(model | async).username" [placeholder]="'ACCOUNT.EMAIL_PLACEHOLDER' | translate"></sa-comp-account-username>
-        <sa-comp-account-password [formGroup]="formGroup"></sa-comp-account-password>
+        <sa-comp-account-password [formGroup]="formGroup" [validation-failures]="passwordValidationFailures"></sa-comp-account-password>
         <sa-comp-account-password [formGroup]="formGroup" [name]="'passwordConfirmation'" [placeholder]="'ACCOUNT.CONFIRM_PASSWORD_PLACEHOLDER' | translate"></sa-comp-account-password>
         <sa-comp-account-button [formGroup]="formGroup" [text]="'ACCOUNT.SIGN_UP_ACTION' | translate"></sa-comp-account-button>
     </form>
@@ -43,6 +43,8 @@ export class FormComponent implements OnInit {
 
     public tenantValidationFailures: Observable<Array<{[key: string]: boolean}>>;
 
+    public passwordValidationFailures: Observable<Array<{[key: string]: boolean}>>;
+
     public ngOnInit(): void {
         // Focus the TENANT input field.
         Observable.timer(0, 300).first().subscribe(x => jQuery('input[class*=\'sa-comp-account-tenant\']').trigger('focus'));
@@ -53,8 +55,9 @@ export class FormComponent implements OnInit {
             .debounceTime(300)
             .subscribe(model => this.valuesChanged.emit(model));
 
-        // Create an observable TENANT validation failures.
+        // Create observable validation failures.
         this.tenantValidationFailures = Validation.createValidationFailures(this.model, GetStarted.ErrorAttribute.TENANT);
+        this.passwordValidationFailures = Validation.createValidationFailures(this.model, GetStarted.ErrorAttribute.PASSWORD);
     }
 
     /* tslint:disable:no-unused-variable */

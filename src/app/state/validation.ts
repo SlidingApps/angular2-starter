@@ -33,7 +33,7 @@ export function createValidationFailures(state: Observable<IValidated>, attribut
         .map(validations => validations.filter(v => v.attribute === attribute))
         .map(validations => {
             if (!!validations.length) {
-                return validations.map(validation => { return { [validation.message]: validation.state === ValidationState.FAILED }; });
+                return validations.map(validation => { return { [validation.message ? validation.message : validation.token]: validation.state === ValidationState.FAILED }; });
             } else {
                 return null;
             }

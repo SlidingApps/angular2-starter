@@ -11,6 +11,10 @@
             },
             "USERNAME": {
                 "NAME_TOO_SHORT": "This name is too short"
+            },
+            "PASSWORD": {
+                "PASSWORD_AND_CONFIRMATION_NOT_EQUAL": "Password and confirmation are not equal",
+                "PASSWORD_TOO_SHORT": "Password is too short"
             }
         }
     },
