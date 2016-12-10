@@ -53,14 +53,14 @@ export class FormComponent implements OnInit {
         this.passwordValidationFailures = Validation.createValidationFailures(this.model, GetStarted.ErrorAttribute.PASSWORD);
 
         this.formGroup = this.builder.group({});
-        this.formGroup.setAsyncValidators([AccountComponent.PasswordValidator.isPasswordAndConfirmationEqual(this.passwordValidationFailures)]);
+        this.formGroup.setAsyncValidators([this.validatePassword.bind(this)]);
 
         // Emit form values changes.
         this.formGroup
             .valueChanges
             .debounceTime(100)
             .subscribe(model => {
-                this.formGroup.updateValueAndValidity({onlySelf: true, emitEvent: true});
+                this.formGroup.updateValueAndValidity({onlySelf: true, emitEvent: false});
                 this.valuesChanged.emit(model);
             });
     }
@@ -73,4 +73,12 @@ export class FormComponent implements OnInit {
         Logger.Debug('FormComponent.onSubmit()', this.model);
     }
     /* tslint:enable:no-unused-variable */
+
+    private validatePassword(): Observable<{[key: string]: boolean}> {
+        return this.passwordValidationFailures
+            .debounceTime(100)
+            .first()
+            .concatMap(x => !!x ? x : Observable.empty())
+            .map(x => (x && !!x[AccountComponent.PasswordComponent.PASSWORD_AND_CONFIRMATION_NOT_EQUAL] ? x : null) as {[key: string]: boolean});
+    }
 }

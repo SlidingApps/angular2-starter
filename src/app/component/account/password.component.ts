@@ -1,11 +1,8 @@
 
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { TranslateService } from '../../application/shared.module';
-import { Validation } from '../../state/state.module';
-import { AsyncValidator } from '../async-validator';
 
 export interface IPasswordModel {
     password: string;
@@ -67,27 +64,5 @@ export class PasswordComponent implements OnInit {
     public ngOnInit(): void {
         this.formControl = new FormControl(undefined, [Validators.required, Validators.minLength(6)], []);
         this.formGroup.addControl(this.name, this.formControl);
-    }
-}
-
-export class PasswordValidator {
-    public static isPasswordAndConfirmationEqual(validationFailures: Observable<Array<Validation.IValidationFailure>>): ValidatorFn {
-        let validator = AsyncValidator.debounce((control) => {
-            let promise = new Promise((resolve, reject) => {
-                if (!!validationFailures) {
-                    validationFailures
-                        .debounceTime(100)
-                        .first()
-                        .concatMap(x => !!x ? x : Observable.empty())
-                        .subscribe(x => resolve(x && !!x[PasswordComponent.PASSWORD_AND_CONFIRMATION_NOT_EQUAL] ? x : null));
-                } else {
-                  resolve(null);
-                }
-            });
-
-            return promise;
-        });
-
-        return validator;
     }
 }
