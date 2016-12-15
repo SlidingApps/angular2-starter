@@ -15,7 +15,7 @@ const INITIAL_STATE: IState = {
 export const reducer = (state: IState = INITIAL_STATE, action: Actions): IState => {
 
     switch (action.type) {
-        case ActionType.SIGN_IN:
+        case ActionType.TRY_SIGN_IN:
             state = Object.assign({}, state, action.payload);
             return state;
 

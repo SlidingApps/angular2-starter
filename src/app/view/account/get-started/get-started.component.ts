@@ -26,8 +26,7 @@ import { State, GetStarted, GetStartedAction } from '../../../state/state.module
 })
 export class GetStartedComponent implements OnInit {
 
-    constructor(private store: Store<State>) {
-    }
+    constructor(private store: Store<State>) { }
 
     public state$: Observable<GetStarted.IState>;
 

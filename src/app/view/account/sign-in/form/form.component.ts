@@ -1,8 +1,11 @@
+/// <reference path="../../../../index.d.ts" />
 
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Logger } from '../../../../foundation/logger';
+import { Observable } from 'rxjs';
 
+import { SignIn } from '../../../../state/state.module';
 import { IFormModel } from './form.model';
 
 @Component({
@@ -22,6 +25,9 @@ export class FormComponent implements OnInit {
     constructor(builder: FormBuilder) {
         this.formGroup = builder.group({});
     }
+
+    @Input('model')
+    public model: Observable<SignIn.IState>;
 
     @Output('sign-in-clicked')
     public signInClicked = new EventEmitter();

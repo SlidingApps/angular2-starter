@@ -1,9 +1,11 @@
 
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Logger } from '../../../foundation/logger';
 
 import { IFormModel } from './form/form.model';
-import { SignInModel } from './sign-in.model';
+import { State, SignIn, SignInAction } from '../../../state/state.module';
 
 @Component({
     selector: 'sa-account-sign-in',
@@ -12,7 +14,7 @@ import { SignInModel } from './sign-in.model';
     <div class="page-login sa-animated">
         <div class="loginContentWrap" style="padding: 0;">
             <div class="container-fluid">
-                <sa-account-sign-in-form (sign-in-clicked)="onSignInClicked($event)"></sa-account-sign-in-form>
+                <sa-account-sign-in-form [model]="state$" (sign-in-clicked)="onSignInClicked($event)"></sa-account-sign-in-form>
                 <ul class="more">
                     <li><a routerLink="/account/getstarted">{{ 'ACCOUNT.GET_STARTED_LINK' | translate }}</a></li>
                     <li><a routerLink="/account/forgotpassword">{{ 'ACCOUNT.FORGOT_PASSWORD_LINK' | translate }}</a></li>
@@ -23,15 +25,27 @@ import { SignInModel } from './sign-in.model';
     <!-- ACCOUNT.SIGN-IN: END -->
     `
 })
-export class SignInComponent implements OnDestroy {
+export class SignInComponent implements OnInit {
 
-    public model: SignInModel = new SignInModel();
+    constructor(private store: Store<State>) { }
 
-    public onSignInClicked(model: IFormModel) {
-        Logger.Info('SignInComponent.onSignInClicked()', model);
+    public state$: Observable<SignIn.IState>;
+
+    public ngOnInit() {
+        this.state$ = this.store.select(x => x.SignIn).let(x => x);
+        this.state$.subscribe(state => {
+            state.password = null;
+        });
     }
 
-    public ngOnDestroy() {
-        this.model.$destroy();
+    public onSignInClicked(model: IFormModel) {
+        this.signIn(model);
+    }
+
+    private signIn(model: IFormModel) {
+        Logger.Debug('SignInComponent.signIn()', model);
+        if (model) {
+            this.store.dispatch(new SignInAction.TrySignIn(model));
+        }
     }
 }

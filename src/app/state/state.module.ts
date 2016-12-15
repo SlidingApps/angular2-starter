@@ -9,6 +9,7 @@ import * as Validation from './validation';
 import * as GetStartedAction from './account/get-started/get-started.action';
 import * as GetStarted from './account/get-started/get-started.reducer';
 
+import * as SignInAction from './account/sign-in/sign-in.action';
 import * as SignIn from './account/sign-in/sign-in.reducer';
 
 interface State {
@@ -36,4 +37,4 @@ class StateModule {
 
 export { StateModule, State}
 export { Validation }
-export { GetStarted, GetStartedAction, SignIn }
+export { GetStarted, GetStartedAction, SignIn, SignInAction }
