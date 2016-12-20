@@ -160,7 +160,7 @@ export class RestServiceEndpoint {
         /* tslint:enable:no-any */
     }
 
-    public post<TPayload>(instance: TPayload): Observable<TPayload> {
+    public post<TPayload, TResult>(instance: TPayload): Observable<TResult> {
         let url: string = this.configuration.url;
         this.resources.forEach((resource: ResourceConfiguration) => {
             url = url + RestService.DELIMITER + resource.name + (resource.id ? '/' + resource.id : '');
@@ -171,12 +171,12 @@ export class RestServiceEndpoint {
 
         /* tslint:disable:no-any */
         return this.$http.post(url, instance, this.requestConfiguration)
-            .map((response: Response) => instance)
+            .map((response: Response) => response.json() as TResult)
             .catch((error: any) => Observable.throw(error.json().error || 'server error'));
         /* tslint:enable:no-any */
     }
 
-    public put<TPayload>(instance?: TPayload): Observable<TPayload> {
+    public put<TPayload, TResult>(instance?: TPayload): Observable<TResult> {
         let url: string = this.configuration.url;
         this.resources.forEach((resource: ResourceConfiguration) => {
             url = url + RestService.DELIMITER + resource.name + (resource.id ? '/' + resource.id : '');
@@ -187,7 +187,7 @@ export class RestServiceEndpoint {
 
         /* tslint:disable:no-any */
         return this.$http.put(url, instance, this.requestConfiguration)
-            .map((response: Response) => instance)
+            .map((response: Response) => response.json() as TResult)
             .catch((error: any) => Observable.throw(error.json().error || 'server error'));
         /* tslint:enable:no-any */
     }

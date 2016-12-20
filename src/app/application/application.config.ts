@@ -18,4 +18,7 @@ export class ApplicationConfig {
     public static get READMODEL_HOST(): string { return 'http://localhost:8082'; }
     public static get READMODEL_API(): string { return 'query'; }
 
+    public static get WRITEMODEL_HOST(): string { return 'http://localhost:8081'; }
+    public static get WRITEMODEL_API(): string { return 'command'; }
+
 }
