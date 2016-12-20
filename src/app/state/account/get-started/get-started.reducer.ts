@@ -48,6 +48,10 @@ export const reducer = (state: IState = INITIAL_STATE, action: Actions): IState 
             state = Validator.TenantNameIsAvailable(state, false);
             return state;
 
+        case ActionType.TRY_SIGN_UP:
+            state = Object.assign({}, state);
+            return state;
+
         default:
             return state;
     }

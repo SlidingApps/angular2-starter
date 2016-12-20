@@ -7,7 +7,8 @@ export const ActionType = {
     CREATE: type('ACCOUNT.GET_STARTED.CREATE'),
     UPDATE: type('ACCOUNT.GET_STARTED.UPDATE'),
     TENANT_NAME_AVAILABLE: type('ACCOUNT.GET_STARTED.TENANT_NAME_AVAILABLE'),
-    TENANT_NAME_NOT_AVAILABLE: type('ACCOUNT.GET_STARTED.TENANT_NAME_NOT_AVAILABLE')
+    TENANT_NAME_NOT_AVAILABLE: type('ACCOUNT.GET_STARTED.TENANT_NAME_NOT_AVAILABLE'),
+    TRY_SIGN_UP: type('ACCOUNT.GET_STARTED.TRY_SIGN_UP')
 };
 
 export interface IUpdatePayload {
@@ -45,8 +46,15 @@ export class TenantNameNotAvailable implements Action {
     public type = ActionType.TENANT_NAME_NOT_AVAILABLE;
 }
 
+export class TrySignUp implements Action {
+    constructor() { }
+
+    public type = ActionType.TRY_SIGN_UP;
+}
+
 export type Actions
     = Create
     | Update
     | TenantNameAvailable
-    | TenantNameNotAvailable;
+    | TenantNameNotAvailable
+    | TrySignUp;
