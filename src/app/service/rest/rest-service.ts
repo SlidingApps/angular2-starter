@@ -341,7 +341,7 @@ export interface IApiOptions {
 export interface IApiConfiguration extends IApiOptions {
     path: string;
     /* tslint:disable:no-any */
-    values: any;
+    // values: any;
     /* tslint:enable:no-any */
 }
 

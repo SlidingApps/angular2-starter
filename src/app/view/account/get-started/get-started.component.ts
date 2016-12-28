@@ -33,8 +33,8 @@ export class GetStartedComponent implements OnInit {
     public ngOnInit() {
         this.state$ = this.store.select(x => x.GetStarted).let(x => x);
         this.state$.subscribe(state => {
-            state.password = null;
-            state.passwordConfirmation = null;
+            state.userPassword = null;
+            state.userPasswordConfirmation = null;
         });
     }
 
@@ -43,13 +43,29 @@ export class GetStartedComponent implements OnInit {
     }
 
     public onSignUpClicked(model: IFormModel) {
-        this.updateState(model);
+        this.signUpState(model);
     }
 
     private updateState(model: IFormModel) {
         Logger.Debug('GetStartedComponent.updateState()', model);
         if (model) {
-            this.store.dispatch(new GetStartedAction.Update(model));
+            this.store.dispatch(new GetStartedAction.Update({
+                tenantCode: model.tenant,
+                userName: model.username,
+                userPassword: model.password,
+                userPasswordConfirmation: model.passwordConfirmation
+            }));
+        }
+    }
+
+    private signUpState(model: IFormModel) {
+        Logger.Debug('GetStartedComponent.signUpState()', model);
+        if (model) {
+            this.store.dispatch(new GetStartedAction.TrySignUp({
+                tenantCode: model.tenant,
+                userName: model.username,
+                userPassword: model.password
+            }));
         }
     }
 }

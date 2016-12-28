@@ -8,18 +8,26 @@ export const ActionType = {
     UPDATE: type('ACCOUNT.GET_STARTED.UPDATE'),
     TENANT_NAME_AVAILABLE: type('ACCOUNT.GET_STARTED.TENANT_NAME_AVAILABLE'),
     TENANT_NAME_NOT_AVAILABLE: type('ACCOUNT.GET_STARTED.TENANT_NAME_NOT_AVAILABLE'),
-    TRY_SIGN_UP: type('ACCOUNT.GET_STARTED.TRY_SIGN_UP')
+    TRY_SIGN_UP: type('ACCOUNT.GET_STARTED.TRY_SIGN_UP'),
+    SIGN_UP_SUCCESS: type('ACCOUNT.GET_STARTED.SIGN_UP_SUCCESS'),
+    SIGN_UP_FAILED: type('ACCOUNT.GET_STARTED.SIGN_UP_FAILED')
 };
 
 export interface IUpdatePayload {
-    tenant: string;
-    username: string;
-    password: string;
-    passwordConfirmation: string;
+    tenantCode: string;
+    userName: string;
+    userPassword: string;
+    userPasswordConfirmation: string;
 }
 
-export interface IUpdateTenanrPayload {
-    tenant: string;
+export interface IUpdateTenantPayload {
+    tenantCode: string;
+}
+
+export interface ISignUpPayload {
+    tenantCode: string;
+    userName: string;
+    userPassword: string;
 }
 
 export class Create implements Action {
@@ -47,9 +55,21 @@ export class TenantNameNotAvailable implements Action {
 }
 
 export class TrySignUp implements Action {
-    constructor() { }
+    constructor(public payload: ISignUpPayload) { }
 
     public type = ActionType.TRY_SIGN_UP;
+}
+
+export class SignUpSuccess implements Action {
+    constructor() { }
+
+    public type = ActionType.SIGN_UP_SUCCESS;
+}
+
+export class SignUpFailed implements Action {
+    constructor() { }
+
+    public type = ActionType.SIGN_UP_FAILED;
 }
 
 export type Actions
@@ -57,4 +77,6 @@ export type Actions
     | Update
     | TenantNameAvailable
     | TenantNameNotAvailable
-    | TrySignUp;
+    | TrySignUp
+    | SignUpSuccess
+    | SignUpFailed;

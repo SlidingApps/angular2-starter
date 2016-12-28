@@ -15,17 +15,17 @@ export const ErrorToken = {
 };
 
 export interface IState extends IValidated {
-    tenant: string;
-    username: string;
-    password: string;
-    passwordConfirmation: string;
+    tenantCode: string;
+    userName: string;
+    userPassword: string;
+    userPasswordConfirmation: string;
 }
 
 const INITIAL_STATE: IState = {
-    tenant: null,
-    username: null,
-    password: null,
-    passwordConfirmation: null,
+    tenantCode: null,
+    userName: null,
+    userPassword: null,
+    userPasswordConfirmation: null,
 
     $validations: []
 };
@@ -52,6 +52,14 @@ export const reducer = (state: IState = INITIAL_STATE, action: Actions): IState 
             state = Object.assign({}, state);
             return state;
 
+        case ActionType.SIGN_UP_SUCCESS:
+            state = Object.assign({}, state);
+            return state;
+
+        case ActionType.SIGN_UP_FAILED:
+            state = Object.assign({}, state);
+            return state;
+
         default:
             return state;
     }
@@ -75,7 +83,7 @@ export class Validator {
 
     public static ValidatePasswordEquality(state: IState): IState {
         state.$validations = state.$validations.filter(x => x.attribute !== ErrorAttribute.PASSWORD);
-        const success: boolean = (!state.password && !state.passwordConfirmation) || ((!!state.password || !!state.passwordConfirmation) && state.password === state.passwordConfirmation);
+        const success: boolean = (!state.userPassword && !state.userPasswordConfirmation) || ((!!state.userPassword || !!state.userPasswordConfirmation) && state.userPassword === state.userPasswordConfirmation);
         if (state) {
             state.$validations = [...state.$validations, {
                 attribute: ErrorAttribute.PASSWORD,
