@@ -17,10 +17,10 @@ export class WriteModelService {
     private static get configuration(): IRestServiceConfiguration {
         return {
             host: {
-                url: ApplicationConfig.WRITEMODEL_HOST
+                url: ApplicationConfig.WRITEMODEL_HOST_URL
             },
             api: {
-                path: ApplicationConfig.WRITEMODEL_API
+                path: ApplicationConfig.WRITEMODEL_API_PATH
             }
         };
     }

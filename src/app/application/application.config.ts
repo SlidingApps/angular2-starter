@@ -15,10 +15,10 @@ export class ApplicationConfig {
     public static get MODEL_SINK_NAME(): string { return 'model'; }
     public static get MODEL_SINK_LEVELS(): Array<Level> { return [Level.ERROR, Level.WARN, Level.INFO /* , Level.DATA */]; }
 
-    public static get READMODEL_HOST(): string { return 'http://localhost:8082'; }
-    public static get READMODEL_API(): string { return 'query'; }
+    public static get READMODEL_HOST_URL(): string { return 'http://localhost:8082'; }
+    public static get READMODEL_API_PATH(): string { return 'query'; }
 
-    public static get WRITEMODEL_HOST(): string { return 'http://localhost:8081'; }
-    public static get WRITEMODEL_API(): string { return 'command'; }
+    public static get WRITEMODEL_HOST_URL(): string { return 'http://localhost:8081'; }
+    public static get WRITEMODEL_API_PATH(): string { return 'command'; }
 
 }

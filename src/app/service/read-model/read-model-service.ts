@@ -17,10 +17,10 @@ export class ReadModelService {
     private static get configuration(): IRestServiceConfiguration {
         return {
             host: {
-                url: ApplicationConfig.READMODEL_HOST
+                url: ApplicationConfig.READMODEL_HOST_URL
             },
             api: {
-                path: ApplicationConfig.READMODEL_API
+                path: ApplicationConfig.READMODEL_API_PATH
             }
         };
     }
