@@ -45,4 +45,5 @@ class StateModule {
 
 export { StateModule, State}
 export { Validation }
-export { AccountGetStarted, AccountGetStartedAction, AccountSignIn, AccountSignInAction, TenantConfirm, TenantConfirmAction }
+export { AccountGetStarted, AccountGetStartedAction, AccountSignIn, AccountSignInAction }
+export { TenantConfirm, TenantConfirmAction }
