@@ -17,6 +17,7 @@ import { StateModule } from '../state/state.module';
 import { PageModule } from '../view/layout/page.module';
 import { PublicModule } from '../view/public/public.module';
 import { AccountModule } from '../view/account/account.module';
+import { TenantModule } from '../view/tenant/tenant.module';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 
@@ -34,7 +35,8 @@ import * as nederlands from '../asset/i18n/nl.json';
         StateModule,
         PageModule,
         PublicModule,
-        AccountModule
+        AccountModule,
+        TenantModule
     ],
     declarations: [
         ApplicationComponent
@@ -81,7 +83,7 @@ export class ApplicationModule {
 
         Logger.Sinks[ApplicationConfig.ROUTER_SINK_NAME].Info(message, 'subscribed');
 
-        Logger.Info('ApplicationModule', 'done');
+        Logger.Info('App:ApplicationModule', 'done');
     }
 
     public hmrOnInit(store) {

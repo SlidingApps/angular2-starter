@@ -27,7 +27,7 @@ import { ApplicationConfig } from './application.config';
 })
 class SharedModule {
     constructor() {
-        Logger.Info('SharedModule', 'done');
+        Logger.Info('App:SharedModule', 'done');
     }
 }
 

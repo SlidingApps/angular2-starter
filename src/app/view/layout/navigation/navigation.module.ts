@@ -17,6 +17,6 @@ import { NavigationComponent } from './navigation.component';
 })
 export class NavigationModule {
     constructor() {
-        Logger.Info('NavigationModule', 'done');
+        Logger.Info('View:Layout:NavigationModule', 'done');
     }
 }

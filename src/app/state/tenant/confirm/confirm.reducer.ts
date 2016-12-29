@@ -1,20 +1,18 @@
 
-import { Actions, ActionType } from './sign-in.action';
+import { Actions, ActionType } from './confirm.action';
 
 export interface IState {
-    username: string;
-    password: string;
+    confirmation: string;
 }
 
 const INITIAL_STATE: IState = {
-    username: null,
-    password: null
+    confirmation: null
 };
 
 export const reducer = (state: IState = INITIAL_STATE, action: Actions): IState => {
 
     switch (action.type) {
-        case ActionType.TRY_SIGN_IN:
+        case ActionType.TRY_CONFIRM:
             state = Object.assign({}, state, action.payload);
             return state;
 

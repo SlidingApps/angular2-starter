@@ -17,6 +17,6 @@ import { SignInModule } from './sign-in/sign-in.module';
 })
 export class AccountModule {
     constructor() {
-        Logger.Info('AccountModule', 'done');
+        Logger.Info('State:AccountModule', 'done');
     }
 }

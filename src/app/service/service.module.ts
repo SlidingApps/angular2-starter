@@ -15,7 +15,7 @@ import { WriteModelService } from './write-model/write-model-service';
 })
 export class ServiceModule {
     constructor() {
-        Logger.Info('ServiceModule', 'done');
+        Logger.Info('Service:ServiceModule', 'done');
     }
 }
 

@@ -21,6 +21,6 @@ import { ContentModule } from './content/content.module';
 })
 export class PageModule {
     constructor() {
-        Logger.Info('PageModule', 'done');
+        Logger.Info('View:Layout:PageModule', 'done');
     }
 }

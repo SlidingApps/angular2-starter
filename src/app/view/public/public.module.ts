@@ -20,6 +20,6 @@ import { PublicComponent } from './public.component';
 })
 export class PublicModule {
     constructor() {
-        Logger.Info('PublicModule', 'done');
+        Logger.Info('View:Public:PublicModule', 'done');
     }
 }

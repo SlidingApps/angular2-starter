@@ -33,7 +33,7 @@ import { ButtonComponent } from './button.component';
 })
 class AccountComponentModule {
     constructor() {
-        Logger.Info('AccountComponentModule', 'done');
+        Logger.Info('Component:AccountComponentModule', 'done');
     }
 }
 

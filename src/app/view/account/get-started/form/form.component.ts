@@ -5,9 +5,9 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Logger, TranslateService } from '../../../../application/shared.module';
 import { Observable } from 'rxjs';
 
-import { GetStarted, Validation } from '../../../../state/state.module';
+import { AccountGetStarted, Validation } from '../../../../state/state.module';
 import { IFormModel } from './form.model';
-import * as AccountComponent from '../../../../component/account/account.module';
+import * as AccountComponent from '../../../../component/account/account-component.module';
 
 import 'jquery';
 
@@ -30,7 +30,7 @@ export class FormComponent implements OnInit {
     constructor(private element: ElementRef, public translate: TranslateService, private builder: FormBuilder) { }
 
     @Input('model')
-    public model: Observable<GetStarted.IState>;
+    public model: Observable<AccountGetStarted.IState>;
 
     @Output('values-changed')
     public valuesChanged = new EventEmitter();
@@ -49,8 +49,8 @@ export class FormComponent implements OnInit {
         Observable.timer(0, 300).first().subscribe(x => jQuery('input[class*=\'sa-comp-account-tenant\']').trigger('focus'));
 
         // Create observable validation failures.
-        this.tenantValidationFailures = Validation.createValidationFailures(this.model, GetStarted.ErrorAttribute.TENANT);
-        this.passwordValidationFailures = Validation.createValidationFailures(this.model, GetStarted.ErrorAttribute.PASSWORD);
+        this.tenantValidationFailures = Validation.createValidationFailures(this.model, AccountGetStarted.ErrorAttribute.TENANT);
+        this.passwordValidationFailures = Validation.createValidationFailures(this.model, AccountGetStarted.ErrorAttribute.PASSWORD);
 
         this.formGroup = this.builder.group({});
         this.formGroup.setAsyncValidators([this.validatePassword.bind(this)]);

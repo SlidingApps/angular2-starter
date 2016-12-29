@@ -1,5 +1,5 @@
 
-import { IUsernameModel } from '../../../../component/account/account.module';
+import { IUsernameModel } from '../../../../component/account/account-component.module';
 
 export interface IFormModel extends
     IUsernameModel {

@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { AccountComponentModule } from '../../../component/account/account.module';
+import { AccountComponentModule } from '../../../component/account/account-component.module';
 
 import { SharedModule, Logger } from '../../../application/shared.module';
 import { ForgotPasswordComponent } from './forgot-password.component';
@@ -21,6 +21,6 @@ import { FormComponent } from './form/form.component';
 })
 export class ForgotPasswordModule {
     constructor() {
-        Logger.Info('ForgotPasswordModule', 'done');
+        Logger.Info('View:Account:ForgotPasswordModule', 'done');
     }
 }

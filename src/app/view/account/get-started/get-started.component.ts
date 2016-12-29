@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Logger } from '../../../foundation/logger';
 
 import { IFormModel } from './form/form.model';
-import { State, GetStarted, GetStartedAction } from '../../../state/state.module';
+import { State, AccountGetStarted, AccountGetStartedAction } from '../../../state/state.module';
 
 @Component({
     selector: 'sa-account-sign-in',
@@ -28,10 +28,10 @@ export class GetStartedComponent implements OnInit {
 
     constructor(private store: Store<State>) { }
 
-    public state$: Observable<GetStarted.IState>;
+    public state$: Observable<AccountGetStarted.IState>;
 
     public ngOnInit() {
-        this.state$ = this.store.select(x => x.GetStarted).let(x => x);
+        this.state$ = this.store.select(x => x.AccountGetStarted).let(x => x);
         this.state$.subscribe(state => {
             state.userPassword = null;
             state.userPasswordConfirmation = null;
@@ -49,7 +49,7 @@ export class GetStartedComponent implements OnInit {
     private updateState(model: IFormModel) {
         Logger.Debug('GetStartedComponent.updateState()', model);
         if (model) {
-            this.store.dispatch(new GetStartedAction.Update({
+            this.store.dispatch(new AccountGetStartedAction.Update({
                 tenantCode: model.tenant,
                 userName: model.username,
                 userPassword: model.password,
@@ -61,7 +61,7 @@ export class GetStartedComponent implements OnInit {
     private signUpState(model: IFormModel) {
         Logger.Debug('GetStartedComponent.signUpState()', model);
         if (model) {
-            this.store.dispatch(new GetStartedAction.TrySignUp({
+            this.store.dispatch(new AccountGetStartedAction.TrySignUp({
                 tenantCode: model.tenant,
                 userName: model.username,
                 userPassword: model.password

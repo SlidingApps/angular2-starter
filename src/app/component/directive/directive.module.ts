@@ -14,6 +14,6 @@ import { AutoSelectDirective } from './auto-select.directive';
 })
 export class DirectiveModule {
     constructor() {
-        Logger.Info('DirectiveModule', 'done');
+        Logger.Info('Component:DirectiveModule', 'done');
     }
 }

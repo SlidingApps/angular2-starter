@@ -4,37 +4,45 @@ import { StoreModule } from '@ngrx/store';
 import { Logger } from '../../app/application/shared.module';
 
 import { AccountModule } from './account/account.module';
+import { TenantModule } from './tenant/tenant.module';
 
 import * as Validation from './validation';
-import * as GetStartedAction from './account/get-started/get-started.action';
-import * as GetStarted from './account/get-started/get-started.reducer';
+import * as AccountGetStartedAction from './account/get-started/get-started.action';
+import * as AccountGetStarted from './account/get-started/get-started.reducer';
 
-import * as SignInAction from './account/sign-in/sign-in.action';
-import * as SignIn from './account/sign-in/sign-in.reducer';
+import * as AccountSignInAction from './account/sign-in/sign-in.action';
+import * as AccountSignIn from './account/sign-in/sign-in.reducer';
+
+import * as TenantConfirmAction from './tenant/confirm/confirm.action';
+import * as TenantConfirm from './tenant/confirm/confirm.reducer';
 
 interface State {
-    GetStarted: GetStarted.IState;
-    SignIn: SignIn.IState;
+    AccountGetStarted: AccountGetStarted.IState;
+    AccountSignIn: AccountSignIn.IState;
+    TenantConfirm: TenantConfirm.IState;
 }
 
 @NgModule({
     imports: [
         StoreModule.provideStore({
-            GetStarted: GetStarted.reducer,
-            SignIn: SignIn.reducer
+            AccountGetStarted: AccountGetStarted.reducer,
+            AccountSignIn: AccountSignIn.reducer,
+            TenantConfirm: TenantConfirm.reducer
         }),
-        AccountModule
+        AccountModule,
+        TenantModule
     ],
     exports: [
-        AccountModule
+        AccountModule,
+        TenantModule
     ]
 })
 class StateModule {
     constructor() {
-        Logger.Info('StateModule', 'done');
+        Logger.Info('State:StateModule', 'done');
     }
 }
 
 export { StateModule, State}
 export { Validation }
-export { GetStarted, GetStartedAction, SignIn, SignInAction }
+export { AccountGetStarted, AccountGetStartedAction, AccountSignIn, AccountSignInAction, TenantConfirm, TenantConfirmAction }

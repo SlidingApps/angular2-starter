@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { AccountComponentModule } from '../../../component/account/account.module';
+import { AccountComponentModule } from '../../../component/account/account-component.module';
 import { DirectiveModule } from '../../../component/directive/directive.module';
 
 import { SharedModule, Logger } from '../../../application/shared.module';
@@ -25,6 +25,6 @@ import { FormComponent } from './form/form.component';
 })
 export class GetStartedModule {
     constructor() {
-        Logger.Info('GetStartedModule', 'done');
+        Logger.Info('View:Account:GetStartedModule', 'done');
     }
 }

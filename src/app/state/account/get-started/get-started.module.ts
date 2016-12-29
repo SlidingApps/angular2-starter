@@ -12,6 +12,6 @@ import { GetStartedEffects } from './get-started.effect';
 })
 export class GetStartedModule {
     constructor() {
-        Logger.Info('GetStartedModule', 'done');
+        Logger.Info('State:Account:GetStartedModule', 'done');
     }
 }

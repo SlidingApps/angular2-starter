@@ -2,11 +2,10 @@
 import { NgModule } from '@angular/core';
 import { Logger } from '../../../../app/application/shared.module';
 
-
 @NgModule({
 })
-export class SignInModule {
+export class ConfirmModule {
     constructor() {
-        Logger.Info('State:Account:SignInModule', 'done');
+        Logger.Info('State:Tenant:ConfirmModule', 'done');
     }
 }

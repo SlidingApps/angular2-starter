@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Logger } from '../../../../foundation/logger';
 import { Observable } from 'rxjs';
 
-import { SignIn } from '../../../../state/state.module';
+import { AccountSignIn } from '../../../../state/state.module';
 import { IFormModel } from './form.model';
 
 @Component({
@@ -27,7 +27,7 @@ export class FormComponent implements OnInit {
     }
 
     @Input('model')
-    public model: Observable<SignIn.IState>;
+    public model: Observable<AccountSignIn.IState>;
 
     @Output('sign-in-clicked')
     public signInClicked = new EventEmitter();
