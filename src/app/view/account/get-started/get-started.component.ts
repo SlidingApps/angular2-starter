@@ -31,11 +31,8 @@ export class GetStartedComponent implements OnInit {
     public state$: Observable<AccountGetStarted.IState>;
 
     public ngOnInit() {
+        this.store.dispatch(new AccountGetStartedAction.ResetPassword());
         this.state$ = this.store.select(x => x.AccountGetStarted).let(x => x);
-        this.state$.subscribe(state => {
-            state.userPassword = null;
-            state.userPasswordConfirmation = null;
-        });
     }
 
     public onValuesChanged(model: IFormModel) {

@@ -38,6 +38,11 @@ export const reducer = (state: IState = INITIAL_STATE, action: Actions): IState 
             state = Validator.ValidatePasswordEquality(state);
             return state;
 
+        case ActionType.RESET_PASSWORD:
+            state = Object.assign({}, state, {password: null, passwordConfirmation: null});
+            state = Validator.ValidatePasswordEquality(state);
+            return state;
+
         case ActionType.TENANT_NAME_AVAILABLE:
             state = Object.assign({}, state);
             state = Validator.TenantNameIsAvailable(state, true);
