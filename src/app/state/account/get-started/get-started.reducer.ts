@@ -39,7 +39,7 @@ export const reducer = (state: IState = INITIAL_STATE, action: Actions): IState 
             return state;
 
         case ActionType.RESET_PASSWORD:
-            state = Object.assign({}, state, {password: null, passwordConfirmation: null});
+            state = Object.assign({}, state, {userPassword: null, userPasswordConfirmation: null});
             state = Validator.ValidatePasswordEquality(state);
             return state;
 

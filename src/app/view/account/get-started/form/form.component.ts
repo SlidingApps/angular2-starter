@@ -16,8 +16,8 @@ import 'jquery';
     template: `
     <!-- ACCOUNT.SIGN-IN.FORM: BEGIN -->
     <form #f="ngForm" [formGroup]="formGroup" (ngSubmit)="onSubmit(f.value)">
-        <sa-comp-account-tenant [formGroup]="formGroup" [tenant]="(model | async).tenant" [validation-failures]="tenantValidationFailures"></sa-comp-account-tenant>
-        <sa-comp-account-username [formGroup]="formGroup" [username]="(model | async).username" [placeholder]="'ACCOUNT.EMAIL_PLACEHOLDER' | translate"></sa-comp-account-username>
+        <sa-comp-account-tenant [formGroup]="formGroup" [tenant]="(model | async).tenantCode" [validation-failures]="tenantValidationFailures"></sa-comp-account-tenant>
+        <sa-comp-account-username [formGroup]="formGroup" [username]="(model | async).userName" [placeholder]="'ACCOUNT.EMAIL_PLACEHOLDER' | translate"></sa-comp-account-username>
         <sa-comp-account-password [formGroup]="formGroup"></sa-comp-account-password>
         <sa-comp-account-password [formGroup]="formGroup" [name]="'passwordConfirmation'" [is-confirmation]="true" [placeholder]="'ACCOUNT.CONFIRM_PASSWORD_PLACEHOLDER' | translate"></sa-comp-account-password>
         <sa-comp-account-button [formGroup]="formGroup" [text]="'ACCOUNT.SIGN_UP_ACTION' | translate"></sa-comp-account-button>
