@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Actions, Effect } from '@ngrx/effects';
 
 import { ReadModelService, WriteModelService } from '../../../service/service.module';
-import { ActionType, IUpdateTenantPayload, ISignUpPayload } from './get-started.action';
+import { ActionType, IUpdatePayload, ISignUpPayload } from './get-started.action';
 
 @Injectable()
 export class GetStartedEffects {
@@ -17,8 +17,8 @@ export class GetStartedEffects {
         .ofType(ActionType.UPDATE)
 
         // Map the payload into JSON to use as the request body
-        .map(action => action.payload as IUpdateTenantPayload)
-        .map(payload => payload.tenantCode)
+        .map(action => action.payload as IUpdatePayload)
+        .map(payload => payload.tenant.code)
         .filter(tenant => !!tenant)
         .distinctUntilChanged()
 
@@ -45,11 +45,11 @@ export class GetStartedEffects {
         .map(action => action.payload as ISignUpPayload)
         .switchMap(signUp =>
             this.writeService.tenant.postCreateTenant({
-                code: signUp.tenantCode,
-                name: signUp.tenantCode,
-                description: signUp.tenantCode,
-                userName: signUp.userName,
-                userPassword: signUp.userPassword
+                code: signUp.tenant.code,
+                name: signUp.tenant.code,
+                description: signUp.tenant.code,
+                userName: signUp.user.username,
+                userPassword: signUp.user.password
             })
                 .map(() => {
                     return {type: ActionType.SIGN_UP_SUCCESS};

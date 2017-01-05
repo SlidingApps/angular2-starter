@@ -31,8 +31,8 @@ export class GetStartedComponent implements OnInit {
     public state$: Observable<AccountGetStarted.IState>;
 
     public ngOnInit() {
-        this.state$ = this.store.select(x => x.AccountGetStarted).let(x => x);
         this.store.dispatch(new AccountGetStartedAction.ResetPassword());
+        this.state$ = this.store.select(x => x.AccountGetStarted).let(x => x);
     }
 
     public onValuesChanged(model: IFormModel) {
@@ -47,10 +47,12 @@ export class GetStartedComponent implements OnInit {
         Logger.Debug('GetStartedComponent.updateState()', model);
         if (model) {
             this.store.dispatch(new AccountGetStartedAction.Update({
-                tenantCode: model.tenant,
-                userName: model.username,
-                userPassword: model.password,
-                userPasswordConfirmation: model.passwordConfirmation
+                tenant: {code: model.tenant },
+                user: {
+                    username: model.username,
+                    password: model.password,
+                    passwordConfirmation: model.passwordConfirmation
+                }
             }));
         }
     }
@@ -59,9 +61,11 @@ export class GetStartedComponent implements OnInit {
         Logger.Debug('GetStartedComponent.signUpState()', model);
         if (model) {
             this.store.dispatch(new AccountGetStartedAction.TrySignUp({
-                tenantCode: model.tenant,
-                userName: model.username,
-                userPassword: model.password
+                tenant: {code: model.tenant },
+                user: {
+                    username: model.username,
+                    password: model.password
+                }
             }));
         }
     }

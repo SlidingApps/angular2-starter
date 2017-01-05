@@ -14,21 +14,30 @@ export const ActionType = {
     SIGN_UP_FAILED: type('ACCOUNT.GET_STARTED.SIGN_UP_FAILED')
 };
 
-export interface IUpdatePayload {
-    tenantCode: string;
-    userName: string;
-    userPassword: string;
-    userPasswordConfirmation: string;
+export interface ITenantInfo {
+    code: string;
 }
 
-export interface IUpdateTenantPayload {
-    tenantCode: string;
+export interface IWithPasswordConfirmation {
+    passwordConfirmation: string;
+}
+
+export interface IUserInfo {
+    username: string;
+    password: string;
+}
+
+export interface IUserInfoWithPasswordConfirmation extends IUserInfo, IWithPasswordConfirmation {
+}
+
+export interface IUpdatePayload {
+    tenant: ITenantInfo;
+    user: IUserInfoWithPasswordConfirmation;
 }
 
 export interface ISignUpPayload {
-    tenantCode: string;
-    userName: string;
-    userPassword: string;
+    tenant: ITenantInfo;
+    user: IUserInfo;
 }
 
 export class Create implements Action {
@@ -37,16 +46,16 @@ export class Create implements Action {
     public type = ActionType.CREATE;
 }
 
-export class Update implements Action {
-    constructor(public payload: IUpdatePayload) { }
-
-    public type = ActionType.UPDATE;
-}
-
 export class ResetPassword implements Action {
     constructor() { }
 
     public type = ActionType.RESET_PASSWORD;
+}
+
+export class Update implements Action {
+    constructor(public payload: IUpdatePayload) { }
+
+    public type = ActionType.UPDATE;
 }
 
 export class TenantNameAvailable implements Action {

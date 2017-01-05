@@ -1,5 +1,5 @@
 
-import { Actions, ActionType } from './get-started.action';
+import {Actions, ActionType, ITenantInfo, IUserInfoWithPasswordConfirmation} from './get-started.action';
 
 import { IValidated, ValidationState } from '../../validation';
 import { type } from '../../utils';
@@ -15,17 +15,19 @@ export const ErrorToken = {
 };
 
 export interface IState extends IValidated {
-    tenantCode: string;
-    userName: string;
-    userPassword: string;
-    userPasswordConfirmation: string;
+    tenant: ITenantInfo;
+    user: IUserInfoWithPasswordConfirmation;
 }
 
 const INITIAL_STATE: IState = {
-    tenantCode: null,
-    userName: null,
-    userPassword: null,
-    userPasswordConfirmation: null,
+    tenant: {
+            code: null
+        },
+    user: {
+        username: null,
+        password: null,
+        passwordConfirmation: null
+    },
 
     $validations: []
 };
@@ -33,13 +35,18 @@ const INITIAL_STATE: IState = {
 export const reducer = (state: IState = INITIAL_STATE, action: Actions): IState => {
 
     switch (action.type) {
-        case ActionType.UPDATE:
-            state = Object.assign({}, state, action.payload);
-            state = Validator.ValidatePasswordEquality(state);
+        case ActionType.CREATE:
+            state = Object.assign({}, INITIAL_STATE, action.payload);
             return state;
 
         case ActionType.RESET_PASSWORD:
-            state = Object.assign({}, state, {userPassword: null, userPasswordConfirmation: null});
+            state.user = Object.assign({}, state.user, {password: null, passwordConfirmation: null});
+            state = Object.assign({}, state, state.user);
+            state = Validator.ValidatePasswordEquality(state);
+            return state;
+
+        case ActionType.UPDATE:
+            state = Object.assign({}, state, action.payload);
             state = Validator.ValidatePasswordEquality(state);
             return state;
 
@@ -88,7 +95,7 @@ export class Validator {
 
     public static ValidatePasswordEquality(state: IState): IState {
         state.$validations = state.$validations.filter(x => x.attribute !== ErrorAttribute.PASSWORD);
-        const success: boolean = (!state.userPassword && !state.userPasswordConfirmation) || ((!!state.userPassword || !!state.userPasswordConfirmation) && state.userPassword === state.userPasswordConfirmation);
+        const success: boolean = (!state.user.password && !state.user.passwordConfirmation) || ((!!state.user.password || !!state.user.passwordConfirmation) && state.user.password === state.user.passwordConfirmation);
         if (state) {
             state.$validations = [...state.$validations, {
                 attribute: ErrorAttribute.PASSWORD,

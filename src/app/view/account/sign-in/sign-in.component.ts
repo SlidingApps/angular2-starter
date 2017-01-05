@@ -32,10 +32,8 @@ export class SignInComponent implements OnInit {
     public state$: Observable<AccountSignIn.IState>;
 
     public ngOnInit() {
+        this.store.dispatch(new AccountSignInAction.ResetPassword());
         this.state$ = this.store.select(x => x.AccountSignIn).let(x => x);
-        this.state$.subscribe(state => {
-            state.password = null;
-        });
     }
 
     public onSignInClicked(model: IFormModel) {
@@ -45,7 +43,10 @@ export class SignInComponent implements OnInit {
     private signIn(model: IFormModel) {
         Logger.Debug('SignInComponent.signIn()', model);
         if (model) {
-            this.store.dispatch(new AccountSignInAction.TrySignIn(model));
+            this.store.dispatch(new AccountSignInAction.TrySignIn({
+                username: model.username,
+                password: model.password
+            }));
         }
     }
 }
