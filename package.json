@@ -39,6 +39,7 @@
     "@ngrx/store": "^2.2.1",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
+    "crypto-js": "^3.1.9-1",
     "jquery": "^3.1.1",
     "ng2-bootstrap": "^1.1.16",
     "ng2-logger": "^0.1.21",

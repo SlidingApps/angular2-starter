@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptionsArgs } from '@angular/http';
 import { Observable } from 'rxjs';
+import * as crypto from 'crypto-js';
 
 import { ApplicationConfig } from '../../../app/application/shared.module';
 import { AccountValidity, IAccountValidity } from './account/account-validity';
@@ -22,6 +23,9 @@ export class AuthorizationService {
         const requestConfiguration: RequestOptionsArgs = {
             headers: headers
         };
+
+        const hash = crypto.SHA256(password);
+        console.log('hash', hash);
 
         return this.$http
             .get(`${ApplicationConfig.AUTHORIZATION_HOST_URL}/${ApplicationConfig.AUTHORIZATION_API_PATH}`, requestConfiguration)
