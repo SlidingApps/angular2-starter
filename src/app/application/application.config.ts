@@ -15,6 +15,9 @@ export class ApplicationConfig {
     public static get MODEL_SINK_NAME(): string { return 'model'; }
     public static get MODEL_SINK_LEVELS(): Array<Level> { return [Level.ERROR, Level.WARN, Level.INFO /* , Level.DATA */]; }
 
+    public static get AUTHORIZATION_HOST_URL(): string { return 'http://localhost:8082'; }
+    public static get AUTHORIZATION_API_PATH(): string { return 'auth'; }
+
     public static get READMODEL_HOST_URL(): string { return 'http://localhost:8082'; }
     public static get READMODEL_API_PATH(): string { return 'query'; }
 

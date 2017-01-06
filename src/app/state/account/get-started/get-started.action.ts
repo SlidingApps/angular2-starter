@@ -1,7 +1,8 @@
 
 import { Action } from '@ngrx/store';
-
 import { type } from '../../utils';
+
+import { IUpdatePayload, ISignUpPayload } from './get-started.model';
 
 export const ActionType = {
     CREATE: type('ACCOUNT.GET_STARTED.CREATE'),
@@ -13,32 +14,6 @@ export const ActionType = {
     SIGN_UP_SUCCESS: type('ACCOUNT.GET_STARTED.SIGN_UP_SUCCESS'),
     SIGN_UP_FAILED: type('ACCOUNT.GET_STARTED.SIGN_UP_FAILED')
 };
-
-export interface ITenantInfo {
-    code: string;
-}
-
-export interface IWithPasswordConfirmation {
-    passwordConfirmation: string;
-}
-
-export interface IUserInfo {
-    username: string;
-    password: string;
-}
-
-export interface IUserInfoWithPasswordConfirmation extends IUserInfo, IWithPasswordConfirmation {
-}
-
-export interface IUpdatePayload {
-    tenant: ITenantInfo;
-    user: IUserInfoWithPasswordConfirmation;
-}
-
-export interface ISignUpPayload {
-    tenant: ITenantInfo;
-    user: IUserInfo;
-}
 
 export class Create implements Action {
     constructor(public payload: string) { }

@@ -1,5 +1,6 @@
 
-import {Actions, ActionType, ITenantInfo, IUserInfoWithPasswordConfirmation} from './get-started.action';
+import { Actions, ActionType } from './get-started.action';
+import { ITenantInfo, IUserInfoWithPasswordConfirmation } from './get-started.model';
 
 import { IValidated, ValidationState } from '../../validation';
 import { type } from '../../utils';

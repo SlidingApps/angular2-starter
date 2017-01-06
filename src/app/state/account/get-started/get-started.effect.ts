@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Actions, Effect } from '@ngrx/effects';
 
-import { ReadModelService, WriteModelService } from '../../../service/service.module';
-import { ActionType, IUpdatePayload, ISignUpPayload } from './get-started.action';
+import { AuthorizationService, ReadModelService, WriteModelService } from '../../../service/service.module';
+import { ActionType } from './get-started.action';
+import { IUpdatePayload, ISignUpPayload } from './get-started.model';
 
 @Injectable()
 export class GetStartedEffects {
-    constructor(private readService: ReadModelService, private writeService: WriteModelService, private actions$: Actions) {
+    constructor(private authorizationService: AuthorizationService, private readService: ReadModelService, private writeService: WriteModelService, private actions$: Actions) {
     }
 
     @Effect()
