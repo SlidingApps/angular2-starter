@@ -35,7 +35,7 @@ export class FormComponent implements OnInit {
     public formGroup: FormGroup;
 
     public ngOnInit(): void {
-        jQuery('input[class*=\'sa-comp-account-username\']').trigger('focus');
+        Observable.timer(200, 50).first().subscribe(x => jQuery('input[class*=\'sa-comp-account-username\']').trigger('focus'));
     }
 
     /* tslint:disable:no-unused-variable */

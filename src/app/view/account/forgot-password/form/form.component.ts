@@ -1,6 +1,7 @@
 
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { Logger } from '../../../../foundation/logger';
 
 import { IFormModel } from './form.model';
@@ -28,7 +29,7 @@ export class FormComponent implements OnInit {
     public formGroup: FormGroup;
 
     public ngOnInit(): void {
-        jQuery('input[class*=\'sa-comp-account-username\']').trigger('focus');
+        Observable.timer(200, 50).first().subscribe(x => jQuery('input[class*=\'sa-comp-account-username\']').trigger('focus'));
     }
 
     /* tslint:disable:no-unused-variable */

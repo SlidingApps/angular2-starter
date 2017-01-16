@@ -1,5 +1,11 @@
 
+import { OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
 import { Component } from '@angular/core';
+import { State, Authentication } from '../../state/state.module';
 
 @Component({
     selector: 'sa-layout-page',
@@ -10,4 +16,17 @@ import { Component } from '@angular/core';
     <!-- LAYOUT.PAGE: END -->
     `
 })
-export class PageComponent { }
+export class PageComponent implements OnInit {
+    constructor(private router: Router, private store: Store<State>) { }
+
+    public state$: Observable<Authentication.IState>;
+
+    public ngOnInit() {
+        this.state$ = this.store.select(x => x.Authentication).let(x => x);
+        this.state$.debounceTime(200).subscribe(state => {
+            if (state.user && state.user.username) {
+                this.router.navigate(['']);
+            }
+        });
+    }
+}

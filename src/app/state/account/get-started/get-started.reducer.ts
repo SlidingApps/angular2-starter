@@ -1,4 +1,6 @@
 
+import { Logger } from '../../../application/shared.module';
+
 import { Actions, ActionType } from './get-started.action';
 import { ITenantInfo, IUserInfoWithPasswordConfirmation } from './get-started.model';
 
@@ -35,42 +37,59 @@ const INITIAL_STATE: IState = {
 
 export const reducer = (state: IState = INITIAL_STATE, action: Actions): IState => {
 
+    let _state: IState = state;
     switch (action.type) {
         case ActionType.CREATE:
             state = Object.assign({}, INITIAL_STATE, action.payload);
+
+            Logger.Info('State:Account:GetStarted:reducer', action.type, action, state);
             return state;
 
         case ActionType.RESET_PASSWORD:
             state.user = Object.assign({}, state.user, {password: null, passwordConfirmation: null});
-            state = Object.assign({}, state, state.user);
+            state = Object.assign({}, state);
             state = Validator.ValidatePasswordEquality(state);
+
+            Logger.Info('State:Account:GetStarted:reducer', action.type, action, state);
             return state;
 
         case ActionType.UPDATE:
             state = Object.assign({}, state, action.payload);
             state = Validator.ValidatePasswordEquality(state);
+
+            Logger.Info('State:Account:GetStarted:reducer', action.type, action, state);
             return state;
 
         case ActionType.TENANT_NAME_AVAILABLE:
             state = Object.assign({}, state);
             state = Validator.TenantNameIsAvailable(state, true);
+
+            Logger.Info('State:Account:GetStarted:reducer', action.type, action, state);
             return state;
 
         case ActionType.TENANT_NAME_NOT_AVAILABLE:
             state = Object.assign({}, state);
             state = Validator.TenantNameIsAvailable(state, false);
+
+            Logger.Info('State:Account:GetStarted:reducer', action.type, action, state);
             return state;
 
         case ActionType.TRY_SIGN_UP:
             state = Object.assign({}, state);
+
+            Logger.Info('State:Account:GetStarted:reducer', action.type, action, state);
             return state;
 
         case ActionType.SIGN_UP_SUCCESS:
             state = Object.assign({}, state);
+
+            Logger.Info('State:Account:GetStarted:reducer', action.type, action, state);
             return state;
 
         case ActionType.SIGN_UP_FAILED:
             state = Object.assign({}, state);
+
+            Logger.Info('State:Account:GetStarted:reducer', action.type, action, state);
             return state;
 
         default:

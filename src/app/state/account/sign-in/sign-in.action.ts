@@ -2,16 +2,13 @@
 import { Action } from '@ngrx/store';
 import { type } from '../../utils';
 
+import { ISignInPayload } from './sign-in.model';
+
 export const ActionType = {
     CREATE: type('ACCOUNT.SIGN_IN.CREATE'),
     RESET_PASSWORD: type('ACCOUNT.SIGN_IN.RESET_PASSWORD'),
     TRY_SIGN_IN: type('ACCOUNT.SIGN_IN.TRY_SIGN_IN')
 };
-
-export interface ISignInPayload {
-    username: string;
-    password: string;
-}
 
 export class Create implements Action {
     constructor(public payload: ISignInPayload) { }
@@ -30,7 +27,6 @@ export class TrySignIn implements Action {
 
     public type = ActionType.TRY_SIGN_IN;
 }
-
 
 export type Actions
     = Create
