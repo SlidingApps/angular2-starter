@@ -2,12 +2,7 @@
 import { Logger } from '../../application/shared.module';
 
 import { Actions, ActionType } from './authentication.action';
-import { IUserInfo, IAccountInfo } from './authentication.model';
-
-export interface IState {
-    user: IUserInfo;
-    account: IAccountInfo;
-}
+import { IState } from './authentication.model';
 
 const INITIAL_STATE: IState = {
     user: null,

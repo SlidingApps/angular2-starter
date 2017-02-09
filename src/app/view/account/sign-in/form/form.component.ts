@@ -15,7 +15,7 @@ import { IFormModel } from './form.model';
     <form [formGroup]="formGroup" (submit)="onSubmit()">        
         <sa-comp-account-username [formGroup]="formGroup" [username]="(model | async).username"></sa-comp-account-username>
         <sa-comp-account-password [formGroup]="formGroup"></sa-comp-account-password>
-        <sa-comp-account-button [formGroup]="formGroup" [text]="'ACCOUNT.SIGN_IN_ACTION' | translate"></sa-comp-account-button>
+        <sa-comp-account-button [formGroup]="formGroup" [text]="'ACCOUNT.SIGN_IN_ACTION' | translate" [is-busy]="isBusy"></sa-comp-account-button>
     </form>
     <!-- ACCOUNT.SIGN-IN.FORM: END -->
     `
@@ -29,13 +29,16 @@ export class FormComponent implements OnInit {
     @Input('model')
     public model: Observable<AccountSignIn.IState>;
 
+    @Input('is-busy')
+    public isBusy: boolean;
+
     @Output('sign-in-clicked')
     public signInClicked = new EventEmitter();
 
     public formGroup: FormGroup;
 
     public ngOnInit(): void {
-        Observable.timer(200, 50).first().subscribe(x => jQuery('input[class*=\'sa-comp-account-username\']').trigger('focus'));
+        Observable.timer(200, 50).first().subscribe(x => jQuery('input[class*=\'sa-comp-person-username\']').trigger('focus'));
     }
 
     /* tslint:disable:no-unused-variable */

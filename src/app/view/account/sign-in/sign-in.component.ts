@@ -14,7 +14,7 @@ import { State, AccountSignIn, AccountSignInAction } from '../../../state/state.
     <div class="page-login sa-animated">
         <div class="loginContentWrap" style="padding: 0;">
             <div class="container-fluid">
-                <sa-account-sign-in-form [model]="state$" (sign-in-clicked)="onSignInClicked($event)"></sa-account-sign-in-form>
+                <sa-account-sign-in-form [model]="state$" [is-busy]="isBusy" (sign-in-clicked)="onSignInClicked($event)"></sa-account-sign-in-form>
                 <ul class="more">
                     <li><a routerLink="/account/getstarted">{{ 'ACCOUNT.GET_STARTED_LINK' | translate }}</a></li>
                     <li><a routerLink="/account/forgotpassword">{{ 'ACCOUNT.FORGOT_PASSWORD_LINK' | translate }}</a></li>
@@ -30,6 +30,7 @@ export class SignInComponent implements OnInit {
     constructor(private store: Store<State>) { }
 
     public state$: Observable<AccountSignIn.IState>;
+    public isBusy: boolean = false;
 
     public ngOnInit() {
         this.store.dispatch(new AccountSignInAction.ResetPassword());
@@ -37,6 +38,7 @@ export class SignInComponent implements OnInit {
     }
 
     public onSignInClicked(model: IFormModel) {
+        this.isBusy = true;
         this.signIn(model);
     }
 

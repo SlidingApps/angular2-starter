@@ -46,7 +46,7 @@ export class FormComponent implements OnInit {
 
     public ngOnInit(): void {
         // Focus the TENANT input field.
-        Observable.timer(200, 10).first().subscribe(x => jQuery('input[class*=\'sa-comp-account-tenant\']').trigger('focus'));
+        Observable.timer(200, 10).first().subscribe(x => jQuery('input[class*=\'sa-comp-person-tenant\']').trigger('focus'));
 
         // Create observable validation failures.
         this.tenantValidationFailures = Validation.createValidationFailures(this.model, AccountGetStarted.ErrorAttribute.TENANT);

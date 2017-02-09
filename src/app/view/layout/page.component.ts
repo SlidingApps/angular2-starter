@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { Component } from '@angular/core';
-import { State, Authentication } from '../../state/state.module';
+import { State, AuthenticationModel } from '../../state/state.module';
 
 @Component({
     selector: 'sa-layout-page',
@@ -19,7 +19,7 @@ import { State, Authentication } from '../../state/state.module';
 export class PageComponent implements OnInit {
     constructor(private router: Router, private store: Store<State>) { }
 
-    public state$: Observable<Authentication.IState>;
+    public state$: Observable<AuthenticationModel.IState>;
 
     public ngOnInit() {
         this.state$ = this.store.select(x => x.Authentication).let(x => x);

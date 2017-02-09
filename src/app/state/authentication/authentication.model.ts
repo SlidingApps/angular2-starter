@@ -1,4 +1,9 @@
 
+export interface IState {
+    user: IUserInfo;
+    account: IAccountInfo;
+}
+
 export interface IAuthenticationPayload {
     user: IUserInfo;
     account: IAccountInfo;

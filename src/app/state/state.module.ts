@@ -8,20 +8,21 @@ import { AccountModule } from './account/account.module';
 import { TenantModule } from './tenant/tenant.module';
 
 import * as Validation from './validation';
-import * as AuthenticationAction from './authentication/authentication.action';
 import * as Authentication from './authentication/authentication.reducer';
+import * as AuthenticationModel from './authentication/authentication.model';
+import * as AuthenticationAction from './authentication/authentication.action';
 
-import * as AccountGetStartedAction from './account/get-started/get-started.action';
 import * as AccountGetStarted from './account/get-started/get-started.reducer';
+import * as AccountGetStartedAction from './account/get-started/get-started.action';
 
-import * as AccountSignInAction from './account/sign-in/sign-in.action';
 import * as AccountSignIn from './account/sign-in/sign-in.reducer';
+import * as AccountSignInAction from './account/sign-in/sign-in.action';
 
-import * as TenantConfirmAction from './tenant/confirm/confirm.action';
 import * as TenantConfirm from './tenant/confirm/confirm.reducer';
+import * as TenantConfirmAction from './tenant/confirm/confirm.action';
 
 interface State {
-    Authentication: Authentication.IState;
+    Authentication: AuthenticationModel.IState;
     AccountGetStarted: AccountGetStarted.IState;
     AccountSignIn: AccountSignIn.IState;
     TenantConfirm: TenantConfirm.IState;
@@ -53,6 +54,6 @@ class StateModule {
 
 export { StateModule, State}
 export { Validation }
-export { Authentication, AuthenticationAction }
+export { Authentication, AuthenticationAction, AuthenticationModel }
 export { AccountGetStarted, AccountGetStartedAction, AccountSignIn, AccountSignInAction }
 export { TenantConfirm, TenantConfirmAction }

@@ -4,12 +4,12 @@ import { Observable} from 'rxjs';
 import { RestService, IRestServiceConfiguration } from '../../rest/rest-service';
 import { IPasswordLinkPayload } from './password-link';
 
-export interface IAccountResource {
+export interface IPersonResource {
     postConfirmationLink(userName: string): Observable<boolean>;
     postPasswordLink(userName: string, payload: IPasswordLinkPayload): Observable<boolean>;
 }
 
-export class AccountResource implements IAccountResource {
+export class PersonResource implements IPersonResource {
 
     constructor(private service: RestService, private configuration: IRestServiceConfiguration) { }
 
@@ -18,14 +18,14 @@ export class AccountResource implements IAccountResource {
 
     public postConfirmationLink(userName: string): Observable<boolean> {
         return this.connector
-            .all(`${AccountResource.RESOURCE}/${userName}/confirmationlink`)
+            .all(`${PersonResource.RESOURCE}/${userName}/confirmationlink`)
             .post(undefined)
             .map(x => true);
     }
 
     public postPasswordLink(userName: string, payload: IPasswordLinkPayload): Observable<boolean> {
         return this.connector
-            .all(`${AccountResource.RESOURCE}/${userName}/passwordlink`)
+            .all(`${PersonResource.RESOURCE}/${userName}/passwordlink`)
             .post(payload)
             .map(x => true);
     }

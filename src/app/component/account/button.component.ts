@@ -9,7 +9,7 @@ import { FormGroup } from '@angular/forms';
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4">
             <div [formGroup]="formGroup" class="form-group">
-                <button type="submit" class="btn btn-orange submit" [disabled]="!formGroup.valid" disabled>{{ text }}</button>
+                <button type="submit" class="btn btn-orange submit" [disabled]="!formGroup.valid || isBusy" disabled>{{ text }}</button>
             </div>
         </div>
     </div>
@@ -22,4 +22,7 @@ export class ButtonComponent {
 
     @Input()
     public text: string;
+
+    @Input('is-busy')
+    public isBusy: boolean;
 }

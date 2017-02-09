@@ -17,7 +17,6 @@ export class AuthenticationEffects {
         .map(action => action.payload as ISignInPayload)
         .filter(credentials => !!credentials)
         .distinctUntilChanged()
-
         .switchMap(credentials =>
             this.authenticationService.signIn(credentials.username, credentials.password)
                 .map(response => {
