@@ -47,7 +47,9 @@ export class GetStartedComponent implements OnInit {
         Logger.Debug('GetStartedComponent.updateState()', model);
         if (model) {
             this.store.dispatch(new AccountGetStartedAction.Update({
-                tenant: {code: model.tenant },
+                tenant: {
+                    code: model.tenant
+                },
                 user: {
                     username: model.username,
                     password: model.password,

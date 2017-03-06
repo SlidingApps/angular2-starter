@@ -21,7 +21,7 @@ export class AuthenticationEffects {
             this.authenticationService.signIn(credentials.username, credentials.password)
                 .map(response => {
                     if (response.isValid) {
-                        return {type: ActionType.SIGN_IN_SUCCESS, payload: { id: response.id, username: response.username } };
+                        return {type: ActionType.SIGN_IN_SUCCESS, payload: { username: response.username, emailAddress: response.emailAddress } };
                     } else {
                         return {type: ActionType.SIGN_IN_FAIL};
                     }

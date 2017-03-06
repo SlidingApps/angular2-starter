@@ -6,7 +6,7 @@ import { IState } from './authentication.model';
 
 const INITIAL_STATE: IState = {
     user: null,
-    account: null
+    person: null
 };
 
 export const reducer = (state: IState = INITIAL_STATE, action: Actions): IState => {
@@ -26,7 +26,7 @@ export const reducer = (state: IState = INITIAL_STATE, action: Actions): IState 
 
         case ActionType.SIGN_IN_SUCCESS:
             state.user = Object.assign({}, state.user, action.payload);
-            state.account = null;
+            state.person = null;
             state = Object.assign({}, state);
 
             Logger.Info('State:Authentication:reducer', action.type, action, state);

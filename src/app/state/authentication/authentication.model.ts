@@ -1,20 +1,20 @@
 
 export interface IState {
     user: IUserInfo;
-    account: IAccountInfo;
+    person: IPersonInfo;
 }
 
 export interface IAuthenticationPayload {
     user: IUserInfo;
-    account: IAccountInfo;
+    person: IPersonInfo;
 }
 
 export interface IUserInfo {
-    id: string;
     username: string;
+    emailAddress: string;
 }
 
-export interface IAccountInfo {
+export interface IPersonInfo {
     name: string;
     firstName: string;
 }

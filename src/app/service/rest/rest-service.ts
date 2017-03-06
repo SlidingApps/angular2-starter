@@ -156,7 +156,10 @@ export class RestServiceEndpoint {
                 Logger.Sinks['rest'].Info('RestServiceEndpoint.get()', url, response.json());
                 return response.json();
             })
-            .catch((error: any) => Observable.throw(error.json().error || 'server error'));
+            .catch((error: any) => {
+                Logger.Sinks['rest'].Error('RestServiceEndpoint.get()', url, error);
+                return Observable.throw(error.json().error || 'server error');
+            });
         /* tslint:enable:no-any */
     }
 
@@ -172,7 +175,10 @@ export class RestServiceEndpoint {
         /* tslint:disable:no-any */
         return this.$http.post(url, instance, this.requestConfiguration)
             .map((response: Response) => response.json() as TResult)
-            .catch((error: any) => Observable.throw(error.json().error || 'server error'));
+            .catch((error: any) => {
+                Logger.Sinks['rest'].Error('RestServiceEndpoint.get()', url, error);
+                return Observable.throw(error.json().error || 'server error');
+            });
         /* tslint:enable:no-any */
     }
 

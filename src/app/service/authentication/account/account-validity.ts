@@ -5,7 +5,6 @@ import { Entity } from '../../../foundation/entity';
 
 // MODEL
 export interface IAccountValidityAttributes {
-    id?: string;
     emailAddress?: string;
     username?: string;
     isValid: boolean;
@@ -25,9 +24,6 @@ export class AccountValidity extends Entity<IAccountValidity> {
     constructor(representation?: IAccountValidity) {
         super(representation);
     }
-
-    public get id(): string { return this.$representation.id; }
-    public set id(value: string) { this.$representation.id = value; }
 
     public get emailAddress(): string { return this.$representation.emailAddress; }
     public set emailAddress(value: string) { this.$representation.emailAddress = value; }
